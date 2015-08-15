@@ -1,0 +1,424 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		070090FE1B7F356D00D5041C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070090FD1B7F356D00D5041C /* AppDelegate.swift */; };
+		070091001B7F356D00D5041C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070090FF1B7F356D00D5041C /* ViewController.swift */; };
+		070091031B7F356D00D5041C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 070091011B7F356D00D5041C /* Main.storyboard */; };
+		070091051B7F356D00D5041C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 070091041B7F356D00D5041C /* Images.xcassets */; };
+		070091081B7F356D00D5041C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 070091061B7F356D00D5041C /* LaunchScreen.xib */; };
+		070091141B7F356E00D5041C /* OKOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070091131B7F356E00D5041C /* OKOTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		0700910E1B7F356E00D5041C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 070090F01B7F356D00D5041C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 070090F71B7F356D00D5041C;
+			remoteInfo = OKO;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		070090F81B7F356D00D5041C /* OKO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OKO.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		070090FC1B7F356D00D5041C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		070090FD1B7F356D00D5041C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		070090FF1B7F356D00D5041C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		070091021B7F356D00D5041C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		070091041B7F356D00D5041C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		070091071B7F356D00D5041C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		0700910D1B7F356E00D5041C /* OKOTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OKOTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		070091121B7F356E00D5041C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		070091131B7F356E00D5041C /* OKOTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OKOTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		070090F51B7F356D00D5041C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0700910A1B7F356E00D5041C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		070090EF1B7F356D00D5041C = {
+			isa = PBXGroup;
+			children = (
+				070090FA1B7F356D00D5041C /* OKO */,
+				070091101B7F356E00D5041C /* OKOTests */,
+				070090F91B7F356D00D5041C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		070090F91B7F356D00D5041C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				070090F81B7F356D00D5041C /* OKO.app */,
+				0700910D1B7F356E00D5041C /* OKOTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		070090FA1B7F356D00D5041C /* OKO */ = {
+			isa = PBXGroup;
+			children = (
+				070090FD1B7F356D00D5041C /* AppDelegate.swift */,
+				070090FF1B7F356D00D5041C /* ViewController.swift */,
+				070091011B7F356D00D5041C /* Main.storyboard */,
+				070091041B7F356D00D5041C /* Images.xcassets */,
+				070091061B7F356D00D5041C /* LaunchScreen.xib */,
+				070090FB1B7F356D00D5041C /* Supporting Files */,
+			);
+			path = OKO;
+			sourceTree = "<group>";
+		};
+		070090FB1B7F356D00D5041C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				070090FC1B7F356D00D5041C /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		070091101B7F356E00D5041C /* OKOTests */ = {
+			isa = PBXGroup;
+			children = (
+				070091131B7F356E00D5041C /* OKOTests.swift */,
+				070091111B7F356E00D5041C /* Supporting Files */,
+			);
+			path = OKOTests;
+			sourceTree = "<group>";
+		};
+		070091111B7F356E00D5041C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				070091121B7F356E00D5041C /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		070090F71B7F356D00D5041C /* OKO */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 070091171B7F356E00D5041C /* Build configuration list for PBXNativeTarget "OKO" */;
+			buildPhases = (
+				070090F41B7F356D00D5041C /* Sources */,
+				070090F51B7F356D00D5041C /* Frameworks */,
+				070090F61B7F356D00D5041C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OKO;
+			productName = OKO;
+			productReference = 070090F81B7F356D00D5041C /* OKO.app */;
+			productType = "com.apple.product-type.application";
+		};
+		0700910C1B7F356E00D5041C /* OKOTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0700911A1B7F356E00D5041C /* Build configuration list for PBXNativeTarget "OKOTests" */;
+			buildPhases = (
+				070091091B7F356E00D5041C /* Sources */,
+				0700910A1B7F356E00D5041C /* Frameworks */,
+				0700910B1B7F356E00D5041C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0700910F1B7F356E00D5041C /* PBXTargetDependency */,
+			);
+			name = OKOTests;
+			productName = OKOTests;
+			productReference = 0700910D1B7F356E00D5041C /* OKOTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		070090F01B7F356D00D5041C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0640;
+				ORGANIZATIONNAME = oko;
+				TargetAttributes = {
+					070090F71B7F356D00D5041C = {
+						CreatedOnToolsVersion = 6.4;
+					};
+					0700910C1B7F356E00D5041C = {
+						CreatedOnToolsVersion = 6.4;
+						TestTargetID = 070090F71B7F356D00D5041C;
+					};
+				};
+			};
+			buildConfigurationList = 070090F31B7F356D00D5041C /* Build configuration list for PBXProject "OKO" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 070090EF1B7F356D00D5041C;
+			productRefGroup = 070090F91B7F356D00D5041C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				070090F71B7F356D00D5041C /* OKO */,
+				0700910C1B7F356E00D5041C /* OKOTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		070090F61B7F356D00D5041C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				070091031B7F356D00D5041C /* Main.storyboard in Resources */,
+				070091081B7F356D00D5041C /* LaunchScreen.xib in Resources */,
+				070091051B7F356D00D5041C /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0700910B1B7F356E00D5041C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		070090F41B7F356D00D5041C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				070091001B7F356D00D5041C /* ViewController.swift in Sources */,
+				070090FE1B7F356D00D5041C /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		070091091B7F356E00D5041C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				070091141B7F356E00D5041C /* OKOTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		0700910F1B7F356E00D5041C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 070090F71B7F356D00D5041C /* OKO */;
+			targetProxy = 0700910E1B7F356E00D5041C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		070091011B7F356D00D5041C /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				070091021B7F356D00D5041C /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		070091061B7F356D00D5041C /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				070091071B7F356D00D5041C /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		070091151B7F356E00D5041C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		070091161B7F356E00D5041C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		070091181B7F356E00D5041C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = OKO/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		070091191B7F356E00D5041C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = OKO/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		0700911B1B7F356E00D5041C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = OKOTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OKO.app/OKO";
+			};
+			name = Debug;
+		};
+		0700911C1B7F356E00D5041C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = OKOTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OKO.app/OKO";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		070090F31B7F356D00D5041C /* Build configuration list for PBXProject "OKO" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				070091151B7F356E00D5041C /* Debug */,
+				070091161B7F356E00D5041C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		070091171B7F356E00D5041C /* Build configuration list for PBXNativeTarget "OKO" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				070091181B7F356E00D5041C /* Debug */,
+				070091191B7F356E00D5041C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		0700911A1B7F356E00D5041C /* Build configuration list for PBXNativeTarget "OKOTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0700911B1B7F356E00D5041C /* Debug */,
+				0700911C1B7F356E00D5041C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 070090F01B7F356D00D5041C /* Project object */;
+}
