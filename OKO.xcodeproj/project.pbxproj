@@ -13,6 +13,66 @@
 		070091051B7F356D00D5041C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 070091041B7F356D00D5041C /* Images.xcassets */; };
 		070091081B7F356D00D5041C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 070091061B7F356D00D5041C /* LaunchScreen.xib */; };
 		070091141B7F356E00D5041C /* OKOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070091131B7F356E00D5041C /* OKOTests.swift */; };
+		070091201B7F396A00D5041C /* splash.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0700911F1B7F396A00D5041C /* splash.jpg */; };
+		070091231B7F5D7B00D5041C /* menu-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 070091221B7F5D7B00D5041C /* menu-button.png */; };
+		0760249D1B7F7405006F4C03 /* top-bar-background.png in Resources */ = {isa = PBXBuildFile; fileRef = 0760249C1B7F7405006F4C03 /* top-bar-background.png */; };
+		1E0662DC1BE33203001BD1F5 /* AddLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0662DB1BE33203001BD1F5 /* AddLocationViewController.swift */; };
+		1E0662DE1BE33237001BD1F5 /* LocaionTypeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0662DD1BE33237001BD1F5 /* LocaionTypeTableViewController.swift */; };
+		1E0662E01BE7BB07001BD1F5 /* edit.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E0662DF1BE7BB07001BD1F5 /* edit.png */; };
+		1EDB6A221BDBA47600828CC7 /* facebook-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EDB6A1E1BDBA47600828CC7 /* facebook-button.png */; };
+		1EDB6A231BDBA47600828CC7 /* instagram-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EDB6A1F1BDBA47600828CC7 /* instagram-button.png */; };
+		1EDB6A241BDBA47600828CC7 /* twitter-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EDB6A201BDBA47600828CC7 /* twitter-button.png */; };
+		1EDB6A251BDBA47600828CC7 /* vk-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EDB6A211BDBA47600828CC7 /* vk-button.png */; };
+		1EDB6A271BDF45CB00828CC7 /* back-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EDB6A261BDF45CB00828CC7 /* back-arrow.png */; };
+		1EE8BB181BB98D3E00F172BC /* radar-off.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EE8BB171BB98D3E00F172BC /* radar-off.png */; };
+		1EE8BB1A1BC0F3B400F172BC /* HUDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE8BB191BC0F3B300F172BC /* HUDViewController.swift */; };
+		1EE8BB1C1BC106EA00F172BC /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE8BB1B1BC106EA00F172BC /* Protocols.swift */; };
+		5E3699AD1B91A2DB0003B57E /* LocationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3699AC1B91A2DB0003B57E /* LocationType.swift */; };
+		5E5470A01B8880F9002A840E /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E54709F1B8880F9002A840E /* arrow.png */; };
+		5E70144B1B9ABCB1004AB4B3 /* FilterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E70144A1B9ABCB1004AB4B3 /* FilterTableViewController.swift */; };
+		5EB9EAF81B899BAD00F3F863 /* compas.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EB9EAF31B899BAD00F3F863 /* compas.png */; };
+		5EB9EAF91B899BAD00F3F863 /* location.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EB9EAF41B899BAD00F3F863 /* location.png */; };
+		5EB9EAFA1B899BAD00F3F863 /* radar-switcher.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EB9EAF51B899BAD00F3F863 /* radar-switcher.png */; };
+		5EB9EAFB1B899BAD00F3F863 /* zoom-in.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EB9EAF61B899BAD00F3F863 /* zoom-in.png */; };
+		5EB9EAFC1B899BAD00F3F863 /* zoom-out.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EB9EAF71B899BAD00F3F863 /* zoom-out.png */; };
+		5EB9EB031B89AC9500F3F863 /* bottom-bar.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EB9EAFE1B89AC9500F3F863 /* bottom-bar.png */; };
+		5EB9EB041B89AC9500F3F863 /* danger-speed.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EB9EAFF1B89AC9500F3F863 /* danger-speed.png */; };
+		5EB9EB051B89AC9500F3F863 /* fast-speed.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EB9EB001B89AC9500F3F863 /* fast-speed.png */; };
+		5EB9EB061B89AC9500F3F863 /* normal-speed.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EB9EB011B89AC9500F3F863 /* normal-speed.png */; };
+		5EB9EB071B89AC9500F3F863 /* slow-speed.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EB9EB021B89AC9500F3F863 /* slow-speed.png */; };
+		5EB9EB231B89C32000F3F863 /* another-danger.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EB9EB091B89C32000F3F863 /* another-danger.png */; };
+		5EB9EB241B89C32000F3F863 /* bad-road.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EB9EB0A1B89C32000F3F863 /* bad-road.png */; };
+		5EB9EB251B89C32000F3F863 /* danger-crossing.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EB9EB0B1B89C32000F3F863 /* danger-crossing.png */; };
+		5EB9EB261B89C32000F3F863 /* danger-crossway.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EB9EB0C1B89C32000F3F863 /* danger-crossway.png */; };
+		5EB9EB271B89C32000F3F863 /* danger-route-change.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EB9EB0D1B89C32000F3F863 /* danger-route-change.png */; };
+		5EB9EB281B89C32000F3F863 /* double-road-camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EB9EB0E1B89C32000F3F863 /* double-road-camera.png */; };
+		5EB9EB291B89C32000F3F863 /* dtp.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EB9EB0F1B89C32000F3F863 /* dtp.png */; };
+		5EB9EB2A1B89C32000F3F863 /* line-control-camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EB9EB101B89C32000F3F863 /* line-control-camera.png */; };
+		5EB9EB2B1B89C32000F3F863 /* locality-inception.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EB9EB111B89C32000F3F863 /* locality-inception.png */; };
+		5EB9EB2C1B89C32000F3F863 /* mobile-camera-ambush.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EB9EB121B89C32000F3F863 /* mobile-camera-ambush.png */; };
+		5EB9EB2D1B89C32000F3F863 /* railway-crossing.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EB9EB131B89C32000F3F863 /* railway-crossing.png */; };
+		5EB9EB2E1B89C32000F3F863 /* red-light-camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EB9EB141B89C32000F3F863 /* red-light-camera.png */; };
+		5EB9EB2F1B89C32000F3F863 /* road-work.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EB9EB151B89C32000F3F863 /* road-work.png */; };
+		5EB9EB301B89C32000F3F863 /* sleeping-policeman.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EB9EB161B89C32000F3F863 /* sleeping-policeman.png */; };
+		5EB9EB311B89C32000F3F863 /* slippery-road.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EB9EB171B89C32000F3F863 /* slippery-road.png */; };
+		5EB9EB321B89C32000F3F863 /* speed-limit-40.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EB9EB181B89C32000F3F863 /* speed-limit-40.png */; };
+		5EB9EB331B89C32000F3F863 /* speed-limit-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EB9EB191B89C32000F3F863 /* speed-limit-50.png */; };
+		5EB9EB341B89C32000F3F863 /* speed-limit-60.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EB9EB1A1B89C32000F3F863 /* speed-limit-60.png */; };
+		5EB9EB351B89C32000F3F863 /* speed-limit-80.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EB9EB1B1B89C32000F3F863 /* speed-limit-80.png */; };
+		5EB9EB361B89C32000F3F863 /* static-dps-post.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EB9EB1C1B89C32000F3F863 /* static-dps-post.png */; };
+		5EB9EB371B89C32000F3F863 /* static-speed-camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EB9EB1D1B89C32000F3F863 /* static-speed-camera.png */; };
+		5EB9EB381B89C32000F3F863 /* stop-line-control.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EB9EB1E1B89C32000F3F863 /* stop-line-control.png */; };
+		5EB9EB391B89C32000F3F863 /* stop-sign.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EB9EB1F1B89C32000F3F863 /* stop-sign.png */; };
+		5EB9EB3A1B89C32000F3F863 /* svetofor-camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EB9EB201B89C32000F3F863 /* svetofor-camera.png */; };
+		5EB9EB3B1B89C32000F3F863 /* traffic-police.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EB9EB211B89C32000F3F863 /* traffic-police.png */; };
+		5EB9EB3C1B89C32000F3F863 /* trenoga.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EB9EB221B89C32000F3F863 /* trenoga.png */; };
+		5EB9EB3F1B89D7F900F3F863 /* filter-check.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EB9EB3D1B89D7F900F3F863 /* filter-check.png */; };
+		5EB9EB401B89D7F900F3F863 /* filter-uncheck.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EB9EB3E1B89D7F900F3F863 /* filter-uncheck.png */; };
+		5EB9EB4A1B89E92200F3F863 /* ContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EB9EB491B89E92200F3F863 /* ContainerViewController.m */; };
+		5ECDF5BD1BA58D5D0026B18D /* claster@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5ECDF5BC1BA58D5D0026B18D /* claster@2x.png */; };
+		5EFC9D041B933E1D00759D56 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFC9D031B933E1D00759D56 /* Location.swift */; };
+		5EFD13671B8B7439002E3F7B /* user@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EFD13661B8B7439002E3F7B /* user@2x.png */; };
+		980C906AE1C6E9B285FA454D /* Pods_OKO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFFB06D87B7AB4AAF080FD62 /* Pods_OKO.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -25,6 +85,19 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		5E676C201B8CB3EF00113EDE /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		070090F81B7F356D00D5041C /* OKO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OKO.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		070090FC1B7F356D00D5041C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -36,6 +109,70 @@
 		0700910D1B7F356E00D5041C /* OKOTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OKOTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		070091121B7F356E00D5041C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		070091131B7F356E00D5041C /* OKOTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OKOTests.swift; sourceTree = "<group>"; };
+		0700911F1B7F396A00D5041C /* splash.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = splash.jpg; path = OKO/images/splash/splash.jpg; sourceTree = SOURCE_ROOT; };
+		070091221B7F5D7B00D5041C /* menu-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-button.png"; sourceTree = "<group>"; };
+		0760249C1B7F7405006F4C03 /* top-bar-background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "top-bar-background.png"; sourceTree = "<group>"; };
+		1E0662DB1BE33203001BD1F5 /* AddLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddLocationViewController.swift; sourceTree = "<group>"; };
+		1E0662DD1BE33237001BD1F5 /* LocaionTypeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocaionTypeTableViewController.swift; sourceTree = "<group>"; };
+		1E0662DF1BE7BB07001BD1F5 /* edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = edit.png; sourceTree = "<group>"; };
+		1EDB6A1E1BDBA47600828CC7 /* facebook-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook-button.png"; sourceTree = "<group>"; };
+		1EDB6A1F1BDBA47600828CC7 /* instagram-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "instagram-button.png"; sourceTree = "<group>"; };
+		1EDB6A201BDBA47600828CC7 /* twitter-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter-button.png"; sourceTree = "<group>"; };
+		1EDB6A211BDBA47600828CC7 /* vk-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "vk-button.png"; sourceTree = "<group>"; };
+		1EDB6A261BDF45CB00828CC7 /* back-arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back-arrow.png"; sourceTree = "<group>"; };
+		1EE8BB171BB98D3E00F172BC /* radar-off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "radar-off.png"; sourceTree = "<group>"; };
+		1EE8BB191BC0F3B300F172BC /* HUDViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HUDViewController.swift; sourceTree = "<group>"; };
+		1EE8BB1B1BC106EA00F172BC /* Protocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		2DFAA71DC7E756D51876291A /* Pods-OKO.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OKO.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OKO/Pods-OKO.debug.xcconfig"; sourceTree = "<group>"; };
+		5E3699AC1B91A2DB0003B57E /* LocationType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationType.swift; sourceTree = "<group>"; };
+		5E54709F1B8880F9002A840E /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow.png; sourceTree = "<group>"; };
+		5E70144A1B9ABCB1004AB4B3 /* FilterTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterTableViewController.swift; sourceTree = "<group>"; };
+		5EB9EAF31B899BAD00F3F863 /* compas.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = compas.png; sourceTree = "<group>"; };
+		5EB9EAF41B899BAD00F3F863 /* location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = location.png; sourceTree = "<group>"; };
+		5EB9EAF51B899BAD00F3F863 /* radar-switcher.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "radar-switcher.png"; sourceTree = "<group>"; };
+		5EB9EAF61B899BAD00F3F863 /* zoom-in.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "zoom-in.png"; sourceTree = "<group>"; };
+		5EB9EAF71B899BAD00F3F863 /* zoom-out.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "zoom-out.png"; sourceTree = "<group>"; };
+		5EB9EAFE1B89AC9500F3F863 /* bottom-bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bottom-bar.png"; sourceTree = "<group>"; };
+		5EB9EAFF1B89AC9500F3F863 /* danger-speed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "danger-speed.png"; sourceTree = "<group>"; };
+		5EB9EB001B89AC9500F3F863 /* fast-speed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fast-speed.png"; sourceTree = "<group>"; };
+		5EB9EB011B89AC9500F3F863 /* normal-speed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "normal-speed.png"; sourceTree = "<group>"; };
+		5EB9EB021B89AC9500F3F863 /* slow-speed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "slow-speed.png"; sourceTree = "<group>"; };
+		5EB9EB091B89C32000F3F863 /* another-danger.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "another-danger.png"; sourceTree = "<group>"; };
+		5EB9EB0A1B89C32000F3F863 /* bad-road.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bad-road.png"; sourceTree = "<group>"; };
+		5EB9EB0B1B89C32000F3F863 /* danger-crossing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "danger-crossing.png"; sourceTree = "<group>"; };
+		5EB9EB0C1B89C32000F3F863 /* danger-crossway.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "danger-crossway.png"; sourceTree = "<group>"; };
+		5EB9EB0D1B89C32000F3F863 /* danger-route-change.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "danger-route-change.png"; sourceTree = "<group>"; };
+		5EB9EB0E1B89C32000F3F863 /* double-road-camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "double-road-camera.png"; sourceTree = "<group>"; };
+		5EB9EB0F1B89C32000F3F863 /* dtp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dtp.png; sourceTree = "<group>"; };
+		5EB9EB101B89C32000F3F863 /* line-control-camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "line-control-camera.png"; sourceTree = "<group>"; };
+		5EB9EB111B89C32000F3F863 /* locality-inception.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "locality-inception.png"; sourceTree = "<group>"; };
+		5EB9EB121B89C32000F3F863 /* mobile-camera-ambush.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mobile-camera-ambush.png"; sourceTree = "<group>"; };
+		5EB9EB131B89C32000F3F863 /* railway-crossing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "railway-crossing.png"; sourceTree = "<group>"; };
+		5EB9EB141B89C32000F3F863 /* red-light-camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "red-light-camera.png"; sourceTree = "<group>"; };
+		5EB9EB151B89C32000F3F863 /* road-work.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "road-work.png"; sourceTree = "<group>"; };
+		5EB9EB161B89C32000F3F863 /* sleeping-policeman.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sleeping-policeman.png"; sourceTree = "<group>"; };
+		5EB9EB171B89C32000F3F863 /* slippery-road.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "slippery-road.png"; sourceTree = "<group>"; };
+		5EB9EB181B89C32000F3F863 /* speed-limit-40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "speed-limit-40.png"; sourceTree = "<group>"; };
+		5EB9EB191B89C32000F3F863 /* speed-limit-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "speed-limit-50.png"; sourceTree = "<group>"; };
+		5EB9EB1A1B89C32000F3F863 /* speed-limit-60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "speed-limit-60.png"; sourceTree = "<group>"; };
+		5EB9EB1B1B89C32000F3F863 /* speed-limit-80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "speed-limit-80.png"; sourceTree = "<group>"; };
+		5EB9EB1C1B89C32000F3F863 /* static-dps-post.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "static-dps-post.png"; sourceTree = "<group>"; };
+		5EB9EB1D1B89C32000F3F863 /* static-speed-camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "static-speed-camera.png"; sourceTree = "<group>"; };
+		5EB9EB1E1B89C32000F3F863 /* stop-line-control.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stop-line-control.png"; sourceTree = "<group>"; };
+		5EB9EB1F1B89C32000F3F863 /* stop-sign.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stop-sign.png"; sourceTree = "<group>"; };
+		5EB9EB201B89C32000F3F863 /* svetofor-camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "svetofor-camera.png"; sourceTree = "<group>"; };
+		5EB9EB211B89C32000F3F863 /* traffic-police.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "traffic-police.png"; sourceTree = "<group>"; };
+		5EB9EB221B89C32000F3F863 /* trenoga.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trenoga.png; sourceTree = "<group>"; };
+		5EB9EB3D1B89D7F900F3F863 /* filter-check.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "filter-check.png"; sourceTree = "<group>"; };
+		5EB9EB3E1B89D7F900F3F863 /* filter-uncheck.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "filter-uncheck.png"; sourceTree = "<group>"; };
+		5EB9EB411B89E12100F3F863 /* OKO-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OKO-Bridging-Header.h"; sourceTree = "<group>"; };
+		5EB9EB481B89E92200F3F863 /* ContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContainerViewController.h; sourceTree = "<group>"; };
+		5EB9EB491B89E92200F3F863 /* ContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContainerViewController.m; sourceTree = "<group>"; };
+		5ECDF5BC1BA58D5D0026B18D /* claster@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "claster@2x.png"; sourceTree = "<group>"; };
+		5EFC9D031B933E1D00759D56 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		5EFD13661B8B7439002E3F7B /* user@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user@2x.png"; sourceTree = "<group>"; };
+		A466AAC8CA678BA52C23C6BD /* Pods-OKO.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OKO.release.xcconfig"; path = "Pods/Target Support Files/Pods-OKO/Pods-OKO.release.xcconfig"; sourceTree = "<group>"; };
+		FFFB06D87B7AB4AAF080FD62 /* Pods_OKO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OKO.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +180,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				980C906AE1C6E9B285FA454D /* Pods_OKO.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,6 +200,8 @@
 				070090FA1B7F356D00D5041C /* OKO */,
 				070091101B7F356E00D5041C /* OKOTests */,
 				070090F91B7F356D00D5041C /* Products */,
+				F0B04C3FA986B79B1EA23A2B /* Pods */,
+				8DD13C478CD7767A97F21E7D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -77,12 +217,23 @@
 		070090FA1B7F356D00D5041C /* OKO */ = {
 			isa = PBXGroup;
 			children = (
+				0700911D1B7F38F600D5041C /* images */,
 				070090FD1B7F356D00D5041C /* AppDelegate.swift */,
 				070090FF1B7F356D00D5041C /* ViewController.swift */,
 				070091011B7F356D00D5041C /* Main.storyboard */,
 				070091041B7F356D00D5041C /* Images.xcassets */,
 				070091061B7F356D00D5041C /* LaunchScreen.xib */,
 				070090FB1B7F356D00D5041C /* Supporting Files */,
+				5EB9EB411B89E12100F3F863 /* OKO-Bridging-Header.h */,
+				5EB9EB481B89E92200F3F863 /* ContainerViewController.h */,
+				5EB9EB491B89E92200F3F863 /* ContainerViewController.m */,
+				5EFC9D031B933E1D00759D56 /* Location.swift */,
+				5E3699AC1B91A2DB0003B57E /* LocationType.swift */,
+				5E70144A1B9ABCB1004AB4B3 /* FilterTableViewController.swift */,
+				1EE8BB191BC0F3B300F172BC /* HUDViewController.swift */,
+				1EE8BB1B1BC106EA00F172BC /* Protocols.swift */,
+				1E0662DB1BE33203001BD1F5 /* AddLocationViewController.swift */,
+				1E0662DD1BE33237001BD1F5 /* LocaionTypeTableViewController.swift */,
 			);
 			path = OKO;
 			sourceTree = "<group>";
@@ -112,6 +263,114 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		0700911D1B7F38F600D5041C /* images */ = {
+			isa = PBXGroup;
+			children = (
+				5EB9EB081B89C30F00F3F863 /* road signs */,
+				5EB9EAFD1B89AC8100F3F863 /* map parts */,
+				070091211B7F5D5900D5041C /* menu buttons */,
+				0700911E1B7F38FC00D5041C /* splash */,
+			);
+			path = images;
+			sourceTree = "<group>";
+		};
+		0700911E1B7F38FC00D5041C /* splash */ = {
+			isa = PBXGroup;
+			children = (
+				0700911F1B7F396A00D5041C /* splash.jpg */,
+			);
+			name = splash;
+			path = images/splash;
+			sourceTree = "<group>";
+		};
+		070091211B7F5D5900D5041C /* menu buttons */ = {
+			isa = PBXGroup;
+			children = (
+				1E0662DF1BE7BB07001BD1F5 /* edit.png */,
+				1EDB6A261BDF45CB00828CC7 /* back-arrow.png */,
+				1EDB6A1E1BDBA47600828CC7 /* facebook-button.png */,
+				1EDB6A1F1BDBA47600828CC7 /* instagram-button.png */,
+				1EDB6A201BDBA47600828CC7 /* twitter-button.png */,
+				1EDB6A211BDBA47600828CC7 /* vk-button.png */,
+				1EE8BB171BB98D3E00F172BC /* radar-off.png */,
+				5EB9EB3D1B89D7F900F3F863 /* filter-check.png */,
+				5EB9EB3E1B89D7F900F3F863 /* filter-uncheck.png */,
+				5EB9EAF31B899BAD00F3F863 /* compas.png */,
+				5EB9EAF41B899BAD00F3F863 /* location.png */,
+				5EB9EAF51B899BAD00F3F863 /* radar-switcher.png */,
+				5EB9EAF61B899BAD00F3F863 /* zoom-in.png */,
+				5EB9EAF71B899BAD00F3F863 /* zoom-out.png */,
+				5E54709F1B8880F9002A840E /* arrow.png */,
+				0760249C1B7F7405006F4C03 /* top-bar-background.png */,
+				070091221B7F5D7B00D5041C /* menu-button.png */,
+			);
+			path = "menu buttons";
+			sourceTree = "<group>";
+		};
+		5EB9EAFD1B89AC8100F3F863 /* map parts */ = {
+			isa = PBXGroup;
+			children = (
+				5ECDF5BC1BA58D5D0026B18D /* claster@2x.png */,
+				5EFD13661B8B7439002E3F7B /* user@2x.png */,
+				5EB9EAFE1B89AC9500F3F863 /* bottom-bar.png */,
+				5EB9EAFF1B89AC9500F3F863 /* danger-speed.png */,
+				5EB9EB001B89AC9500F3F863 /* fast-speed.png */,
+				5EB9EB011B89AC9500F3F863 /* normal-speed.png */,
+				5EB9EB021B89AC9500F3F863 /* slow-speed.png */,
+			);
+			path = "map parts";
+			sourceTree = "<group>";
+		};
+		5EB9EB081B89C30F00F3F863 /* road signs */ = {
+			isa = PBXGroup;
+			children = (
+				5EB9EB091B89C32000F3F863 /* another-danger.png */,
+				5EB9EB0A1B89C32000F3F863 /* bad-road.png */,
+				5EB9EB0B1B89C32000F3F863 /* danger-crossing.png */,
+				5EB9EB0C1B89C32000F3F863 /* danger-crossway.png */,
+				5EB9EB0D1B89C32000F3F863 /* danger-route-change.png */,
+				5EB9EB0E1B89C32000F3F863 /* double-road-camera.png */,
+				5EB9EB0F1B89C32000F3F863 /* dtp.png */,
+				5EB9EB101B89C32000F3F863 /* line-control-camera.png */,
+				5EB9EB111B89C32000F3F863 /* locality-inception.png */,
+				5EB9EB121B89C32000F3F863 /* mobile-camera-ambush.png */,
+				5EB9EB131B89C32000F3F863 /* railway-crossing.png */,
+				5EB9EB141B89C32000F3F863 /* red-light-camera.png */,
+				5EB9EB151B89C32000F3F863 /* road-work.png */,
+				5EB9EB161B89C32000F3F863 /* sleeping-policeman.png */,
+				5EB9EB171B89C32000F3F863 /* slippery-road.png */,
+				5EB9EB181B89C32000F3F863 /* speed-limit-40.png */,
+				5EB9EB191B89C32000F3F863 /* speed-limit-50.png */,
+				5EB9EB1A1B89C32000F3F863 /* speed-limit-60.png */,
+				5EB9EB1B1B89C32000F3F863 /* speed-limit-80.png */,
+				5EB9EB1C1B89C32000F3F863 /* static-dps-post.png */,
+				5EB9EB1D1B89C32000F3F863 /* static-speed-camera.png */,
+				5EB9EB1E1B89C32000F3F863 /* stop-line-control.png */,
+				5EB9EB1F1B89C32000F3F863 /* stop-sign.png */,
+				5EB9EB201B89C32000F3F863 /* svetofor-camera.png */,
+				5EB9EB211B89C32000F3F863 /* traffic-police.png */,
+				5EB9EB221B89C32000F3F863 /* trenoga.png */,
+			);
+			path = "road signs";
+			sourceTree = "<group>";
+		};
+		8DD13C478CD7767A97F21E7D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FFFB06D87B7AB4AAF080FD62 /* Pods_OKO.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F0B04C3FA986B79B1EA23A2B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2DFAA71DC7E756D51876291A /* Pods-OKO.debug.xcconfig */,
+				A466AAC8CA678BA52C23C6BD /* Pods-OKO.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -119,9 +378,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 070091171B7F356E00D5041C /* Build configuration list for PBXNativeTarget "OKO" */;
 			buildPhases = (
+				4E9CD3358367A8D98C44015D /* Check Pods Manifest.lock */,
 				070090F41B7F356D00D5041C /* Sources */,
 				070090F51B7F356D00D5041C /* Frameworks */,
 				070090F61B7F356D00D5041C /* Resources */,
+				5E676C201B8CB3EF00113EDE /* Embed Frameworks */,
+				118F0B3160809FDABEFE1AF5 /* Embed Pods Frameworks */,
+				93F304B7E07B116E7E80B3DB /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -156,11 +419,13 @@
 		070090F01B7F356D00D5041C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0640;
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = oko;
 				TargetAttributes = {
 					070090F71B7F356D00D5041C = {
 						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = 5ZPVHYYR5Z;
 					};
 					0700910C1B7F356E00D5041C = {
 						CreatedOnToolsVersion = 6.4;
@@ -192,9 +457,60 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5EB9EB251B89C32000F3F863 /* danger-crossing.png in Resources */,
+				5EB9EAF81B899BAD00F3F863 /* compas.png in Resources */,
+				5EB9EB371B89C32000F3F863 /* static-speed-camera.png in Resources */,
+				5EB9EAFA1B899BAD00F3F863 /* radar-switcher.png in Resources */,
+				5EB9EB351B89C32000F3F863 /* speed-limit-80.png in Resources */,
+				5EB9EB2C1B89C32000F3F863 /* mobile-camera-ambush.png in Resources */,
+				1EDB6A221BDBA47600828CC7 /* facebook-button.png in Resources */,
+				070091201B7F396A00D5041C /* splash.jpg in Resources */,
+				5EB9EB301B89C32000F3F863 /* sleeping-policeman.png in Resources */,
+				5EB9EB2A1B89C32000F3F863 /* line-control-camera.png in Resources */,
+				5EB9EB271B89C32000F3F863 /* danger-route-change.png in Resources */,
+				5EB9EB331B89C32000F3F863 /* speed-limit-50.png in Resources */,
+				5EB9EB261B89C32000F3F863 /* danger-crossway.png in Resources */,
+				5EB9EB281B89C32000F3F863 /* double-road-camera.png in Resources */,
+				5EB9EB2D1B89C32000F3F863 /* railway-crossing.png in Resources */,
+				5EB9EB321B89C32000F3F863 /* speed-limit-40.png in Resources */,
+				070091231B7F5D7B00D5041C /* menu-button.png in Resources */,
+				5EB9EB3F1B89D7F900F3F863 /* filter-check.png in Resources */,
+				5EB9EB231B89C32000F3F863 /* another-danger.png in Resources */,
+				1EE8BB181BB98D3E00F172BC /* radar-off.png in Resources */,
+				5EB9EB2F1B89C32000F3F863 /* road-work.png in Resources */,
+				5EB9EB2B1B89C32000F3F863 /* locality-inception.png in Resources */,
+				5EB9EB311B89C32000F3F863 /* slippery-road.png in Resources */,
 				070091031B7F356D00D5041C /* Main.storyboard in Resources */,
+				1EDB6A231BDBA47600828CC7 /* instagram-button.png in Resources */,
+				5EB9EAFC1B899BAD00F3F863 /* zoom-out.png in Resources */,
+				1EDB6A251BDBA47600828CC7 /* vk-button.png in Resources */,
+				5EB9EB241B89C32000F3F863 /* bad-road.png in Resources */,
+				5EB9EB2E1B89C32000F3F863 /* red-light-camera.png in Resources */,
+				1E0662E01BE7BB07001BD1F5 /* edit.png in Resources */,
+				5EB9EAF91B899BAD00F3F863 /* location.png in Resources */,
+				5EFD13671B8B7439002E3F7B /* user@2x.png in Resources */,
+				1EDB6A271BDF45CB00828CC7 /* back-arrow.png in Resources */,
+				5EB9EAFB1B899BAD00F3F863 /* zoom-in.png in Resources */,
+				5EB9EB031B89AC9500F3F863 /* bottom-bar.png in Resources */,
+				5EB9EB3B1B89C32000F3F863 /* traffic-police.png in Resources */,
 				070091081B7F356D00D5041C /* LaunchScreen.xib in Resources */,
+				5ECDF5BD1BA58D5D0026B18D /* claster@2x.png in Resources */,
+				5EB9EB381B89C32000F3F863 /* stop-line-control.png in Resources */,
+				5EB9EB061B89AC9500F3F863 /* normal-speed.png in Resources */,
+				5EB9EB3A1B89C32000F3F863 /* svetofor-camera.png in Resources */,
 				070091051B7F356D00D5041C /* Images.xcassets in Resources */,
+				5EB9EB401B89D7F900F3F863 /* filter-uncheck.png in Resources */,
+				5EB9EB341B89C32000F3F863 /* speed-limit-60.png in Resources */,
+				5EB9EB291B89C32000F3F863 /* dtp.png in Resources */,
+				5E5470A01B8880F9002A840E /* arrow.png in Resources */,
+				5EB9EB361B89C32000F3F863 /* static-dps-post.png in Resources */,
+				5EB9EB051B89AC9500F3F863 /* fast-speed.png in Resources */,
+				5EB9EB3C1B89C32000F3F863 /* trenoga.png in Resources */,
+				5EB9EB391B89C32000F3F863 /* stop-sign.png in Resources */,
+				1EDB6A241BDBA47600828CC7 /* twitter-button.png in Resources */,
+				5EB9EB041B89AC9500F3F863 /* danger-speed.png in Resources */,
+				0760249D1B7F7405006F4C03 /* top-bar-background.png in Resources */,
+				5EB9EB071B89AC9500F3F863 /* slow-speed.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -207,13 +523,69 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		118F0B3160809FDABEFE1AF5 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OKO/Pods-OKO-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4E9CD3358367A8D98C44015D /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		93F304B7E07B116E7E80B3DB /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OKO/Pods-OKO-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		070090F41B7F356D00D5041C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				070091001B7F356D00D5041C /* ViewController.swift in Sources */,
+				5E70144B1B9ABCB1004AB4B3 /* FilterTableViewController.swift in Sources */,
+				5E3699AD1B91A2DB0003B57E /* LocationType.swift in Sources */,
+				1E0662DE1BE33237001BD1F5 /* LocaionTypeTableViewController.swift in Sources */,
 				070090FE1B7F356D00D5041C /* AppDelegate.swift in Sources */,
+				1E0662DC1BE33203001BD1F5 /* AddLocationViewController.swift in Sources */,
+				5EB9EB4A1B89E92200F3F863 /* ContainerViewController.m in Sources */,
+				1EE8BB1A1BC0F3B400F172BC /* HUDViewController.swift in Sources */,
+				1EE8BB1C1BC106EA00F172BC /* Protocols.swift in Sources */,
+				5EFC9D041B933E1D00759D56 /* Location.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -276,6 +648,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -338,21 +711,36 @@
 		};
 		070091181B7F356E00D5041C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2DFAA71DC7E756D51876291A /* Pods-OKO.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = OKO/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "kz.oko.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "OKO/OKO-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		070091191B7F356E00D5041C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A466AAC8CA678BA52C23C6BD /* Pods-OKO.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = OKO/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "kz.oko.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "OKO/OKO-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -370,6 +758,7 @@
 				);
 				INFOPLIST_FILE = OKOTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "kz.oko.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OKO.app/OKO";
 			};
@@ -385,6 +774,7 @@
 				);
 				INFOPLIST_FILE = OKOTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "kz.oko.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OKO.app/OKO";
 			};
@@ -409,6 +799,7 @@
 				070091191B7F356E00D5041C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0700911A1B7F356E00D5041C /* Build configuration list for PBXNativeTarget "OKOTests" */ = {
 			isa = XCConfigurationList;
@@ -417,6 +808,7 @@
 				0700911C1B7F356E00D5041C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
