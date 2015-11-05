@@ -13,10 +13,16 @@ class HUDViewController: UIViewController,MyLocationDelegateProtocol {
 
     @IBOutlet weak var hudLabel: UILabel!
 
+    @IBOutlet weak var viewToFlip: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
         hudLabel.transform = CGAffineTransformMakeRotation(CGFloat(-M_PI_2))
+        
+
         // Do any additional setup after loading the view.
+        
+        //TODO Отразить слева направо
+        viewToFlip.transform = CGAffineTransformMakeScale(-1.0, 1.0)
     }
 
     override func didReceiveMemoryWarning() {

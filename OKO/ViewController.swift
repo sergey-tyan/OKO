@@ -96,6 +96,13 @@ View Appearance
             startSaving()
         }
         mapView.delegate = self;
+        
+        if #available(iOS 9.0, *) {
+            mapView.showsCompass=false
+        } else {
+            // Fallback on earlier versions
+        };
+
        
         locationManager.startUpdatingLocation()
         
@@ -126,6 +133,10 @@ View Appearance
         print("viewDidAppear")
         let value = UIInterfaceOrientation.Portrait.rawValue
         UIDevice.currentDevice().setValue(value, forKey: "orientation")
+        
+        
+
+
         //self.menuView.frame.origin.x = ((-1) * self.menuView.frame.width)
     }
     override func viewWillAppear(animated: Bool) {
@@ -145,7 +156,6 @@ View Appearance
             
             userDefaults.setObject(activeFilters, forKey: "savedFilters")
             print("LOADED NEW FILTERS \(activeFilters)")
-            
         }
         filteredLocationArray = [Location]()
         for someType in allLocationDictionary.keys {
@@ -155,7 +165,6 @@ View Appearance
                 for oneLoc in currentFilteredLocationArray {
                     filteredLocationArray.append(oneLoc)
                 }
-                
             }
         }
         self.clusteringController.setAnnotations(filteredLocationArray)
@@ -227,6 +236,7 @@ Location Manager Delegate Methods
     }
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        print("calling locationsUpdate")
         userLocation = locations.last!;
 
         //UPDATE COURSE AND SPEED HERE
@@ -235,19 +245,30 @@ Location Manager Delegate Methods
 //        print("locationUpdated \(UIApplication.sharedApplication().keyWindow!.rootViewController?.classForCoder)")
         var speed = userLocation.speed;
         let course = userLocation.course
+        print("course \(course)")
         speed = speed * 3.6;
+        
+
+        
         if(speed < 0){
             speed = 0;
             curSpeedColor = 0
         }
 
         if(working){
-            //TODO
-//            var newCamera:MKMapCamera = MKMapCamera();
-//            newCamera = mapView.camera
-//            newCamera.altitude = 3000
-//            newCamera.heading = course
-//            mapView.setCamera(newCamera, animated: true)
+            //TODO сделать вращение камеры в зависимости от направления движения пользователя
+            
+            let newCamera = mapView.camera
+            if(course > 0){
+                newCamera.heading=course
+            }else{
+                newCamera.heading=180.0
+            }
+            
+            newCamera.centerCoordinate = userLocation.coordinate
+            newCamera.altitude=500.0
+            mapView.setCamera(newCamera, animated: false)
+
             var newSpeedColor:Int;
             if(speed >= 0 && speed < 60){
                 newSpeedColor = 1
@@ -277,7 +298,7 @@ Location Manager Delegate Methods
                 }
             }
         }
-/*        print("curSpeedColor = \(curSpeedColor)")
+/*      print("curSpeedColor = \(curSpeedColor)")
         print("course = \(course)")
         print("speed = \(speed)")*/
 
@@ -289,15 +310,12 @@ Location Manager Delegate Methods
             stopMonitoringGeotification()
             let annotations = mapView.annotations
             
+            
             //В этом цикле берутся все точки вокруг пользователя не в кластерах и добавляются в массив
             for annotation in annotations{
                 if annotation is KPAnnotation {
                     let a = annotation as! KPAnnotation
-                    if a.isCluster() {
-                        
-                    }
-                    else {
-                        
+                    if (!a.isCluster()) {
                         let kpAnnot = annotation as? KPAnnotation
                         let kpSet = kpAnnot?.annotations;
                         let locationAnnot = kpSet?.first as! Location
@@ -305,14 +323,15 @@ Location Manager Delegate Methods
                         let dist1 = userLocation.distanceFromLocation(loc1CLLocation)
                         locationAnnot.distance = dist1
                         locationsAroundUser.append(locationAnnot)
+
+                        //TODO увеличивать annotation, к которому приближаемся достать MKAnnotationView из MKAnnotation
                     }
                 }
             }
             //локейшны вокруг пользователя сортируются по дистанции к нему
             let sortedLocationsAroundUser = locationsAroundUser.sort(sortFunc)
-            var counter = 0
-            var locationsForMonitoring = [Location]()
-            //ближайшие 20 точек кладутся в массив для мониторинга
+
+            //ищем первую точку, расстояние до которой меньше 700 м по направлению
             for nearestLoc in sortedLocationsAroundUser{
 
                 //угол между ближайшей точкой и локейшном юзера
@@ -322,19 +341,16 @@ Location Manager Delegate Methods
                     lon2: userLocation.coordinate.longitude)
 
                 //направление точки минус угол
-                let degree = nearestLoc.direction - locToUserAngle
-
-                if(counter < 5 && (abs(degree) < 45)){
-                    locationsForMonitoring.append(nearestLoc)
-
+                let degree = abs(nearestLoc.direction - locToUserAngle)
+                
+                if((nearestLoc.distance < 200) && (degree < 30)){
+                    alertUser(nearestLoc)
                     print("distance: \(nearestLoc.distance)")
                     print("direction: \(nearestLoc.direction)")
                     print("locToUserAngle: \(locToUserAngle)")
-                    print("degree: \(abs(degree))")
-                    counter++
-
+                    print("degree: \(degree)")
+                    break
                 }
-
             }
             
             /*for sortedLoc in locationsForMonitoring{
@@ -361,25 +377,18 @@ Location Manager Delegate Methods
         
     }
     
-    /*func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
-        
-        var reuseId = ""
-        var asd = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId) as? MKPinAnnotationView
-        asd = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
-        asd!.pinColor=MKPinAnnotationColor.Green
-        return asd
-        
-    }*/
+    func alertUser(alertLocation: Location){
+        showSimpleAlertWithTitle("distance \(alertLocation.distance)", message: "\(alertLocation.imageName)", viewController: self)
+    }
     
-    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView {
+
+    
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+        print("calling ViewForAnnotation")
 
         if annotation is MKUserLocation {
-            // return nil so map view draws "blue dot" for standard user location
-            
             let annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "user")
             annotationView.image = UIImage(named:"user")
-            
-            
             return annotationView
         }
         
@@ -387,10 +396,8 @@ Location Manager Delegate Methods
         
         if annotation is KPAnnotation {
             let a = annotation as! KPAnnotation
-            
             if a.isCluster() {
                 if let reusedClasterAnnotationView = mapView.dequeueReusableAnnotationViewWithIdentifier("cluster"){
-                    
                     return reusedClasterAnnotationView
                 }else{
                     let annotationView = MKAnnotationView(annotation: a, reuseIdentifier: "cluster")
@@ -413,34 +420,28 @@ Location Manager Delegate Methods
                 //print(locationAnnot.imageName)
                 //print("dist1 \(dist1)")
                 a.title = "angle \(locationAnnot.direction)"
-                
                 if let reusedAnnotationView = mapView.dequeueReusableAnnotationViewWithIdentifier("pin"){
-
-                    
                     reusedAnnotationView.image=UIImage(named: locationAnnot.imageName)
                     reusedAnnotationView.frame=CGRectMake(0,0,20,20);
                     return reusedAnnotationView
                 }else{
                     let newAnnotationView = MKAnnotationView(annotation: a, reuseIdentifier: "pin")
-
                     newAnnotationView.image=UIImage(named: locationAnnot.imageName)
                     newAnnotationView.frame=CGRectMake(0,0,20,20);
                     newAnnotationView.canShowCallout = true;
                     return newAnnotationView
-                
                 }
             }
             
         }
         
-        return MKAnnotationView();
+        return nil;
     }
     
     
     func mapView(mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         print("region did changed - refreshing...")
         clusteringController.refresh(true)
-        print("refreshing complete")
     }
     
     func mapView(mapView: MKMapView, didDeselectAnnotationView view: MKAnnotationView) {
@@ -553,13 +554,11 @@ Map Buttons IBActions
     }
       
     @IBAction func startDetecting(sender: AnyObject) {
-        
-
         if(!working){
             speedIndicator.hidden=false;
             radarButton.selected = true;
             print("switched ON")
-            mapView.setUserTrackingMode(MKUserTrackingMode.FollowWithHeading, animated: true);
+            mapView.setUserTrackingMode(MKUserTrackingMode.Follow, animated: true);
 
             mapView.zoomEnabled = false;
             mapView.scrollEnabled = false;
@@ -632,10 +631,6 @@ Map Buttons IBActions
                     
                 }
         }
-
-        
-        
-        
     }
     
     func loadDataFromMemory(savedData:NSData){
@@ -708,7 +703,7 @@ Map Buttons IBActions
     func locationManager(manager: CLLocationManager, didEnterRegion region: CLRegion) {
         if region is CLCircularRegion {
             region.identifier
-            print("TRIGGERED MOFO!")
+            print("triggered phantom geofencing")
 //            handleRegionEvent(region)
         }
     }
@@ -732,7 +727,7 @@ Map Buttons IBActions
         
             
         //Проверяем зум карты и если слишком близко то отключаем кластеризацию
-        if(working){
+        if(working && region.span.latitudeDelta < 0.09){
             return false
         }
         
