@@ -22,9 +22,12 @@ class HUDViewController: UIViewController,MyLocationDelegateProtocol {
         // Do any additional setup after loading the view.
         
         //TODO Отразить слева направо
-        viewToFlip.transform = CGAffineTransformMakeScale(-1.0, 1.0)
+        viewToFlip.transform = CGAffineTransformMakeScale(1.0, -1.0)
     }
 
+    @IBOutlet weak var distanceLabel: UILabel!
+    @IBOutlet weak var speedSignImageView: UIImageView!
+    @IBOutlet weak var signImageView: UIImageView!
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -36,12 +39,36 @@ class HUDViewController: UIViewController,MyLocationDelegateProtocol {
 
     @IBOutlet weak var speedLabel: UILabel!
 
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    
+    func locationTriggered(location:Location){
+        signImageView.image=UIImage(named:location.imageName)
+        speedSignImageView.hidden = false
+        if(location.imageName.containsString("limit")){
+            speedSignImageView.hidden=true
+        }
+        if(location.speed < 40){
+            speedSignImageView.image = UIImage(named:"speed-limit-40")
+        }else if(location.speed >= 40 && location.speed < 50){
+            speedSignImageView.image = UIImage(named:"speed-limit-50")
+        }else if(location.speed >= 50 && location.speed < 60){
+            speedSignImageView.image = UIImage(named:"speed-limit-60")
+        }else if(location.speed >= 60 && location.speed < 80){
+            speedSignImageView.image = UIImage(named:"speed-limit-80")
+        }else{
+            speedSignImageView.hidden=true
+        }
+        distanceLabel.text = String(format: "%.0f м", location.distance)
+        signImageView.hidden = false
 
+        distanceLabel.hidden = false
 
-
-
-
+    }
+    
+    func clearLabels(){
+        signImageView.hidden = true
+        speedSignImageView.hidden = true
+        distanceLabel.hidden = true
+        
     }
     
     func updateSpeed(location:CLLocation){
@@ -50,7 +77,6 @@ class HUDViewController: UIViewController,MyLocationDelegateProtocol {
             speedDouble = 0;
         }
         speedLabel.text = NSString(format: "%.0f", speedDouble) as String
-        print("delegate updated")
     }
 
     /*
@@ -61,7 +87,7 @@ class HUDViewController: UIViewController,MyLocationDelegateProtocol {
     }
     
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return UIInterfaceOrientationMask.Landscape;
+        return UIInterfaceOrientationMask.LandscapeRight;
     }
     
 

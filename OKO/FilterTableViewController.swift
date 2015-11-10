@@ -48,8 +48,6 @@ class FilterTableViewController: UITableViewController {
         
         if let filterInt = Int(filterStr) {
             print("filterStr = \(filterStr)")
-            
-            
             if let index = savedFilters.indexOf(filterInt) {
                 savedFilters.removeAtIndex(index)
                 check?.image = UIImage(named: "filter-uncheck")
@@ -57,20 +55,11 @@ class FilterTableViewController: UITableViewController {
                 check?.image = UIImage(named: "filter-check")
                 savedFilters.append(filterInt)
             }
-            
         } else {
             print("doesnt work")
-            // handle the fact, that toInt() didn't yield an integer value
         }
-
-        
-        
-        
-        
-        
         userDefaults.setObject(savedFilters, forKey: "savedFilters")
         print(savedFilters)
-        
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

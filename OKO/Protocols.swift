@@ -11,6 +11,8 @@ import CoreLocation
 
 protocol MyLocationDelegateProtocol {
     func updateSpeed(location:CLLocation)
+    func locationTriggered(location:Location)
+    func clearLabels()
 
 }
 

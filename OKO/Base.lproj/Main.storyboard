@@ -824,6 +824,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="bottomInfoBar" destination="5RC-dQ-NIS" id="UY4-77-CCE"/>
+                        <outlet property="centerOnUserButton" destination="c6Z-WJ-8Lk" id="gQa-tu-7hg"/>
                         <outlet property="compasView" destination="dNa-S8-jrK" id="ITe-Fp-hK8"/>
                         <outlet property="descriptionBottom" destination="RQ3-8d-3aT" id="mCB-Lz-oo4"/>
                         <outlet property="distanceBottom" destination="ueE-Rk-vDh" id="wbL-tl-Dg0"/>
@@ -836,6 +837,8 @@
                         <outlet property="speedColor" destination="Lxf-EX-7y4" id="icH-4H-gQY"/>
                         <outlet property="speedIndicator" destination="EEW-e1-ZCz" id="tQb-6z-ROx"/>
                         <outlet property="speedLabel" destination="r9c-2j-uyb" id="2oJ-bI-cNx"/>
+                        <outlet property="zoomInButton" destination="UZt-FV-2iE" id="15I-QY-tbQ"/>
+                        <outlet property="zoomOutButton" destination="Ttp-gl-l1L" id="rR9-I7-zcb"/>
                         <segue destination="5Qn-jN-kUi" kind="show" identifier="openHud" id="eG4-hl-CL8"/>
                         <segue destination="Kac-YS-o2e" kind="show" identifier="addSign" id="UX2-i9-MUg"/>
                     </connections>
@@ -2434,16 +2437,19 @@
                                 <rect key="frame" x="0.0" y="0.0" width="60" height="320"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8h7-fm-a0l">
-                                        <rect key="frame" x="20" y="299" width="20" height="11"/>
+                                        <rect key="frame" x="10" y="270" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="11" id="J0B-gi-ZLV"/>
+                                            <constraint firstAttribute="height" constant="40" id="bbv-T8-0Wp"/>
+                                            <constraint firstAttribute="width" constant="40" id="dUF-6i-77E"/>
                                             <constraint firstAttribute="width" constant="61" id="szm-BH-3ar"/>
                                             <constraint firstAttribute="width" constant="20" id="tVJ-ZT-WMz"/>
                                         </constraints>
-                                        <state key="normal" image="back-arrow.png"/>
                                         <variation key="default">
                                             <mask key="constraints">
+                                                <exclude reference="J0B-gi-ZLV"/>
                                                 <exclude reference="szm-BH-3ar"/>
+                                                <exclude reference="tVJ-ZT-WMz"/>
                                             </mask>
                                         </variation>
                                         <connections>
@@ -2461,6 +2467,13 @@
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="back-arrow.png" translatesAutoresizingMaskIntoConstraints="NO" id="h4Q-hz-erK">
+                                        <rect key="frame" x="20" y="299" width="20" height="11"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="20" id="TUa-gN-R2M"/>
+                                            <constraint firstAttribute="height" constant="11" id="fXa-Kz-2XP"/>
+                                        </constraints>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.2196078431372549" green="0.2196078431372549" blue="0.2196078431372549" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -2468,7 +2481,10 @@
                                     <constraint firstItem="8h7-fm-a0l" firstAttribute="trailing" secondItem="7fj-Dg-xwo" secondAttribute="trailingMargin" constant="-298" id="NjP-uc-9pD"/>
                                     <constraint firstAttribute="width" constant="60" id="Q9X-7D-g6B"/>
                                     <constraint firstAttribute="bottom" secondItem="8h7-fm-a0l" secondAttribute="bottom" constant="10" id="cSE-Of-FBd"/>
+                                    <constraint firstAttribute="bottom" secondItem="h4Q-hz-erK" secondAttribute="bottom" constant="10" id="j0O-Lu-dHe"/>
+                                    <constraint firstItem="h4Q-hz-erK" firstAttribute="centerX" secondItem="7fj-Dg-xwo" secondAttribute="centerX" id="qMb-BP-nWv"/>
                                     <constraint firstItem="8h7-fm-a0l" firstAttribute="centerX" secondItem="7fj-Dg-xwo" secondAttribute="centerX" id="qR5-WP-V9r"/>
+                                    <constraint firstItem="h4Q-hz-erK" firstAttribute="top" secondItem="yPA-wv-8Pk" secondAttribute="bottom" constant="128" id="wNm-wm-otB"/>
                                     <constraint firstItem="8h7-fm-a0l" firstAttribute="top" secondItem="7fj-Dg-xwo" secondAttribute="top" constant="26" id="yM8-hS-xSP"/>
                                     <constraint firstItem="yPA-wv-8Pk" firstAttribute="centerY" secondItem="7fj-Dg-xwo" secondAttribute="centerY" id="zZQ-Yc-NmG"/>
                                 </constraints>
@@ -2482,7 +2498,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pmb-gH-9aQ" userLabel="ViewToFlip">
                                 <rect key="frame" x="60" y="0.0" width="508" height="320"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="bottomLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="112" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="90" translatesAutoresizingMaskIntoConstraints="NO" id="GB7-uM-o3a">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="bottomLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="90" translatesAutoresizingMaskIntoConstraints="NO" id="GB7-uM-o3a">
                                         <rect key="frame" x="8" y="171" width="245" height="141"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="149" id="ELb-Ir-TIN"/>
@@ -2511,14 +2527,14 @@
                                             <constraint firstAttribute="height" constant="21" id="hv6-3r-OFQ"/>
                                         </constraints>
                                     </view>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="static-speed-camera.png" translatesAutoresizingMaskIntoConstraints="NO" id="Rl9-Hp-oyM">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Rl9-Hp-oyM">
                                         <rect key="frame" x="8" y="8" width="110" height="110"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="110" id="VTO-qZ-g5g"/>
                                             <constraint firstAttribute="height" constant="110" id="fue-OO-XYX"/>
                                         </constraints>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="speed-limit-40.png" translatesAutoresizingMaskIntoConstraints="NO" id="IXc-EO-E9O">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="IXc-EO-E9O">
                                         <rect key="frame" x="126" y="8" width="110" height="110"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="110" id="9fU-vB-le8"/>
@@ -2533,7 +2549,7 @@
                                             </mask>
                                         </variation>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="120 м" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="k4f-vT-RGf">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="k4f-vT-RGf">
                                         <rect key="frame" x="244" y="11" width="264" height="104"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="k4f-vT-RGf" secondAttribute="height" multiplier="8:5" constant="49.799999999999997" id="6RV-73-cCc"/>
@@ -2596,8 +2612,11 @@
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="distanceLabel" destination="k4f-vT-RGf" id="91P-0p-YNF"/>
                         <outlet property="hudLabel" destination="yPA-wv-8Pk" id="0Om-fW-YG2"/>
+                        <outlet property="signImageView" destination="Rl9-Hp-oyM" id="18P-h0-uGd"/>
                         <outlet property="speedLabel" destination="GB7-uM-o3a" id="yVt-jk-iOU"/>
+                        <outlet property="speedSignImageView" destination="IXc-EO-E9O" id="NIZ-C5-9AH"/>
                         <outlet property="viewToFlip" destination="pmb-gH-9aQ" id="lT1-BJ-W4T"/>
                     </connections>
                 </viewController>
