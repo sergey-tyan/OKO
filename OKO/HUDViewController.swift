@@ -38,6 +38,7 @@ class HUDViewController: UIViewController,MyLocationDelegateProtocol {
     }
 
     @IBOutlet weak var speedLabel: UILabel!
+    
 
     
     func locationTriggered(location:Location){

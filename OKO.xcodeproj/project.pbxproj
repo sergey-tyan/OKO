@@ -73,7 +73,7 @@
 		5EB9EB3F1B89D7F900F3F863 /* filter-check.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EB9EB3D1B89D7F900F3F863 /* filter-check.png */; };
 		5EB9EB401B89D7F900F3F863 /* filter-uncheck.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EB9EB3E1B89D7F900F3F863 /* filter-uncheck.png */; };
 		5EB9EB4A1B89E92200F3F863 /* ContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EB9EB491B89E92200F3F863 /* ContainerViewController.m */; };
-		5ECDF5BD1BA58D5D0026B18D /* claster@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5ECDF5BC1BA58D5D0026B18D /* claster@2x.png */; };
+		5ECDF5BD1BA58D5D0026B18D /* cluster@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5ECDF5BC1BA58D5D0026B18D /* cluster@2x.png */; };
 		5EFC9D041B933E1D00759D56 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFC9D031B933E1D00759D56 /* Location.swift */; };
 		5EFD13671B8B7439002E3F7B /* user@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EFD13661B8B7439002E3F7B /* user@2x.png */; };
 		980C906AE1C6E9B285FA454D /* Pods_OKO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFFB06D87B7AB4AAF080FD62 /* Pods_OKO.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -176,7 +176,7 @@
 		5EB9EB411B89E12100F3F863 /* OKO-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OKO-Bridging-Header.h"; sourceTree = "<group>"; };
 		5EB9EB481B89E92200F3F863 /* ContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContainerViewController.h; sourceTree = "<group>"; };
 		5EB9EB491B89E92200F3F863 /* ContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContainerViewController.m; sourceTree = "<group>"; };
-		5ECDF5BC1BA58D5D0026B18D /* claster@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "claster@2x.png"; sourceTree = "<group>"; };
+		5ECDF5BC1BA58D5D0026B18D /* cluster@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cluster@2x.png"; sourceTree = "<group>"; };
 		5EFC9D031B933E1D00759D56 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		5EFD13661B8B7439002E3F7B /* user@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user@2x.png"; sourceTree = "<group>"; };
 		A466AAC8CA678BA52C23C6BD /* Pods-OKO.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OKO.release.xcconfig"; path = "Pods/Target Support Files/Pods-OKO/Pods-OKO.release.xcconfig"; sourceTree = "<group>"; };
@@ -329,7 +329,7 @@
 		5EB9EAFD1B89AC8100F3F863 /* map parts */ = {
 			isa = PBXGroup;
 			children = (
-				5ECDF5BC1BA58D5D0026B18D /* claster@2x.png */,
+				5ECDF5BC1BA58D5D0026B18D /* cluster@2x.png */,
 				5EFD13661B8B7439002E3F7B /* user@2x.png */,
 				5EB9EAFE1B89AC9500F3F863 /* bottom-bar.png */,
 				5EB9EAFF1B89AC9500F3F863 /* danger-speed.png */,
@@ -516,7 +516,7 @@
 				5EB9EB3B1B89C32000F3F863 /* traffic-police.png in Resources */,
 				070091081B7F356D00D5041C /* LaunchScreen.xib in Resources */,
 				1EF8271A1BF1FA5F00C46CF9 /* direction.png in Resources */,
-				5ECDF5BD1BA58D5D0026B18D /* claster@2x.png in Resources */,
+				5ECDF5BD1BA58D5D0026B18D /* cluster@2x.png in Resources */,
 				5EB9EB381B89C32000F3F863 /* stop-line-control.png in Resources */,
 				5EB9EB061B89AC9500F3F863 /* normal-speed.png in Resources */,
 				1EF827151BF1BA0A00C46CF9 /* sound_alarm.mp3 in Resources */,

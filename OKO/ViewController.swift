@@ -54,13 +54,25 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     var userLocation:CLLocation=CLLocation()
     var lastUserLocationForMapLoading:CLLocation=CLLocation()
     
+    @IBOutlet weak var soundSwitch: UISwitch!
     var delegate:MyLocationDelegateProtocol?=nil
     var progressBarShowing:Bool=false
     @IBOutlet var speedLabel: UILabel!
     private var clusteringController : KPClusteringController!
     var buttonBeep : AVAudioPlayer?
     
+    
+    var inBackground:Bool = false
+    
+    //Расстояние, в радиусе которого подгружаются точки.
     let locationShowRadius:Double = 2000.0
+    
+    //Расстояние до объекта, при котором выводится предупреждение (в метрах)
+    let triggerRadius:Double = 100.0
+    //Угол, под которым камера видит машину и машина видит камеру
+    let sightDegree:Double = 30
+    
+    let notificationText:String="Осторожно, 100 м до ближайшей опасности!"
     
 /*
 View Appearance
@@ -74,8 +86,6 @@ View Appearance
             self.buttonBeep = buttonBeep
         }
 
-        //let initialLocation = CLLocation(latitude: 21.282778, longitude: -157.829444)
-        //centerMapOnLocation(initialLocation)
         self.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
         self.navigationBar.shadowImage = UIImage()
         self.navigationBar.translucent = true
@@ -97,14 +107,13 @@ View Appearance
         
         mapView.delegate = self;
         mapView.showsUserLocation=true;
-//        mapView.setUserTrackingMode(MKUserTrackingMode.Follow, animated: true)
+
         if #available(iOS 9.0, *) {
             mapView.showsCompass=false
-        } else {
-            // Fallback on earlier versions
-        };
+        }
 
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "enterBackground", name: "appEntersBackground", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "becomeActive", name: "appBecomesActive", object: nil)
         locationManager.startUpdatingLocation()
         
 
@@ -114,7 +123,7 @@ View Appearance
    
     
     func progressBarDisplayer(msg:String, _ indicator:Bool ) {
-        print("SHOW PROGRESS BAR")
+        print("SHOW ACTIVITY VIEW")
         strLabel = UILabel(frame: CGRect(x: 50, y: 0, width: 200, height: 50))
         strLabel.text = msg
         strLabel.textColor = UIColor.whiteColor()
@@ -136,29 +145,48 @@ View Appearance
         print("viewDidAppear")
         let value = UIInterfaceOrientation.Portrait.rawValue
         UIDevice.currentDevice().setValue(value, forKey: "orientation")
-        
-        
-
-
-        //self.menuView.frame.origin.x = ((-1) * self.menuView.frame.width)
-    }
-    override func viewWillAppear(animated: Bool) {
-        print("VIEW WILL APPEAR!")
-        
-        self.groupLocationsByType()
-        
     }
     
+    override func viewWillAppear(animated: Bool) {
+        print("VIEW WILL APPEAR")
+        self.groupLocationsByType()
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if(segue.identifier == "openHud"){
+            let vc = segue.destinationViewController as! HUDViewController
+            self.delegate = vc
+        }
+        if(segue.identifier == "addSign"){
+            let vc = segue.destinationViewController as! AddLocationViewController
+            vc.mapRekt = mapView.visibleMapRect
+            print(mapView.visibleMapRect)
+        }
+    }
+    
+    override func shouldAutorotate() -> Bool {
+        return false;
+    }
+    
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.Portrait;
+    }
+
+
+
+    
+    
+    
+
+    
+    //Application Logic
+    //
     func groupLocationsByType(){
         if let possibleFilters = userDefaults.objectForKey("savedFilters"){
-            
             activeFilters = possibleFilters as! [Int]
-            print("HAS FILTERS \(activeFilters)")
         }else{
             //Nothing stored in NSUserDefaults yet. Set a value.
-            
             userDefaults.setObject(activeFilters, forKey: "savedFilters")
-            print("LOADED NEW FILTERS \(activeFilters)")
         }
         filteredLocationArray = [Location]()
         for someType in allLocationDictionary.keys {
@@ -175,75 +203,28 @@ View Appearance
     }
     
     
-    @IBAction func toggleMenu(sender: AnyObject) {
-        if(self.menuView.hidden){
-            self.menuView.frame.origin.x = ((-1) * self.menuView.frame.width)
-            self.menuView.hidden = false
-            
+    func clusteringControllerShouldClusterAnnotations(clusteringController: KPClusteringController!) -> Bool {
+        let region = mapView.region;
+        
+        
+        //Проверяем зум карты и если слишком близко то отключаем кластеризацию
+        if(working && region.span.latitudeDelta < 0.09){
+            return false
         }
-        UIView.animateWithDuration(0.3, delay: 0.0, options: .CurveEaseOut, animations: {
-            
-            if(self.menuOpened){
-                
-                self.menuView.frame.origin.x = ((-1) * self.menuView.frame.width)
-                
-            }else{
-                
-                self.menuView.frame.origin.x = 0
-            }
-            self.menuOpened = !self.menuOpened
-            }, completion: { finished in
-                if(!self.menuOpened){
-                    self.menuView.hidden = true
-                }
-                
-        })
-    }
-    func centerMapOnLocation(location: CLLocation) {
-        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate,
-            regionRadius * 2.0, regionRadius * 2.0)
-        mapView.setRegion(coordinateRegion, animated: true)
-    }
-/*
-************************************************************************************************************
-*/
-
-    
-/*
-Location Manager Delegate Methods
-************************************************************************************************************
-*/
-
-    @IBAction func openHud(sender: AnyObject) {
-        self.performSegueWithIdentifier("openHud", sender: self)
+        
+        return true
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if(segue.identifier == "openHud"){
-            let vc = segue.destinationViewController as! HUDViewController
-            self.delegate = vc
-        }
-        if(segue.identifier == "addSign"){
-            let vc = segue.destinationViewController as! AddLocationViewController
-            vc.mapRekt = mapView.visibleMapRect
-            print(mapView.visibleMapRect)
-        }
-    }
 
     
-    func locationManager(manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
-
-        print("newHeading =\(newHeading.magneticHeading)")
-        /*var headingDegrees:CGFloat = (heading*M_PI/180.0); //assuming needle points to top of iphone. convert to radians
-        compasView.transform = CGAffineTransformMakeRotation(headingDegrees);*/
-    }
-    
+    /*
+    Location Manager Delegate Methods
+    ************************************************************************************************************
+    */
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-
         userLocation = locations.last!;
-
         if let savedData = userDefaults.objectForKey("mapData") as? NSData{
-            loadDataFromMemory(savedData,currentCoordinate: userLocation)
+            loadLocationsAroundUser(savedData,currentCoordinate: userLocation)
         }else{
             
             startSaving()
@@ -252,8 +233,6 @@ Location Manager Delegate Methods
 
         //UPDATE COURSE AND SPEED HERE
         delegate?.updateSpeed(userLocation)
-
-//        print("locationUpdated \(UIApplication.sharedApplication().keyWindow!.rootViewController?.classForCoder)")
         var speed = userLocation.speed;
         let course = userLocation.course
 
@@ -275,9 +254,6 @@ Location Manager Delegate Methods
             }
             
             newCamera.centerCoordinate = userLocation.coordinate
-            
-
-//            mapView.setRegion(MKCoordinateRegion(center: userLocation.coordinate, span: MKCoordinateSpan()), animated: false)
             mapView.setCamera(newCamera, animated: false)
 
             var newSpeedColor:Int;
@@ -312,20 +288,11 @@ Location Manager Delegate Methods
                 }
             }
         }
-/*      print("curSpeedColor = \(curSpeedColor)")
-        print("course = \(course)")
-        print("speed = \(speed)")*/
-
         speedLabel.text = NSString(format: "%.2f", speed) as String
-        
-        /////////////////////////////////
         var locationsAroundUser = [Location]()
         var locationAnnotationDict = [Location:MKAnnotation]()
         if(working){
-            stopMonitoringGeotification()
             let annotations = mapView.annotations
-            
-            
             //В этом цикле берутся все точки вокруг пользователя не в кластерах и добавляются в массив
             for annotation in annotations{
                 if annotation is KPAnnotation {
@@ -345,10 +312,8 @@ Location Manager Delegate Methods
             }
             //локейшны вокруг пользователя сортируются по дистанции к нему
             let sortedLocationsAroundUser = locationsAroundUser.sort(sortFunc)
-
-            //ищем первую точку, расстояние до которой меньше 700 м по направлению
+            
             for nearestLoc in sortedLocationsAroundUser{
-
                 //угол между ближайшей точкой и локейшном юзера
                 let locToUserAngle = bearingBetweenTwoPoints(nearestLoc.coordinate.latitude,
                     lon1: nearestLoc.coordinate.longitude,
@@ -362,24 +327,19 @@ Location Manager Delegate Methods
 
                 //направление точки минус угол
                 let degree = abs(nearestLoc.direction - locToUserAngle)
-                
                 let degree2 = abs(course - userToLocAngle)
                 
-                if((nearestLoc.distance > 150) && (nearestLoc.distance < 200)/* TODO UNCOMMENT && (degree < 30) && (degree2 < 30)*/){
+                if((nearestLoc.distance > triggerRadius - 20.0) && (nearestLoc.distance < triggerRadius) && (degree < sightDegree) && (degree2 < sightDegree)){
                     if let triggeredAnnotation = locationAnnotationDict[nearestLoc]{
                         delegate?.locationTriggered(nearestLoc)
-                        buttonBeep?.play()
-                        sendPush()
+                        if(soundSwitch.on){
+                            buttonBeep?.play()
+                        }
+                        if(inBackground){
+                            sendPush()
+                        }
                         mapView.selectAnnotation(triggeredAnnotation, animated: true)
-                        print("happy")
-
-                    }else{
-                        print("disasta")
                     }
-                    print("distance: \(nearestLoc.distance)")
-                    print("direction: \(nearestLoc.direction)")
-                    print("locToUserAngle: \(locToUserAngle)")
-                    print("degree: \(degree)")
                     break
                 }else{
                     delegate?.clearLabels()
@@ -388,14 +348,12 @@ Location Manager Delegate Methods
         }
     }
     
-    func alertUser(alertLocation: Location){
-        showSimpleAlertWithTitle("distance \(alertLocation.distance)", message: "\(alertLocation.imageName)", viewController: self)
-    }
 
     func deselectAllAnnotations(){
-        print("deselecting")
         for annotation in mapView.annotations{
-            mapView.deselectAnnotation(annotation, animated: false)
+            if !(annotation is MKUserLocation){
+                mapView.deselectAnnotation(annotation, animated: false)
+            }
         }
     }
 
@@ -413,7 +371,7 @@ Location Manager Delegate Methods
                     return reusedClasterAnnotationView
                 }else{
                     let annotationView = MKAnnotationView(annotation: a, reuseIdentifier: "cluster")
-                    annotationView.image=UIImage(named: "claster")
+                    annotationView.image=UIImage(named: "cluster")
                     annotationView.frame=CGRectMake(0,0,30,30);
                     return annotationView
                 }
@@ -424,21 +382,13 @@ Location Manager Delegate Methods
                 let kpSet = kpAnnot?.annotations;
                 
                 let locationAnnot = kpSet?.first as! Location
-                //let userLocation = mapView.userLocation
-                
-                //let loc1CLLocation = CLLocation(latitude: locationAnnot.coordinate.latitude, longitude: locationAnnot.coordinate.longitude)
-                //let userCLLocation = CLLocation(latitude: userLocation.coordinate.latitude, longitude: userLocation.coordinate.longitude)
-                //let dist1 = userCLLocation.distanceFromLocation(loc1CLLocation)
-                //print(locationAnnot.imageName)
-                //print("dist1 \(dist1)")
-                a.title = "angle \(locationAnnot.direction)"
+                //a.title = "angle \(locationAnnot.direction)"
                 
                 let directionImageView:UIImageView=UIImageView(image: UIImage(named:"direction"))
                 directionImageView.tag = 1
 
             
                 let headingDegrees:CGFloat = CGFloat((locationAnnot.direction)*M_PI/180.0);
-
                 directionImageView.transform = CGAffineTransformMakeRotation(headingDegrees)
                 if let reusedAnnotationView = mapView.dequeueReusableAnnotationViewWithIdentifier("pin"){
                     reusedAnnotationView.image=UIImage(named: locationAnnot.imageName)
@@ -453,7 +403,6 @@ Location Manager Delegate Methods
                     let newAnnotationView = MKAnnotationView(annotation: a, reuseIdentifier: "pin")
                     newAnnotationView.image=UIImage(named: locationAnnot.imageName)
                     newAnnotationView.frame=CGRectMake(0,0,20,20);
-                    newAnnotationView.canShowCallout = true;
                     newAnnotationView.addSubview(directionImageView)
                     directionImageView.center=newAnnotationView.center
                     return newAnnotationView
@@ -467,17 +416,14 @@ Location Manager Delegate Methods
     
     
     func mapView(mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-        print("refreshing")
         clusteringController.refresh(true)
-        print("finished refreshing")
+
         
         let headingDegrees:CGFloat = CGFloat((360.0-mapView.camera.heading)*M_PI/180.0);
         compasView.transform=CGAffineTransformMakeRotation(headingDegrees)
         
 
         for annotation in mapView.annotations{
-            
-
             if annotation is KPAnnotation {
                 let a = annotation as! KPAnnotation
                 if (!a.isCluster()) {
@@ -486,17 +432,9 @@ Location Manager Delegate Methods
                     let locationAnnot = kpSet?.first as! Location
                     let locationDegrees:CGFloat = CGFloat((360.0-mapView.camera.heading + locationAnnot.direction)*M_PI/180.0);
                     mapView.viewForAnnotation(annotation)?.viewWithTag(1)?.transform=CGAffineTransformMakeRotation(locationDegrees)
-
-                    
-                    
                 }
             }
-            
-            
         }
-
-        
-
     }
     
     func mapView(mapView: MKMapView, didDeselectAnnotationView view: MKAnnotationView) {
@@ -518,8 +456,6 @@ Location Manager Delegate Methods
                 selectLocationIcon(view)
             }
         }
-        
-
     }
 
     func selectLocationIcon(view: MKAnnotationView){
@@ -531,8 +467,8 @@ Location Manager Delegate Methods
                 
                     UIView.animateWithDuration(0.3, delay: 0.0, options: .CurveEaseOut, animations: {
                         view.frame=CGRectMake(view.frame.origin.x-10,view.frame.origin.y-10,40,40);
-                        let av = view.viewWithTag(1)! as! UIImageView
-                        av.center=CGPoint(x: 20, y: 20)
+                        let directionImage = view.viewWithTag(1)! as! UIImageView
+                        directionImage.center=CGPoint(x: 20, y: 20)
                         }, completion: { finished in
                             
 
@@ -560,13 +496,12 @@ Location Manager Delegate Methods
             let cluster = view.annotation as! KPAnnotation
             
             if cluster.annotations.count == 1 {
-
                 UIView.animateWithDuration(0.3, delay: 0.0, options: .CurveEaseOut, animations: {
                     view.frame=CGRectMake(view.frame.origin.x+10,view.frame.origin.y+10,20,20);
                     
-                    let av = view.viewWithTag(1)! as! UIImageView
+                    let directionImage = view.viewWithTag(1)! as! UIImageView
 
-                    av.center=CGPoint(x: 10, y: 10)
+                    directionImage.center=CGPoint(x: 10, y: 10)
 
                     }, completion: { finished in
 
@@ -576,20 +511,14 @@ Location Manager Delegate Methods
 
     }
     
-    
-    
-    
-    
-/*
-************************************************************************************************************
-*/
-
-    
-    
 /*
 Map Buttons IBActions
 ************************************************************************************************************
 */
+    
+    @IBAction func openHud(sender: AnyObject) {
+        self.performSegueWithIdentifier("openHud", sender: self)
+    }
 
     
     @IBAction func zoomIn(sender: AnyObject) {
@@ -641,8 +570,6 @@ Map Buttons IBActions
             mapView.zoomEnabled = true;
             mapView.scrollEnabled = true;
             mapView.userInteractionEnabled = true;
-            stopMonitoringGeotification()
-            speedColor.image = UIImage(named:"slow-speed")
             zoomInButton.hidden=false
             zoomOutButton.hidden=false
             centerOnUserButton.hidden=false
@@ -661,6 +588,7 @@ Map Buttons IBActions
     
     
     @IBAction func centerOnUser(sender: AnyObject) {
+        print(soundSwitch.on)
 
         let newCamera = mapView.camera
         newCamera.centerCoordinate = userLocation.coordinate
@@ -709,14 +637,11 @@ Map Buttons IBActions
         }
     }
     
-    func loadDataFromMemory(savedData:NSData, currentCoordinate:CLLocation){
-        print("loading data from memory \(userLocation.coordinate)")
-
-        
-        let placesDictionary = NSKeyedUnarchiver.unarchiveObjectWithData(savedData) as? NSDictionary
+    func loadLocationsAroundUser(savedData:NSData, currentCoordinate:CLLocation){
+        print("checking if need to load new data around \(userLocation.coordinate)")
         
         if(currentCoordinate.distanceFromLocation(lastUserLocationForMapLoading) > locationShowRadius - 100.0){
-            
+            let placesDictionary = NSKeyedUnarchiver.unarchiveObjectWithData(savedData) as? NSDictionary
             if let types = placesDictionary?.objectForKey("types") as? NSArray {
                 for type in types{
                     let newType = LocationType(name:type.objectForKey("name") as! String,id:type.objectForKey("id") as! Int);
@@ -742,14 +667,10 @@ Map Buttons IBActions
                 }
                 lastUserLocationForMapLoading = currentCoordinate
                 locationArray = locationArray.sort(sortFunc)
-                print("allLocationDictionary")
-                print(allLocationDictionary)
-                
+
                 for someLocation in locationArray{
                     if(someLocation.distance < locationShowRadius){
                         nearestLocationsArray.append(someLocation)
-                        
-                        
                         if var arrayForType = allLocationDictionary[someLocation.typeInt]{
                             arrayForType.append(someLocation)
                             allLocationDictionary[someLocation.typeInt]=arrayForType
@@ -760,69 +681,30 @@ Map Buttons IBActions
                         }
                     }
                 }
-                
                 groupLocationsByType()
-                print("allLocationDictionary after")
-                print(allLocationDictionary)
             }
+        }
+    }
+    
+    
+    //
+    //Help functions
+    //
 
-            print("allLocationDictionary \(allLocationDictionary.count)")
-        }
-    }
-    /*
-    FUNCTION TO STOP MONITORING GEOTIFICATIONS
-*/
-    
-    func stopMonitoringGeotification() {
-        for region in locationManager.monitoredRegions {
-            if let circularRegion = region as? CLCircularRegion {
-                locationManager.stopMonitoringForRegion(circularRegion)
-            }
-        }
-    }
-    
-    func showSimpleAlertWithTitle(title: String!, message: String, viewController: UIViewController) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-        let action = UIAlertAction(title: "OK", style: .Cancel, handler: nil)
-        alert.addAction(action)
-        viewController.presentViewController(alert, animated: true, completion: nil)
-    }
-    
-    
-    func locationManager(manager: CLLocationManager, didEnterRegion region: CLRegion) {
-        if region is CLCircularRegion {
-            region.identifier
-            print("triggered phantom geofencing")
-        }
-    }
-    
     
     func toggleInfoSpeedBar(){
         bottomInfoBar.hidden = !bottomInfoBar.hidden
         speedIndicator.hidden = !speedIndicator.hidden
     }
     
-/*
-************************************************************************************************************
-*/
 
-    func clusteringControllerShouldClusterAnnotations(clusteringController: KPClusteringController!) -> Bool {
-        let region = mapView.region;
-        
-            
-        //Проверяем зум карты и если слишком близко то отключаем кластеризацию
-        if(working && region.span.latitudeDelta < 0.09){
-            return false
-        }
-        
-        if(region.span.latitudeDelta < 0.05){
-            print("DONT CLUSTER")
-            //return false
-            
-        }
-        
-        return true
+    func showSimpleAlertWithTitle(title: String!, message: String, viewController: UIViewController) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+        let action = UIAlertAction(title: "OK", style: .Cancel, handler: nil)
+        alert.addAction(action)
+        viewController.presentViewController(alert, animated: true, completion: nil)
     }
+
     
     
     func sortFunc(loc1: Location, loc2: Location) -> Bool {
@@ -830,9 +712,6 @@ Map Buttons IBActions
     }
     
     func bearingBetweenTwoPoints( lat1 : Double,  lon1 : Double,  lat2 : Double,  lon2: Double) -> Double {
-        
-        
-        
         func DegreesToRadians (value:Double) -> Double {
             return value * M_PI / 180.0
         }
@@ -853,14 +732,30 @@ Map Buttons IBActions
         }else{
             return 360.0 + value
         }
-        
-        
-        
     }
     
-    override func shouldAutorotate() -> Bool {
-        return false;
-    } 
+    @IBAction func toggleMenu(sender: AnyObject) {
+        if(self.menuView.hidden){
+            self.menuView.frame.origin.x = ((-1) * self.menuView.frame.width)
+            self.menuView.hidden = false
+            
+        }
+        UIView.animateWithDuration(0.3, delay: 0.0, options: .CurveEaseOut, animations: {
+            if(self.menuOpened){
+                self.menuView.frame.origin.x = ((-1) * self.menuView.frame.width)
+            }else{
+                self.menuView.frame.origin.x = 0
+            }
+            self.menuOpened = !self.menuOpened
+            }, completion: { finished in
+                if(!self.menuOpened){
+                    self.menuView.hidden = true
+                }
+            }
+        )
+    }
+
+    
     @IBAction func openFacebook(sender: AnyObject) {
         print("fb")
         let facebookURL = (NSURL(string: "fb://profile/G8YNICqAwTE")!)
@@ -923,47 +818,30 @@ Map Buttons IBActions
     func sendLocalPush(locationCoord:CLLocationCoordinate2D,id:String){
         let localNotification:UILocalNotification = UILocalNotification()
         localNotification.regionTriggersOnce = true
-        localNotification.alertBody = "Осторожно, меньше 200 м до ближайшей опасности!"
+        localNotification.alertBody = notificationText
         localNotification.region = CLCircularRegion(center:locationCoord , radius: 100, identifier: id)
         UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
     }
     
     
     func sendPush(){
-        
-        
         let localNotification:UILocalNotification = UILocalNotification()
-        localNotification.alertBody = "Осторожно, 100 м до ближайшей опасности!"
+        localNotification.alertBody = notificationText
         localNotification.fireDate = NSDate(timeIntervalSinceNow: 0)
         localNotification.soundName = UILocalNotificationDefaultSoundName
         localNotification.soundName =  "out.caf"
-
         UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
     }
-
-    
     // app enters background
-    
-    var inBackground:Bool = false
-    
     func enterBackground() {
         print("APP ENTERS BACKGROUND")
         inBackground = true
-        var counter = 0
-/*        if(working){
-            for someLocation in nearestLocationsArray{
-                if(counter < 20){
-                    counter++
-                    sendLocalPush(someLocation.coordinate,id: String("id \(counter)"))
-                    print("adding local pushes id \(counter)")
-                }
-            }
-        }
-*/
     }
     
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return UIInterfaceOrientationMask.Portrait;
+    func becomeActive() {
+        print("APP BECAME ACTIVE")
+        inBackground = false
     }
+    
 }
 

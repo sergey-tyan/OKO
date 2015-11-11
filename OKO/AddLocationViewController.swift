@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 import Alamofire
-class AddLocationViewController: UIViewController,ChooseLocationTypeProtocol, UIPickerViewDataSource,UIPickerViewDelegate {
+class AddLocationViewController: UIViewController,ChooseLocationTypeProtocol, UIPickerViewDataSource,UIPickerViewDelegate,MKMapViewDelegate {
     
     var messageFrame = UIView()
     var activityIndicator = UIActivityIndicatorView()
@@ -37,6 +37,7 @@ class AddLocationViewController: UIViewController,ChooseLocationTypeProtocol, UI
     var newLocation:Location?;
     var curSpeed:Int=10;
     var typeIdChosen:Int=64;
+    var direction:Double=0;
 
     var mapRekt:MKMapRect?
     @IBOutlet weak var addLocationMapView: MKMapView!
@@ -45,16 +46,14 @@ class AddLocationViewController: UIViewController,ChooseLocationTypeProtocol, UI
     override func viewDidLoad() {
         super.viewDidLoad()
         addLocationMapView.visibleMapRect = mapRekt!
-
-        // Do any additional setup after loading the view.
+        addLocationMapView.delegate = self
     }
     @IBAction func sendLocation(sender: AnyObject) {
         print(addLocationMapView.centerCoordinate)
         
         progressBarDisplayer("Загрузка", true)
-        Alamofire.request(.POST, "http://scl.kz/location/manual?point.latitude=\(addLocationMapView.centerCoordinate.latitude)&point.longitude=\(addLocationMapView.centerCoordinate.longitude)&point.direction=0&point.speed=\(curSpeed)&point.radius=50.0&point.typeId=\(typeIdChosen)")
+        Alamofire.request(.POST, "http://scl.kz/location/manual?point.latitude=\(addLocationMapView.centerCoordinate.latitude)&point.longitude=\(addLocationMapView.centerCoordinate.longitude)&point.direction=\(direction)&point.speed=\(curSpeed)&point.radius=50.0&point.typeId=\(typeIdChosen)")
             .responseJSON { _, _, result in
-                //                print("JSON \(result.value!)")
                 print("got result \(result)")
                 self.messageFrame.removeFromSuperview()
         }
@@ -134,19 +133,15 @@ class AddLocationViewController: UIViewController,ChooseLocationTypeProtocol, UI
         return false;
     }
     
+    func mapView(mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        print("camera heading \(mapView.camera.heading)")
+        direction = mapView.camera.heading
+    }
+
+    
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
 
         curSpeed = (row + 1) * 10
         print("curSpeed is \(curSpeed)")
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

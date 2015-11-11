@@ -834,6 +834,7 @@
                         <outlet property="radarButton" destination="t8t-xF-Sy7" id="LSO-dM-TiR"/>
                         <outlet property="signImageBottom" destination="5bF-RB-QAV" id="NFD-vD-CZh"/>
                         <outlet property="signSpeedLimitBottom" destination="9Vt-zF-EWS" id="Yfb-AD-maX"/>
+                        <outlet property="soundSwitch" destination="5dU-Kz-lxr" id="Y1q-64-r9v"/>
                         <outlet property="speedColor" destination="Lxf-EX-7y4" id="icH-4H-gQY"/>
                         <outlet property="speedIndicator" destination="EEW-e1-ZCz" id="tQb-6z-ROx"/>
                         <outlet property="speedLabel" destination="r9c-2j-uyb" id="2oJ-bI-cNx"/>
@@ -1007,11 +1008,21 @@
                                     <constraint firstItem="K5m-Hq-QBR" firstAttribute="leading" secondItem="BVy-8r-101" secondAttribute="leading" id="ziB-bQ-WhR"/>
                                 </constraints>
                             </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="direction.png" translatesAutoresizingMaskIntoConstraints="NO" id="IEh-EE-8Pd">
+                                <rect key="frame" x="178" y="277" width="20" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="20" id="BEY-dI-bDG"/>
+                                    <constraint firstAttribute="height" constant="60" id="d6w-xU-Y4T"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="IEh-EE-8Pd" firstAttribute="centerY" secondItem="rmM-MI-Rg5" secondAttribute="centerY" id="0Yt-Vm-Lus"/>
                             <constraint firstItem="QLn-8O-hBe" firstAttribute="leading" secondItem="d61-cn-Eiu" secondAttribute="leadingMargin" constant="-20" id="2Iw-uz-xdz"/>
+                            <constraint firstItem="IEh-EE-8Pd" firstAttribute="centerY" secondItem="d61-cn-Eiu" secondAttribute="centerY" id="3iJ-Z5-H0v"/>
                             <constraint firstItem="bxK-vj-ZHk" firstAttribute="centerY" secondItem="rmM-MI-Rg5" secondAttribute="centerY" id="A8Y-n1-B9H"/>
+                            <constraint firstItem="IEh-EE-8Pd" firstAttribute="centerX" secondItem="d61-cn-Eiu" secondAttribute="centerX" id="Bh1-yB-Uqz"/>
                             <constraint firstItem="rmM-MI-Rg5" firstAttribute="top" secondItem="1eD-2A-UAa" secondAttribute="bottom" constant="43" id="CFO-q6-kL4"/>
                             <constraint firstAttribute="bottom" secondItem="DZY-gA-l5d" secondAttribute="bottom" constant="20" symbolic="YES" id="EaC-NN-fmP"/>
                             <constraint firstItem="bxK-vj-ZHk" firstAttribute="centerX" secondItem="8N5-Wd-Dia" secondAttribute="centerX" id="G63-c4-EOZ"/>
@@ -1030,6 +1041,11 @@
                             <constraint firstItem="DZY-gA-l5d" firstAttribute="leading" secondItem="d61-cn-Eiu" secondAttribute="leadingMargin" constant="4" id="xIM-rH-JYC"/>
                             <constraint firstAttribute="trailingMargin" secondItem="QLn-8O-hBe" secondAttribute="trailing" constant="-20" id="zq0-MF-eNC"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="3iJ-Z5-H0v"/>
+                            </mask>
+                        </variation>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
@@ -1042,7 +1058,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rfk-0Q-2e2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="754.5" y="860.5"/>
+            <point key="canvasLocation" x="752.5" y="927.5"/>
         </scene>
         <!--Table View Controller-->
         <scene sceneID="EGw-8r-ox8">
@@ -2419,7 +2435,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z3v-HM-5sV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2124.5" y="255.5"/>
+            <point key="canvasLocation" x="2216.5" y="173.5"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="HKj-Kg-DtI">
@@ -2622,7 +2638,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ySq-eJ-x1X" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1601" y="-657"/>
+            <point key="canvasLocation" x="1758" y="-581"/>
         </scene>
         <!--Container View Controller-->
         <scene sceneID="ACd-DU-339">
@@ -3187,7 +3203,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hpL-6d-a5j" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1233.5" y="860.5"/>
+            <point key="canvasLocation" x="1267.5" y="927.5"/>
         </scene>
     </scenes>
     <resources>
@@ -3200,6 +3216,7 @@
         <image name="danger-crossing.png" width="512" height="512"/>
         <image name="danger-crossway.png" width="512" height="512"/>
         <image name="danger-route-change.png" width="512" height="512"/>
+        <image name="direction.png" width="20" height="50"/>
         <image name="double-road-camera.png" width="512" height="512"/>
         <image name="dtp.png" width="512" height="512"/>
         <image name="edit.png" width="38" height="38"/>
