@@ -96,7 +96,8 @@ View Appearance
         //self.menuView.hidden = true
         
         mapView.delegate = self;
-        mapView.setUserTrackingMode(MKUserTrackingMode.Follow, animated: true)
+        mapView.showsUserLocation=true;
+//        mapView.setUserTrackingMode(MKUserTrackingMode.Follow, animated: true)
         if #available(iOS 9.0, *) {
             mapView.showsCompass=false
         } else {
@@ -280,7 +281,10 @@ Location Manager Delegate Methods
             mapView.setCamera(newCamera, animated: false)
 
             var newSpeedColor:Int;
-            if(speed >= 0 && speed < 60){
+            if(speed < 5){
+                newSpeedColor = 1
+            }
+            else if(speed >= 5 && speed < 60){
                 newSpeedColor = 1
             } else if(speed < 80){
                 newSpeedColor = 2
@@ -361,16 +365,14 @@ Location Manager Delegate Methods
                 
                 let degree2 = abs(course - userToLocAngle)
                 
-                if((nearestLoc.distance < 200)/* TODO UNCOMMENT && (degree < 30) && (degree2 < 30)*/){
+                if((nearestLoc.distance > 150) && (nearestLoc.distance < 200)/* TODO UNCOMMENT && (degree < 30) && (degree2 < 30)*/){
                     if let triggeredAnnotation = locationAnnotationDict[nearestLoc]{
                         delegate?.locationTriggered(nearestLoc)
                         buttonBeep?.play()
                         sendPush()
-                        if(mapView.viewForAnnotation(triggeredAnnotation)?.frame.size.height == 20){
-                            mapView.selectAnnotation(triggeredAnnotation, animated: true)
+                        mapView.selectAnnotation(triggeredAnnotation, animated: true)
+                        print("happy")
 
-                            print("happy")
-                        }
                     }else{
                         print("disasta")
                     }
@@ -431,27 +433,29 @@ Location Manager Delegate Methods
                 //print("dist1 \(dist1)")
                 a.title = "angle \(locationAnnot.direction)"
                 
-                //TODO добавить нормальную картинку для направления
-                let asd:UIImageView=UIImageView(image: UIImage(named:"ic_normal_yes"))
-                asd.tag = 1
+                let directionImageView:UIImageView=UIImageView(image: UIImage(named:"direction"))
+                directionImageView.tag = 1
+
             
                 let headingDegrees:CGFloat = CGFloat((locationAnnot.direction)*M_PI/180.0);
 
-                asd.transform = CGAffineTransformMakeRotation(headingDegrees)
+                directionImageView.transform = CGAffineTransformMakeRotation(headingDegrees)
                 if let reusedAnnotationView = mapView.dequeueReusableAnnotationViewWithIdentifier("pin"){
                     reusedAnnotationView.image=UIImage(named: locationAnnot.imageName)
                     reusedAnnotationView.frame=CGRectMake(0,0,20,20);
                     reusedAnnotationView.viewWithTag(1)?.removeFromSuperview()
-                    reusedAnnotationView.addSubview(asd)
-                    asd.center=reusedAnnotationView.center
+                    reusedAnnotationView.addSubview(directionImageView)
+                    directionImageView.center=reusedAnnotationView.center
+                    
+
                     return reusedAnnotationView
                 }else{
                     let newAnnotationView = MKAnnotationView(annotation: a, reuseIdentifier: "pin")
                     newAnnotationView.image=UIImage(named: locationAnnot.imageName)
                     newAnnotationView.frame=CGRectMake(0,0,20,20);
                     newAnnotationView.canShowCallout = true;
-                    newAnnotationView.addSubview(asd)
-                    asd.center=newAnnotationView.center
+                    newAnnotationView.addSubview(directionImageView)
+                    directionImageView.center=newAnnotationView.center
                     return newAnnotationView
                 }
             }
@@ -505,18 +509,17 @@ Location Manager Delegate Methods
     func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
         if view.annotation is KPAnnotation {
             let cluster = view.annotation as! KPAnnotation
-            
             if cluster.annotations.count > 1 {
                 let region = MKCoordinateRegionMakeWithDistance(cluster.coordinate,
                     cluster.radius * 2.5,
                     cluster.radius * 2.5)
-                
                 mapView.setRegion(region, animated: true)
-                
+            }else{
+                selectLocationIcon(view)
             }
         }
         
-        selectLocationIcon(view)
+
     }
 
     func selectLocationIcon(view: MKAnnotationView){
@@ -528,8 +531,14 @@ Location Manager Delegate Methods
                 
                     UIView.animateWithDuration(0.3, delay: 0.0, options: .CurveEaseOut, animations: {
                         view.frame=CGRectMake(view.frame.origin.x-10,view.frame.origin.y-10,40,40);
+                        let av = view.viewWithTag(1)! as! UIImageView
+                        av.center=CGPoint(x: 20, y: 20)
                         }, completion: { finished in
+                            
+
                     })
+                    
+                    
                     let kpSet = cluster.annotations;
                     let locationAnnot = kpSet?.first as! Location
                     print("imageName \(locationAnnot.imageName)")
@@ -548,10 +557,21 @@ Location Manager Delegate Methods
     
     func deselectLocationIcon(view:MKAnnotationView){
         if view.annotation is KPAnnotation {
-            UIView.animateWithDuration(0.3, delay: 0.0, options: .CurveEaseOut, animations: {
-                view.frame=CGRectMake(view.frame.origin.x+10,view.frame.origin.y+10,20,20);
-                }, completion: { finished in
-            })
+            let cluster = view.annotation as! KPAnnotation
+            
+            if cluster.annotations.count == 1 {
+
+                UIView.animateWithDuration(0.3, delay: 0.0, options: .CurveEaseOut, animations: {
+                    view.frame=CGRectMake(view.frame.origin.x+10,view.frame.origin.y+10,20,20);
+                    
+                    let av = view.viewWithTag(1)! as! UIImageView
+
+                    av.center=CGPoint(x: 10, y: 10)
+
+                    }, completion: { finished in
+
+                })
+            }
         }
 
     }
@@ -575,32 +595,23 @@ Map Buttons IBActions
     @IBAction func zoomIn(sender: AnyObject) {
 
         if(!working){
-            var region = mapView.region;
-            print("latitudeDelta \(region.span.latitudeDelta)")
-            print("longitudeDelta \(region.span.longitudeDelta)")
-            var span = MKCoordinateSpan();
-            span.latitudeDelta = region.span.latitudeDelta/2;
-            span.longitudeDelta = region.span.longitudeDelta/2;
+            
+            let newCamera = mapView.camera
+            newCamera.centerCoordinate = userLocation.coordinate
+            newCamera.altitude=mapView.camera.altitude / 2
+            mapView.setCamera(newCamera, animated: true)
 
-            region.span = span;
-            mapView.setRegion(region, animated: true);
+            
         }
     }
     @IBAction func zoomOut(sender: AnyObject) {
         if(!working){
-            mapView.setUserTrackingMode(MKUserTrackingMode.None, animated: true);
-            var region = mapView.region;
-            var span = MKCoordinateSpan()
-            print("latitudeDelta \(region.span.latitudeDelta)")
-            print("longitudeDelta \(region.span.longitudeDelta)")
             
-            if(region.span.longitudeDelta < 50){
-                span.latitudeDelta = region.span.latitudeDelta*2;
-                span.longitudeDelta = region.span.longitudeDelta*2;
-                
-                region.span = span;
-                mapView.setRegion(region, animated: true);
-            }
+            let newCamera = mapView.camera
+            newCamera.centerCoordinate = userLocation.coordinate
+            newCamera.altitude=mapView.camera.altitude * 2
+            mapView.setCamera(newCamera, animated: true)
+
         }
     }
       
@@ -912,7 +923,7 @@ Map Buttons IBActions
     func sendLocalPush(locationCoord:CLLocationCoordinate2D,id:String){
         let localNotification:UILocalNotification = UILocalNotification()
         localNotification.regionTriggersOnce = true
-        localNotification.alertBody = "Осторожно, 100 м до ближайшей опасности!"
+        localNotification.alertBody = "Осторожно, меньше 200 м до ближайшей опасности!"
         localNotification.region = CLCircularRegion(center:locationCoord , radius: 100, identifier: id)
         UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
     }
