@@ -18,11 +18,6 @@ class HUDViewController: UIViewController,MyLocationDelegateProtocol {
         super.viewDidLoad()
         hudLabel.transform = CGAffineTransformMakeRotation(CGFloat(-M_PI_2))
         
-
-        // Do any additional setup after loading the view.
-        
-        //TODO Отразить слева направо
-        viewToFlip.transform = CGAffineTransformMakeScale(1.0, -1.0)
     }
 
     @IBOutlet weak var distanceLabel: UILabel!
@@ -72,6 +67,16 @@ class HUDViewController: UIViewController,MyLocationDelegateProtocol {
         
     }
     
+    var flipped = false
+    @IBAction func flipHudView(sender: AnyObject) {
+        if(flipped){
+            viewToFlip.transform = CGAffineTransformMakeScale(1.0, 1.0)
+        }else{
+            viewToFlip.transform = CGAffineTransformMakeScale(1.0, -1.0)
+        }
+        flipped = !flipped
+
+    }
     func updateSpeed(location:CLLocation){
         var speedDouble = location.speed * 3.6;
         if(speedDouble < 0){

@@ -42,11 +42,26 @@ class AddLocationViewController: UIViewController,ChooseLocationTypeProtocol, UI
     var mapRekt:MKMapRect?
     @IBOutlet weak var addLocationMapView: MKMapView!
 
+    @IBAction func rotateRight(sender: AnyObject) {
+        let camera = addLocationMapView.camera
+        camera.heading += 15
+        addLocationMapView.setCamera(camera, animated: true)
+        
+    }
+    @IBAction func rotateLeft(sender: AnyObject) {
+        let camera = addLocationMapView.camera
+        camera.heading -= 15
+        addLocationMapView.setCamera(camera, animated: true)
+        
+    }
     @IBOutlet weak var typeImage: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
         addLocationMapView.visibleMapRect = mapRekt!
         addLocationMapView.delegate = self
+
+        
+        
     }
     @IBAction func sendLocation(sender: AnyObject) {
         print(addLocationMapView.centerCoordinate)
@@ -83,6 +98,7 @@ class AddLocationViewController: UIViewController,ChooseLocationTypeProtocol, UI
             
         }
     }
+    
     
     func typeChosen(type: Int) {
 

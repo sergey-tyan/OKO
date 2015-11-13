@@ -61,14 +61,15 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     private var clusteringController : KPClusteringController!
     var buttonBeep : AVAudioPlayer?
     
-    
+    var showTraffic:Bool=false
+    var workInBackground:Bool=true
     var inBackground:Bool = false
     
     //Расстояние, в радиусе которого подгружаются точки.
     let locationShowRadius:Double = 2000.0
     
     //Расстояние до объекта, при котором выводится предупреждение (в метрах)
-    let triggerRadius:Double = 100.0
+    var triggerRadius:Double = 200.0
     //Угол, под которым камера видит машину и машина видит камеру
     let sightDegree:Double = 30
     
@@ -111,6 +112,10 @@ View Appearance
         if #available(iOS 9.0, *) {
             mapView.showsCompass=false
         }
+    
+        
+
+
 
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "enterBackground", name: "appEntersBackground", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "becomeActive", name: "appBecomesActive", object: nil)
@@ -222,127 +227,129 @@ View Appearance
     ************************************************************************************************************
     */
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        userLocation = locations.last!;
-        if let savedData = userDefaults.objectForKey("mapData") as? NSData{
-            loadLocationsAroundUser(savedData,currentCoordinate: userLocation)
-        }else{
-            
-            startSaving()
-        }
-
-
-        //UPDATE COURSE AND SPEED HERE
-        delegate?.updateSpeed(userLocation)
-        var speed = userLocation.speed;
-        let course = userLocation.course
-
-        speed = speed * 3.6;
-        
-
-        
-        if(speed < 0){
-            speed = 0;
-            curSpeedColor = 0
-        }
-
-        if(working){
-            let newCamera = mapView.camera
-            if(course > 0){
-                newCamera.heading=course
+        if((inBackground && workInBackground) || (!inBackground)){
+            userLocation = locations.last!;
+            if let savedData = userDefaults.objectForKey("mapData") as? NSData{
+                loadLocationsAroundUser(savedData,currentCoordinate: userLocation)
             }else{
-                newCamera.heading=0.0
-            }
-            
-            newCamera.centerCoordinate = userLocation.coordinate
-            mapView.setCamera(newCamera, animated: false)
-
-            var newSpeedColor:Int;
-            if(speed < 5){
-                newSpeedColor = 1
-            }
-            else if(speed >= 5 && speed < 60){
-                newSpeedColor = 1
-            } else if(speed < 80){
-                newSpeedColor = 2
-            }else{
-                newSpeedColor = 3
-            }
-            if(curSpeedColor != newSpeedColor){
-                curSpeedColor = newSpeedColor
-                switch(curSpeedColor){
-                case 0:
-                    speedColor.image = UIImage(named:"slow-speed")
-                    break;
-                case 1:
-                    speedColor.image = UIImage(named:"normal-speed")
-                    break;
-                case 2:
-                    speedColor.image = UIImage(named:"fast-speed")
-                    break
-                case 3:
-                    speedColor.image = UIImage(named:"danger-speed")
-                    break;
-                default:
-                    speedColor.image = UIImage(named:"slow-speed")
-                    break;
-                }
-            }
-        }
-        speedLabel.text = NSString(format: "%.2f", speed) as String
-        var locationsAroundUser = [Location]()
-        var locationAnnotationDict = [Location:MKAnnotation]()
-        if(working){
-            let annotations = mapView.annotations
-            //В этом цикле берутся все точки вокруг пользователя не в кластерах и добавляются в массив
-            for annotation in annotations{
-                if annotation is KPAnnotation {
-                    let a = annotation as! KPAnnotation
-                    if (!a.isCluster()) {
-                        let kpAnnot = annotation as? KPAnnotation
-                        let kpSet = kpAnnot?.annotations;
-                        let locationAnnot = kpSet?.first as! Location
-                        let loc1CLLocation = CLLocation(latitude: locationAnnot.coordinate.latitude, longitude: locationAnnot.coordinate.longitude)
-                        let dist1 = userLocation.distanceFromLocation(loc1CLLocation)
-                        locationAnnot.distance = dist1
-                        locationsAroundUser.append(locationAnnot)
-                        locationAnnotationDict[locationAnnot] = annotation
-
-                    }
-                }
-            }
-            //локейшны вокруг пользователя сортируются по дистанции к нему
-            let sortedLocationsAroundUser = locationsAroundUser.sort(sortFunc)
-            
-            for nearestLoc in sortedLocationsAroundUser{
-                //угол между ближайшей точкой и локейшном юзера
-                let locToUserAngle = bearingBetweenTwoPoints(nearestLoc.coordinate.latitude,
-                    lon1: nearestLoc.coordinate.longitude,
-                    lat2: userLocation.coordinate.latitude,
-                    lon2: userLocation.coordinate.longitude)
                 
-                let userToLocAngle = bearingBetweenTwoPoints(userLocation.coordinate.latitude,
-                    lon1: userLocation.coordinate.longitude,
-                    lat2: nearestLoc.coordinate.latitude,
-                    lon2: nearestLoc.coordinate.longitude)
+                startSaving()
+            }
 
-                //направление точки минус угол
-                let degree = abs(nearestLoc.direction - locToUserAngle)
-                let degree2 = abs(course - userToLocAngle)
-                
-                if((nearestLoc.distance > triggerRadius - 20.0) && (nearestLoc.distance < triggerRadius) && (degree < sightDegree) && (degree2 < sightDegree)){
-                    if let triggeredAnnotation = locationAnnotationDict[nearestLoc]{
-                        delegate?.locationTriggered(nearestLoc)
-                        if(soundSwitch.on){
-                            buttonBeep?.play()
-                        }
-                        if(inBackground){
-                            sendPush()
-                        }
-                        mapView.selectAnnotation(triggeredAnnotation, animated: true)
-                    }
-                    break
+
+            //UPDATE COURSE AND SPEED HERE
+            delegate?.updateSpeed(userLocation)
+            var speed = userLocation.speed;
+            let course = userLocation.course
+
+            speed = speed * 3.6;
+            
+
+            
+            if(speed < 0){
+                speed = 0;
+                curSpeedColor = 0
+            }
+
+            if(working){
+                let newCamera = mapView.camera
+                if(course > 0){
+                    newCamera.heading=course
                 }else{
-                    delegate?.clearLabels()
+                    newCamera.heading=0.0
+                }
+                
+                newCamera.centerCoordinate = userLocation.coordinate
+                mapView.setCamera(newCamera, animated: false)
+
+                var newSpeedColor:Int;
+                if(speed < 5){
+                    newSpeedColor = 1
+                }
+                else if(speed >= 5 && speed < 60){
+                    newSpeedColor = 1
+                } else if(speed < 80){
+                    newSpeedColor = 2
+                }else{
+                    newSpeedColor = 3
+                }
+                if(curSpeedColor != newSpeedColor){
+                    curSpeedColor = newSpeedColor
+                    switch(curSpeedColor){
+                    case 0:
+                        speedColor.image = UIImage(named:"slow-speed")
+                        break;
+                    case 1:
+                        speedColor.image = UIImage(named:"normal-speed")
+                        break;
+                    case 2:
+                        speedColor.image = UIImage(named:"fast-speed")
+                        break
+                    case 3:
+                        speedColor.image = UIImage(named:"danger-speed")
+                        break;
+                    default:
+                        speedColor.image = UIImage(named:"slow-speed")
+                        break;
+                    }
+                }
+            }
+            speedLabel.text = NSString(format: "%.0f", speed) as String
+            var locationsAroundUser = [Location]()
+            var locationAnnotationDict = [Location:MKAnnotation]()
+            if(working){
+                let annotations = mapView.annotations
+                //В этом цикле берутся все точки вокруг пользователя не в кластерах и добавляются в массив
+                for annotation in annotations{
+                    if annotation is KPAnnotation {
+                        let a = annotation as! KPAnnotation
+                        if (!a.isCluster()) {
+                            let kpAnnot = annotation as? KPAnnotation
+                            let kpSet = kpAnnot?.annotations;
+                            let locationAnnot = kpSet?.first as! Location
+                            let loc1CLLocation = CLLocation(latitude: locationAnnot.coordinate.latitude, longitude: locationAnnot.coordinate.longitude)
+                            let dist1 = userLocation.distanceFromLocation(loc1CLLocation)
+                            locationAnnot.distance = dist1
+                            locationsAroundUser.append(locationAnnot)
+                            locationAnnotationDict[locationAnnot] = annotation
+
+                        }
+                    }
+                }
+                //локейшны вокруг пользователя сортируются по дистанции к нему
+                let sortedLocationsAroundUser = locationsAroundUser.sort(sortFunc)
+                
+                for nearestLoc in sortedLocationsAroundUser{
+                    //угол между ближайшей точкой и локейшном юзера
+                    let locToUserAngle = bearingBetweenTwoPoints(nearestLoc.coordinate.latitude,
+                        lon1: nearestLoc.coordinate.longitude,
+                        lat2: userLocation.coordinate.latitude,
+                        lon2: userLocation.coordinate.longitude)
+                    
+                    let userToLocAngle = bearingBetweenTwoPoints(userLocation.coordinate.latitude,
+                        lon1: userLocation.coordinate.longitude,
+                        lat2: nearestLoc.coordinate.latitude,
+                        lon2: nearestLoc.coordinate.longitude)
+
+                    //направление точки минус угол
+                    let degree = abs(nearestLoc.direction - locToUserAngle)
+                    let degree2 = abs(course - userToLocAngle)
+                    
+                    if((nearestLoc.distance > triggerRadius - 20.0) && (nearestLoc.distance < triggerRadius) && (degree < sightDegree) && (degree2 < sightDegree)){
+                        if let triggeredAnnotation = locationAnnotationDict[nearestLoc]{
+                            delegate?.locationTriggered(nearestLoc)
+                            if(soundSwitch.on){
+                                buttonBeep?.play()
+                            }
+                            if(inBackground){
+                                sendPush()
+                            }
+                            mapView.selectAnnotation(triggeredAnnotation, animated: true)
+                        }
+                        break
+                    }else{
+                        delegate?.clearLabels()
+                    }
                 }
             }
         }
@@ -357,7 +364,6 @@ View Appearance
         }
     }
 
-    
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         if annotation is MKUserLocation {
             let annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "user")
@@ -383,11 +389,9 @@ View Appearance
                 
                 let locationAnnot = kpSet?.first as! Location
                 //a.title = "angle \(locationAnnot.direction)"
-                
                 let directionImageView:UIImageView=UIImageView(image: UIImage(named:"direction"))
                 directionImageView.tag = 1
 
-            
                 let headingDegrees:CGFloat = CGFloat((locationAnnot.direction)*M_PI/180.0);
                 directionImageView.transform = CGAffineTransformMakeRotation(headingDegrees)
                 if let reusedAnnotationView = mapView.dequeueReusableAnnotationViewWithIdentifier("pin"){
@@ -396,8 +400,6 @@ View Appearance
                     reusedAnnotationView.viewWithTag(1)?.removeFromSuperview()
                     reusedAnnotationView.addSubview(directionImageView)
                     directionImageView.center=reusedAnnotationView.center
-                    
-
                     return reusedAnnotationView
                 }else{
                     let newAnnotationView = MKAnnotationView(annotation: a, reuseIdentifier: "pin")
@@ -408,9 +410,7 @@ View Appearance
                     return newAnnotationView
                 }
             }
-            
         }
-        
         return nil;
     }
     
@@ -440,8 +440,6 @@ View Appearance
     func mapView(mapView: MKMapView, didDeselectAnnotationView view: MKAnnotationView) {
         bottomInfoBar.hidden = true
         deselectLocationIcon(view)
-        
-
     }
     
     func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
@@ -522,37 +520,28 @@ Map Buttons IBActions
 
     
     @IBAction func zoomIn(sender: AnyObject) {
-
         if(!working){
-            
             let newCamera = mapView.camera
             newCamera.centerCoordinate = userLocation.coordinate
             newCamera.altitude=mapView.camera.altitude / 2
             mapView.setCamera(newCamera, animated: true)
-
-            
         }
     }
     @IBAction func zoomOut(sender: AnyObject) {
         if(!working){
-            
             let newCamera = mapView.camera
             newCamera.centerCoordinate = userLocation.coordinate
             newCamera.altitude=mapView.camera.altitude * 2
             mapView.setCamera(newCamera, animated: true)
-
         }
     }
       
     @IBAction func startDetecting(sender: AnyObject) {
         if(!working){
+            print("switched ON")
             centerOnUser(sender)
             speedIndicator.hidden=false;
             radarButton.selected = true;
-            print("switched ON")
-
-//            mapView.setUserTrackingMode(MKUserTrackingMode.None, animated: true);
-
             mapView.zoomEnabled = false;
             mapView.scrollEnabled = false;
             mapView.userInteractionEnabled = false;
@@ -594,21 +583,14 @@ Map Buttons IBActions
         newCamera.centerCoordinate = userLocation.coordinate
         newCamera.altitude=1000.0
         mapView.setCamera(newCamera, animated: false)
-
         let info = String("locationManager.monitoredRegions.count = \(locationManager.monitoredRegions.count) and mapView.annotations.count = \(mapView.annotations.count)")
         print(info)
-    
-
     }
-    
-/*
-************************************************************************************************************
-*/
 
     
     
 /*
-    API methods
+    API functions
 ************************************************************************************************************
 */
     
@@ -840,6 +822,23 @@ Map Buttons IBActions
     
     func becomeActive() {
         print("APP BECAME ACTIVE")
+        if ((userDefaults.objectForKey("trigger_radius")) != nil){
+            triggerRadius = userDefaults.objectForKey("trigger_radius") as! Double
+        }
+        print("trigger radius \(triggerRadius)")
+        
+        if ((userDefaults.objectForKey("show_traffic")) != nil){
+            showTraffic = userDefaults.objectForKey("show_traffic") as! Bool
+        }
+        print("showTraffic \(showTraffic)")
+
+        
+        if ((userDefaults.objectForKey("background_work")) != nil){
+            workInBackground = userDefaults.objectForKey("background_work") as! Bool
+        }
+        print("workInBackground \(workInBackground)")
+
+
         inBackground = false
     }
     
