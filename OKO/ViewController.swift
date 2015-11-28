@@ -14,7 +14,7 @@ import kingpin
 import AVFoundation
 
 
-class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, KPClusteringControllerDelegate {
+class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, KPClusteringControllerDelegate,UIScrollViewDelegate {
     @IBOutlet weak var distanceBottom: UILabel!
     @IBOutlet weak var bottomInfoBar: UIView!
     @IBOutlet weak var signImageBottom: UIImageView!
@@ -69,7 +69,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     let locationShowRadius:Double = 2000.0
     
     //Расстояние до объекта, при котором выводится предупреждение (в метрах)
-    var triggerRadius:Double = 200.0
+    var triggerRadius:Double = 120.0
     //Угол, под которым камера видит машину и машина видит камеру
     let sightDegree:Double = 30
     
@@ -80,7 +80,9 @@ View Appearance
 ************************************************************************************************************
 */
     
+    @IBOutlet weak var menuScrollView: UIScrollView!
     
+    @IBOutlet weak var menuInsideView: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
         if let buttonBeep = self.setupAudioPlayerWithFile("sound_alarm", type:"mp3") {
@@ -90,6 +92,8 @@ View Appearance
         self.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
         self.navigationBar.shadowImage = UIImage()
         self.navigationBar.translucent = true
+        menuScrollView.delegate=self
+
         //initially hiding 
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
@@ -125,6 +129,12 @@ View Appearance
         
     }
     
+    override func viewDidLayoutSubviews() {
+        menuScrollView.contentSize=menuInsideView.frame.size
+        
+    }
+
+    
    
     
     func progressBarDisplayer(msg:String, _ indicator:Bool ) {
@@ -150,6 +160,22 @@ View Appearance
         print("viewDidAppear")
         let value = UIInterfaceOrientation.Portrait.rawValue
         UIDevice.currentDevice().setValue(value, forKey: "orientation")
+        if ((userDefaults.objectForKey("trigger_radius")) != nil){
+            triggerRadius = userDefaults.objectForKey("trigger_radius") as! Double
+        }
+        print("trigger radius \(triggerRadius)")
+        
+        if ((userDefaults.objectForKey("show_traffic")) != nil){
+            showTraffic = userDefaults.objectForKey("show_traffic") as! Bool
+        }
+        print("showTraffic \(showTraffic)")
+        
+        
+        if ((userDefaults.objectForKey("background_work")) != nil){
+            workInBackground = userDefaults.objectForKey("background_work") as! Bool
+        }
+        print("workInBackground \(workInBackground)")
+
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -717,6 +743,7 @@ Map Buttons IBActions
     }
     
     @IBAction func toggleMenu(sender: AnyObject) {
+        print("togg")
         if(self.menuView.hidden){
             self.menuView.frame.origin.x = ((-1) * self.menuView.frame.width)
             self.menuView.hidden = false
@@ -731,7 +758,7 @@ Map Buttons IBActions
             self.menuOpened = !self.menuOpened
             }, completion: { finished in
                 if(!self.menuOpened){
-                    self.menuView.hidden = true
+                    self.menuView.hidden = false
                 }
             }
         )
@@ -822,21 +849,6 @@ Map Buttons IBActions
     
     func becomeActive() {
         print("APP BECAME ACTIVE")
-        if ((userDefaults.objectForKey("trigger_radius")) != nil){
-            triggerRadius = userDefaults.objectForKey("trigger_radius") as! Double
-        }
-        print("trigger radius \(triggerRadius)")
-        
-        if ((userDefaults.objectForKey("show_traffic")) != nil){
-            showTraffic = userDefaults.objectForKey("show_traffic") as! Bool
-        }
-        print("showTraffic \(showTraffic)")
-
-        
-        if ((userDefaults.objectForKey("background_work")) != nil){
-            workInBackground = userDefaults.objectForKey("background_work") as! Bool
-        }
-        print("workInBackground \(workInBackground)")
 
 
         inBackground = false

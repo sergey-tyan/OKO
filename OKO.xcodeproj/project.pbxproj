@@ -19,6 +19,7 @@
 		1E0662DC1BE33203001BD1F5 /* AddLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0662DB1BE33203001BD1F5 /* AddLocationViewController.swift */; };
 		1E0662DE1BE33237001BD1F5 /* LocaionTypeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0662DD1BE33237001BD1F5 /* LocaionTypeTableViewController.swift */; };
 		1E0662E01BE7BB07001BD1F5 /* edit.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E0662DF1BE7BB07001BD1F5 /* edit.png */; };
+		1EAAC0091C09CA2F00283B96 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EAAC0081C09CA2F00283B96 /* SettingsViewController.swift */; };
 		1EDB6A221BDBA47600828CC7 /* facebook-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EDB6A1E1BDBA47600828CC7 /* facebook-button.png */; };
 		1EDB6A231BDBA47600828CC7 /* instagram-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EDB6A1F1BDBA47600828CC7 /* instagram-button.png */; };
 		1EDB6A241BDBA47600828CC7 /* twitter-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EDB6A201BDBA47600828CC7 /* twitter-button.png */; };
@@ -127,6 +128,7 @@
 		1E0662DB1BE33203001BD1F5 /* AddLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddLocationViewController.swift; sourceTree = "<group>"; };
 		1E0662DD1BE33237001BD1F5 /* LocaionTypeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocaionTypeTableViewController.swift; sourceTree = "<group>"; };
 		1E0662DF1BE7BB07001BD1F5 /* edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = edit.png; sourceTree = "<group>"; };
+		1EAAC0081C09CA2F00283B96 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		1EDB6A1E1BDBA47600828CC7 /* facebook-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook-button.png"; sourceTree = "<group>"; };
 		1EDB6A1F1BDBA47600828CC7 /* instagram-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "instagram-button.png"; sourceTree = "<group>"; };
 		1EDB6A201BDBA47600828CC7 /* twitter-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter-button.png"; sourceTree = "<group>"; };
@@ -261,6 +263,7 @@
 				1EE8BB1B1BC106EA00F172BC /* Protocols.swift */,
 				1E0662DB1BE33203001BD1F5 /* AddLocationViewController.swift */,
 				1E0662DD1BE33237001BD1F5 /* LocaionTypeTableViewController.swift */,
+				1EAAC0081C09CA2F00283B96 /* SettingsViewController.swift */,
 			);
 			path = OKO;
 			sourceTree = "<group>";
@@ -650,6 +653,7 @@
 				1EE8BB1A1BC0F3B400F172BC /* HUDViewController.swift in Sources */,
 				1EE8BB1C1BC106EA00F172BC /* Protocols.swift in Sources */,
 				5EFC9D041B933E1D00759D56 /* Location.swift in Sources */,
+				1EAAC0091C09CA2F00283B96 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
