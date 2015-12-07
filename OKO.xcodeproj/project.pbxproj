@@ -19,6 +19,11 @@
 		1E0662DC1BE33203001BD1F5 /* AddLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0662DB1BE33203001BD1F5 /* AddLocationViewController.swift */; };
 		1E0662DE1BE33237001BD1F5 /* LocaionTypeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0662DD1BE33237001BD1F5 /* LocaionTypeTableViewController.swift */; };
 		1E0662E01BE7BB07001BD1F5 /* edit.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E0662DF1BE7BB07001BD1F5 /* edit.png */; };
+		1E59B7A71C15D1AE001A7EE4 /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E59B7A61C15D1AE001A7EE4 /* TutorialViewController.swift */; };
+		1E59B7B51C15D64E001A7EE4 /* page1.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E59B7B11C15D64E001A7EE4 /* page1.png */; };
+		1E59B7B61C15D64E001A7EE4 /* page2.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E59B7B21C15D64E001A7EE4 /* page2.png */; };
+		1E59B7B71C15D64E001A7EE4 /* page3.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E59B7B31C15D64E001A7EE4 /* page3.png */; };
+		1E59B7B81C15D64E001A7EE4 /* page4.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E59B7B41C15D64E001A7EE4 /* page4.png */; };
 		1EAAC0091C09CA2F00283B96 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EAAC0081C09CA2F00283B96 /* SettingsViewController.swift */; };
 		1EDB6A221BDBA47600828CC7 /* facebook-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EDB6A1E1BDBA47600828CC7 /* facebook-button.png */; };
 		1EDB6A231BDBA47600828CC7 /* instagram-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EDB6A1F1BDBA47600828CC7 /* instagram-button.png */; };
@@ -128,6 +133,11 @@
 		1E0662DB1BE33203001BD1F5 /* AddLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddLocationViewController.swift; sourceTree = "<group>"; };
 		1E0662DD1BE33237001BD1F5 /* LocaionTypeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocaionTypeTableViewController.swift; sourceTree = "<group>"; };
 		1E0662DF1BE7BB07001BD1F5 /* edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = edit.png; sourceTree = "<group>"; };
+		1E59B7A61C15D1AE001A7EE4 /* TutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
+		1E59B7B11C15D64E001A7EE4 /* page1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = page1.png; sourceTree = "<group>"; };
+		1E59B7B21C15D64E001A7EE4 /* page2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = page2.png; sourceTree = "<group>"; };
+		1E59B7B31C15D64E001A7EE4 /* page3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = page3.png; sourceTree = "<group>"; };
+		1E59B7B41C15D64E001A7EE4 /* page4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = page4.png; sourceTree = "<group>"; };
 		1EAAC0081C09CA2F00283B96 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		1EDB6A1E1BDBA47600828CC7 /* facebook-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook-button.png"; sourceTree = "<group>"; };
 		1EDB6A1F1BDBA47600828CC7 /* instagram-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "instagram-button.png"; sourceTree = "<group>"; };
@@ -264,6 +274,7 @@
 				1E0662DB1BE33203001BD1F5 /* AddLocationViewController.swift */,
 				1E0662DD1BE33237001BD1F5 /* LocaionTypeTableViewController.swift */,
 				1EAAC0081C09CA2F00283B96 /* SettingsViewController.swift */,
+				1E59B7A61C15D1AE001A7EE4 /* TutorialViewController.swift */,
 			);
 			path = OKO;
 			sourceTree = "<group>";
@@ -296,6 +307,7 @@
 		0700911D1B7F38F600D5041C /* images */ = {
 			isa = PBXGroup;
 			children = (
+				1E59B7A81C15D611001A7EE4 /* tutorial images */,
 				1EF827251BF5990B00C46CF9 /* animation parts */,
 				5EB9EB081B89C30F00F3F863 /* road signs */,
 				5EB9EAFD1B89AC8100F3F863 /* map parts */,
@@ -347,6 +359,17 @@
 				1EF827131BF1BA0A00C46CF9 /* sound_alarm.mp3 */,
 			);
 			path = sounds;
+			sourceTree = "<group>";
+		};
+		1E59B7A81C15D611001A7EE4 /* tutorial images */ = {
+			isa = PBXGroup;
+			children = (
+				1E59B7B11C15D64E001A7EE4 /* page1.png */,
+				1E59B7B21C15D64E001A7EE4 /* page2.png */,
+				1E59B7B31C15D64E001A7EE4 /* page3.png */,
+				1E59B7B41C15D64E001A7EE4 /* page4.png */,
+			);
+			path = "tutorial images";
 			sourceTree = "<group>";
 		};
 		1EF827251BF5990B00C46CF9 /* animation parts */ = {
@@ -526,6 +549,8 @@
 				5EB9EB271B89C32000F3F863 /* danger-route-change.png in Resources */,
 				5EB9EB331B89C32000F3F863 /* speed-limit-50.png in Resources */,
 				5EB9EB261B89C32000F3F863 /* danger-crossway.png in Resources */,
+				1E59B7B81C15D64E001A7EE4 /* page4.png in Resources */,
+				1E59B7B51C15D64E001A7EE4 /* page1.png in Resources */,
 				5EB9EB281B89C32000F3F863 /* double-road-camera.png in Resources */,
 				5EB9EB2D1B89C32000F3F863 /* railway-crossing.png in Resources */,
 				5EB9EB321B89C32000F3F863 /* speed-limit-40.png in Resources */,
@@ -545,6 +570,7 @@
 				1EF827161BF1BD7A00C46CF9 /* out.caf in Resources */,
 				5EB9EB241B89C32000F3F863 /* bad-road.png in Resources */,
 				1EF8272C1BF5992500C46CF9 /* rotating_part.png in Resources */,
+				1E59B7B61C15D64E001A7EE4 /* page2.png in Resources */,
 				5EB9EB2E1B89C32000F3F863 /* red-light-camera.png in Resources */,
 				1E0662E01BE7BB07001BD1F5 /* edit.png in Resources */,
 				5EB9EAF91B899BAD00F3F863 /* location.png in Resources */,
@@ -566,6 +592,7 @@
 				070091051B7F356D00D5041C /* Images.xcassets in Resources */,
 				5EB9EB401B89D7F900F3F863 /* filter-uncheck.png in Resources */,
 				5EB9EB341B89C32000F3F863 /* speed-limit-60.png in Resources */,
+				1E59B7B71C15D64E001A7EE4 /* page3.png in Resources */,
 				5EB9EB291B89C32000F3F863 /* dtp.png in Resources */,
 				5E5470A01B8880F9002A840E /* arrow.png in Resources */,
 				5EB9EB361B89C32000F3F863 /* static-dps-post.png in Resources */,
@@ -648,6 +675,7 @@
 				5E3699AD1B91A2DB0003B57E /* LocationType.swift in Sources */,
 				1E0662DE1BE33237001BD1F5 /* LocaionTypeTableViewController.swift in Sources */,
 				070090FE1B7F356D00D5041C /* AppDelegate.swift in Sources */,
+				1E59B7A71C15D1AE001A7EE4 /* TutorialViewController.swift in Sources */,
 				1E0662DC1BE33203001BD1F5 /* AddLocationViewController.swift in Sources */,
 				5EB9EB4A1B89E92200F3F863 /* ContainerViewController.m in Sources */,
 				1EE8BB1A1BC0F3B400F172BC /* HUDViewController.swift in Sources */,

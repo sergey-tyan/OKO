@@ -13,22 +13,37 @@ import Alamofire
 class AnimationViewController: UIViewController {
     let userDefaults = NSUserDefaults.standardUserDefaults()
     var loading:Bool = false
+    var alamofireManager : Alamofire.Manager?
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
+        configuration.timeoutIntervalForResource = 5 // seconds
+        
+        self.alamofireManager = Alamofire.Manager(configuration: configuration)
+        
         
         
         if (userDefaults.objectForKey("mapData") == nil){
             loading = true
-            Alamofire.request(.GET, "http://scl.kz/data/all")
-                .responseJSON { _, _, result in
-                    //                print("JSON \(result.value!)")
-                    print("got result")
+            self.alamofireManager!.request(.GET, "http://scl.kz/data/all").responseJSON { _, _, result in
+                print(result)
+                if(result.isSuccess){
                     if let locationDictionary = result.value! as? NSDictionary {
                         let placesData = NSKeyedArchiver.archivedDataWithRootObject(locationDictionary)
                         self.userDefaults.setObject(placesData, forKey: "mapData");
                         self.userDefaults.synchronize();
                         self.openMap()
-                    }}
+                    }
+                }else{
+                    print("FEIL")
+                    let alert = UIAlertController(title: "Ошибка", message: "Не удалось установить соединение с сервером", preferredStyle: .Alert)
+                    let action = UIAlertAction(title: "OK", style: .Cancel, handler: nil)
+                    alert.addAction(action)
+                    self.presentViewController(alert, animated: true, completion: nil)
+
+                }
+            }
 
         }
         
@@ -87,7 +102,15 @@ class AnimationViewController: UIViewController {
     }
     
     func openMap(){
-        self.performSegueWithIdentifier("openMap", sender: nil)
+
+        print("open Map or Tutorial")
+        
+        if ((userDefaults.objectForKey("show_tutorial")) != nil){
+            self.performSegueWithIdentifier("openMap", sender: nil)
+        }else{
+            self.performSegueWithIdentifier("openTutorial", sender: nil)
+        }
+
     }
 
     
