@@ -767,40 +767,33 @@ Map Buttons IBActions
     
     @IBAction func openFacebook(sender: AnyObject) {
         print("fb")
+        //TODO FACEBOOK PROFILE
         let facebookURL = (NSURL(string: "fb://profile/G8YNICqAwTE")!)
         if(!UIApplication.sharedApplication().openURL(facebookURL)){
-            UIApplication.sharedApplication().openURL((NSURL(string: "https://www.facebook.com/okosw")!))
+            UIApplication.sharedApplication().openURL((NSURL(string: "https://www.facebook.com/oko.city")!))
         }
     }
     @IBAction func openTwitter(sender: AnyObject) {
 
         
-        let twitterURL = (NSURL(string: "twitter:///user?screen_name=OK0SW")!)
+        let twitterURL = (NSURL(string: "twitter:///user?screen_name=ok0city")!)
         if(!UIApplication.sharedApplication().openURL(twitterURL)){
-            UIApplication.sharedApplication().openURL((NSURL(string: "https://www.twitter.com/OK0SW")!))
+            UIApplication.sharedApplication().openURL((NSURL(string: "https://twitter.com/ok0city")!))
         }
     }
 
     @IBAction func openVk(sender: AnyObject) {
-
-        
-        UIApplication.sharedApplication().openURL(NSURL(string: "vk://vk.com/okosw")!)
-        
-        let vkURL = (NSURL(string: "vk://vk.com/okosw")!)
+        let vkURL = (NSURL(string: "vk://vk.com/oko.city")!)
         if(!UIApplication.sharedApplication().openURL(vkURL)){
-            UIApplication.sharedApplication().openURL((NSURL(string: "https://vk.com/okosw")!))
+            UIApplication.sharedApplication().openURL((NSURL(string: "https://vk.com/oko.city")!))
         }
 
     }
     @IBAction func openInstagram(sender: AnyObject) {
-
-        
-        let instagramURL = (NSURL(string: "instagram://user?username=okosw")!)
+        let instagramURL = (NSURL(string: "instagram://user?username=oko.city")!)
         if(!UIApplication.sharedApplication().openURL(instagramURL)){
-            UIApplication.sharedApplication().openURL((NSURL(string: "https://instagram.com/okosw")!))
+            UIApplication.sharedApplication().openURL((NSURL(string: "https://www.instagram.com/oko.city")!))
         }
-
-
     }
     @IBAction func AddNewRoadsign(sender: AnyObject) {
         self.performSegueWithIdentifier("addSign", sender: self)

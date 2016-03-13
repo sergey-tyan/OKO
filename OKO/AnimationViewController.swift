@@ -26,7 +26,7 @@ class AnimationViewController: UIViewController {
         
         if (userDefaults.objectForKey("mapData") == nil){
             loading = true
-            self.alamofireManager!.request(.GET, "http://scl.kz/data/all").responseJSON { _, _, result in
+            self.alamofireManager!.request(.GET, "http://46.101.120.101/data/all").responseJSON { _, _, result in
                 print(result)
                 if(result.isSuccess){
                     if let locationDictionary = result.value! as? NSDictionary {
