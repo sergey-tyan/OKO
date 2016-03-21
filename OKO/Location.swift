@@ -22,12 +22,14 @@ class Location:NSObject, MKAnnotation{
     var coordinate:CLLocationCoordinate2D = CLLocationCoordinate2D()
     var distance:Double = 0.0
     var signDescription:String = ""
+    var directionType:Int = 0
+    var extraInfo:String = ""
     
     init(typeInt:Int, speed: Double) {
         
         self.speed = speed
         self.typeInt = typeInt;
-        switch self.typeInt {
+/*        switch self.typeInt {
         case 61:
             imageName="another-danger"
             signDescription="Другая опасность"
@@ -85,7 +87,7 @@ class Location:NSObject, MKAnnotation{
         default:
             imageName="another-danger"
             signDescription = "Другая опасность"
-        }
+        }*/
         
         super.init()
     }

@@ -17,8 +17,6 @@ class ImageStorage {
         documentsDirectory = documentsDirectory.URLByAppendingPathComponent(String("\(typeId).png"));
         
         let checkValidation = NSFileManager.defaultManager()
-        print(documentsDirectory.absoluteString);
-
         if(checkValidation.fileExistsAtPath(documentsDirectory.path!)){
             let data:NSData = NSData(contentsOfURL: documentsDirectory)!
             return UIImage(data:data)
@@ -50,7 +48,7 @@ class ImageStorage {
         })
             .response { (request, response, _, error) in
 
-                print("Downloaded file to \(localPath!)")
+                print("Downloaded file \(typeId)")
         }
     }
 }

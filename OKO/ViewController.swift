@@ -47,7 +47,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     var locationArray = [Location]()
     var filteredLocationArray = [Location]()
     var nearestLocationsArray = [Location]()
-    var typeArray = [LocationType]()
     var allLocationDictionary =  [Int:[Location]]()
     var activeFilters:[Int] = [61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72]
     var curSpeedColor: Int = 0
@@ -89,6 +88,8 @@ View Appearance
             self.buttonBeep = buttonBeep
         }
         
+        //FOR CLEAN START
+        userDefaults.removeObjectForKey("mapData");
 
 
         self.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
@@ -423,7 +424,7 @@ View Appearance
                 let headingDegrees:CGFloat = CGFloat((locationAnnot.direction)*M_PI/180.0);
                 directionImageView.transform = CGAffineTransformMakeRotation(headingDegrees)
                 if let reusedAnnotationView = mapView.dequeueReusableAnnotationViewWithIdentifier("pin"){
-                    reusedAnnotationView.image=UIImage(named: locationAnnot.imageName)
+                    reusedAnnotationView.image=ImageStorage.getImage(locationAnnot.typeInt)
                     reusedAnnotationView.frame=CGRectMake(0,0,20,20);
                     reusedAnnotationView.viewWithTag(1)?.removeFromSuperview()
                     reusedAnnotationView.addSubview(directionImageView)
@@ -431,7 +432,7 @@ View Appearance
                     return reusedAnnotationView
                 }else{
                     let newAnnotationView = MKAnnotationView(annotation: a, reuseIdentifier: "pin")
-                    newAnnotationView.image=UIImage(named: locationAnnot.imageName)
+                    newAnnotationView.image=ImageStorage.getImage(locationAnnot.typeInt)!
                     newAnnotationView.frame=CGRectMake(0,0,20,20);
                     newAnnotationView.addSubview(directionImageView)
                     directionImageView.center=newAnnotationView.center
@@ -503,11 +504,11 @@ View Appearance
                     
                     let kpSet = cluster.annotations;
                     let locationAnnot = kpSet?.first as! Location
-                    print("imageName \(locationAnnot.imageName)")
+                    print("image type \(locationAnnot.typeInt)")
                     bottomInfoBar.hidden = false
                     let loc1CLLocation = CLLocation(latitude: locationAnnot.coordinate.latitude, longitude: locationAnnot.coordinate.longitude)
                     distanceBottom.text = NSString(format: "%.0f", userLocation.distanceFromLocation(loc1CLLocation)) as String
-                    signImageBottom.image = UIImage(named: locationAnnot.imageName)
+                    signImageBottom.image = ImageStorage.getImage(locationAnnot.typeInt)!
                     descriptionBottom.text = locationAnnot.signDescription
                     signSpeedLimitBottom.text = NSString(format: "%.0f km/h", locationAnnot.speed) as String
                 
@@ -639,6 +640,9 @@ Map Buttons IBActions
                         self.userDefaults.synchronize();
     //                    self.loadDataFromMemory(placesData)
     //                    self.groupLocationsByType()
+                        
+                        LocationsDataService.saveTypeImages()
+                        
                         self.messageFrame.removeFromSuperview()
                         self.progressBarShowing = false
                         
@@ -652,10 +656,13 @@ Map Buttons IBActions
         
         if(currentCoordinate.distanceFromLocation(lastUserLocationForMapLoading) > locationShowRadius - 100.0){
             let placesDictionary = NSKeyedUnarchiver.unarchiveObjectWithData(savedData) as? NSDictionary
+            let typeDictionary:NSMutableDictionary = NSMutableDictionary()
+            
             if let types = placesDictionary?.objectForKey("types") as? NSArray {
                 for type in types{
-                    let newType = LocationType(name:type.objectForKey("name") as! String,id:type.objectForKey("id") as! Int);
-                    typeArray.append(newType)
+                    let description = type.objectForKey("description") as! String
+                    let typeID = type.objectForKey("id") as! Int
+                    typeDictionary.setObject(description, forKey: typeID)
                 }
             }
             if let locations  = placesDictionary?.objectForKey("locations") as? NSArray {
@@ -664,6 +671,7 @@ Map Buttons IBActions
                     let type = location.objectForKey("typeId") as! Int;
                     let newLocation = Location(typeInt:type,
                         speed: location.objectForKey("speed") as! Double)
+                    newLocation.signDescription = typeDictionary.objectForKey(type) as! String
                     newLocation.coordinate = CLLocationCoordinate2DMake(location.objectForKey("latitude") as! Double,
                         location.objectForKey("longitude") as! Double)
                     newLocation.direction = location.objectForKey("direction") as! Double
@@ -785,17 +793,13 @@ Map Buttons IBActions
     }
 
     @IBAction func openVk(sender: AnyObject) {
-//        ImageStorage.saveImage(63);
-//        print("\n");
+
 
         
-        let button = sender as! UIButton
-        button.setImage(ImageStorage.getImage(67), forState: .Normal)
-        
-//        let vkURL = (NSURL(string: "vk://vk.com/oko.city")!)
-//        if(!UIApplication.sharedApplication().openURL(vkURL)){
-//            UIApplication.sharedApplication().openURL((NSURL(string: "https://vk.com/oko.city")!))
-//        }
+        let vkURL = (NSURL(string: "vk://vk.com/oko.city")!)
+        if(!UIApplication.sharedApplication().openURL(vkURL)){
+            UIApplication.sharedApplication().openURL((NSURL(string: "https://vk.com/oko.city")!))
+        }
 
     }
     @IBAction func openInstagram(sender: AnyObject) {

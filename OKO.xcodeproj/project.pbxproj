@@ -91,7 +91,7 @@
 		5EFC9D041B933E1D00759D56 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFC9D031B933E1D00759D56 /* Location.swift */; };
 		5EFD13671B8B7439002E3F7B /* user@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EFD13661B8B7439002E3F7B /* user@2x.png */; };
 		980C906AE1C6E9B285FA454D /* Pods_OKO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFFB06D87B7AB4AAF080FD62 /* Pods_OKO.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		A40F9E291C9FB7E400B1AE15 /* LocationsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40F9E281C9FB7E400B1AE15 /* LocationsStorage.swift */; };
+		A40F9E291C9FB7E400B1AE15 /* LocationsDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40F9E281C9FB7E400B1AE15 /* LocationsDataService.swift */; };
 		A4236BB91C95A1F1002C855E /* ImageStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4236BB81C95A1F1002C855E /* ImageStorage.swift */; };
 /* End PBXBuildFile section */
 
@@ -209,7 +209,7 @@
 		5ECDF5BC1BA58D5D0026B18D /* cluster@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cluster@2x.png"; sourceTree = "<group>"; };
 		5EFC9D031B933E1D00759D56 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		5EFD13661B8B7439002E3F7B /* user@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user@2x.png"; sourceTree = "<group>"; };
-		A40F9E281C9FB7E400B1AE15 /* LocationsStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationsStorage.swift; sourceTree = "<group>"; };
+		A40F9E281C9FB7E400B1AE15 /* LocationsDataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationsDataService.swift; sourceTree = "<group>"; };
 		A4236BB81C95A1F1002C855E /* ImageStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageStorage.swift; sourceTree = "<group>"; };
 		A466AAC8CA678BA52C23C6BD /* Pods-OKO.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OKO.release.xcconfig"; path = "Pods/Target Support Files/Pods-OKO/Pods-OKO.release.xcconfig"; sourceTree = "<group>"; };
 		FFFB06D87B7AB4AAF080FD62 /* Pods_OKO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OKO.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -280,7 +280,7 @@
 				1EAAC0081C09CA2F00283B96 /* SettingsViewController.swift */,
 				1E59B7A61C15D1AE001A7EE4 /* TutorialViewController.swift */,
 				A4236BB81C95A1F1002C855E /* ImageStorage.swift */,
-				A40F9E281C9FB7E400B1AE15 /* LocationsStorage.swift */,
+				A40F9E281C9FB7E400B1AE15 /* LocationsDataService.swift */,
 			);
 			path = OKO;
 			sourceTree = "<group>";
@@ -683,7 +683,7 @@
 				1E0662DE1BE33237001BD1F5 /* LocaionTypeTableViewController.swift in Sources */,
 				070090FE1B7F356D00D5041C /* AppDelegate.swift in Sources */,
 				1E59B7A71C15D1AE001A7EE4 /* TutorialViewController.swift in Sources */,
-				A40F9E291C9FB7E400B1AE15 /* LocationsStorage.swift in Sources */,
+				A40F9E291C9FB7E400B1AE15 /* LocationsDataService.swift in Sources */,
 				1E0662DC1BE33203001BD1F5 /* AddLocationViewController.swift in Sources */,
 				5EB9EB4A1B89E92200F3F863 /* ContainerViewController.m in Sources */,
 				1EE8BB1A1BC0F3B400F172BC /* HUDViewController.swift in Sources */,
