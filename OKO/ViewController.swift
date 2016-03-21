@@ -89,7 +89,7 @@ View Appearance
         }
         
         //FOR CLEAN START
-        userDefaults.removeObjectForKey("mapData");
+//        userDefaults.removeObjectForKey("mapData");
 
 
         self.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
@@ -652,7 +652,7 @@ Map Buttons IBActions
     }
     
     func loadLocationsAroundUser(savedData:NSData, currentCoordinate:CLLocation){
-        print("checking if need to load new data around \(userLocation.coordinate)")
+//        print("checking if need to load new data around \(userLocation.coordinate)")
         
         if(currentCoordinate.distanceFromLocation(lastUserLocationForMapLoading) > locationShowRadius - 100.0){
             let placesDictionary = NSKeyedUnarchiver.unarchiveObjectWithData(savedData) as? NSDictionary

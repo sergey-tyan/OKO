@@ -801,7 +801,7 @@
                                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                                 </state>
                                                                 <connections>
-                                                                    <segue destination="ij5-lW-TQq" kind="showDetail" id="bNr-cS-o0c"/>
+                                                                    <segue destination="ij5-lW-TQq" kind="show" id="KF4-RW-3Mn"/>
                                                                 </connections>
                                                             </button>
                                                         </subviews>
@@ -1362,6 +1362,93 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1158" y="82"/>
+        </scene>
+        <!--Filter Table View Controller-->
+        <scene sceneID="n9T-SZ-ZJR">
+            <objects>
+                <tableViewController id="H6k-6c-mcI" customClass="FilterTableViewController" customModule="OKO" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="U9a-uH-Aeq">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LocationTypeTableViewCell" rowHeight="80" id="WM4-vg-MjL" userLabel="Трехножка 70" customClass="LocationTypeTableViewCell" customModule="OKO" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="80"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WM4-vg-MjL" id="fSx-yT-hoA">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="79"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="trenoga.png" translatesAutoresizingMaskIntoConstraints="NO" id="8OL-j9-dxo">
+                                            <rect key="frame" x="10" y="10" width="60" height="60"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="60" id="QWR-eh-bk5"/>
+                                                <constraint firstAttribute="width" constant="60" id="sny-z8-V0G"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Трехножка" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qk2-JQ-bOv">
+                                            <rect key="frame" x="78" y="18" width="259" height="43"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="43" id="lDt-Ee-qIJ"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" tag="322" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="filter-check.png" translatesAutoresizingMaskIntoConstraints="NO" id="Few-m8-R9e">
+                                            <rect key="frame" x="348" y="31" width="19" height="19"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="19" id="X5w-2i-9Tm"/>
+                                                <constraint firstAttribute="width" constant="19" id="xBO-8w-zMw"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="Few-m8-R9e" firstAttribute="trailing" secondItem="fSx-yT-hoA" secondAttribute="trailingMargin" id="84M-x0-QBy"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="Few-m8-R9e" secondAttribute="bottom" constant="24" id="GRx-jZ-oMM"/>
+                                        <constraint firstItem="Qk2-JQ-bOv" firstAttribute="top" secondItem="fSx-yT-hoA" secondAttribute="topMargin" constant="10" id="I0c-XS-v6h"/>
+                                        <constraint firstItem="Few-m8-R9e" firstAttribute="centerY" secondItem="Qk2-JQ-bOv" secondAttribute="centerY" id="K4z-LX-bB7"/>
+                                        <constraint firstItem="8OL-j9-dxo" firstAttribute="top" secondItem="fSx-yT-hoA" secondAttribute="topMargin" constant="2" id="Wia-SY-d9p"/>
+                                        <constraint firstItem="Few-m8-R9e" firstAttribute="leading" secondItem="Qk2-JQ-bOv" secondAttribute="trailing" constant="11" id="f3W-l2-JTt"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="Qk2-JQ-bOv" secondAttribute="trailing" constant="30" id="ghi-4a-2lc"/>
+                                        <constraint firstItem="Qk2-JQ-bOv" firstAttribute="leading" secondItem="fSx-yT-hoA" secondAttribute="leadingMargin" constant="70" id="hJF-Gh-HwY"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="Few-m8-R9e" secondAttribute="trailing" id="kQu-A6-jO7"/>
+                                        <constraint firstItem="8OL-j9-dxo" firstAttribute="leading" secondItem="fSx-yT-hoA" secondAttribute="leadingMargin" constant="2" id="mmL-kz-pHT"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="Qk2-JQ-bOv" secondAttribute="trailing" constant="30" id="vdD-Pv-kSe"/>
+                                        <constraint firstItem="Few-m8-R9e" firstAttribute="top" secondItem="fSx-yT-hoA" secondAttribute="topMargin" constant="22" id="xNd-G7-AXA"/>
+                                        <constraint firstAttribute="centerY" secondItem="Few-m8-R9e" secondAttribute="centerY" id="zQe-1o-UlS"/>
+                                    </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="vdD-Pv-kSe"/>
+                                            <exclude reference="f3W-l2-JTt"/>
+                                            <exclude reference="kQu-A6-jO7"/>
+                                            <exclude reference="xNd-G7-AXA"/>
+                                            <exclude reference="K4z-LX-bB7"/>
+                                            <exclude reference="GRx-jZ-oMM"/>
+                                        </mask>
+                                    </variation>
+                                </tableViewCellContentView>
+                                <accessibility key="accessibilityConfiguration" identifier="LocationTypeTableViewCell">
+                                    <accessibilityTraits key="traits" none="YES"/>
+                                </accessibility>
+                                <connections>
+                                    <outlet property="checkedImageView" destination="Few-m8-R9e" id="ovX-2t-Mj6"/>
+                                    <outlet property="descriptionLabel" destination="Qk2-JQ-bOv" id="kpn-nX-Qfn"/>
+                                    <outlet property="typeImageView" destination="8OL-j9-dxo" id="NwZ-CG-QtS"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="H6k-6c-mcI" id="Weo-9O-4lw"/>
+                            <outlet property="delegate" destination="H6k-6c-mcI" id="Qax-AU-p0d"/>
+                        </connections>
+                    </tableView>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cM7-wp-ZH4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2151.5" y="65.5"/>
         </scene>
         <!--Add Location View Controller-->
         <scene sceneID="9cc-ye-1cx">
@@ -2210,10 +2297,10 @@
             </objects>
             <point key="canvasLocation" x="1712.5" y="911.5"/>
         </scene>
-        <!--Filter Table View Controller-->
+        <!--Table View Controller-->
         <scene sceneID="eKs-gh-DS5">
             <objects>
-                <tableViewController id="n9d-TJ-MHp" customClass="FilterTableViewController" customModule="OKO" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="n9d-TJ-MHp" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" sectionHeaderHeight="22" sectionFooterHeight="22" id="Vos-yN-08F">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -3010,7 +3097,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z3v-HM-5sV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2216.5" y="173.5"/>
+            <point key="canvasLocation" x="2887.5" y="10.5"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="HKj-Kg-DtI">
@@ -3273,7 +3360,7 @@
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nUk-iM-AHt">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <connections>
-                                    <segue destination="n9d-TJ-MHp" kind="embed" id="Kh6-D8-KEh"/>
+                                    <segue destination="H6k-6c-mcI" kind="embed" id="Mm8-qB-LjD"/>
                                 </connections>
                             </containerView>
                         </subviews>
@@ -3292,7 +3379,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kLe-RJ-Pt3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1662" y="174"/>
+            <point key="canvasLocation" x="1623.5" y="101.5"/>
         </scene>
         <!--Locaion Type Table View Controller-->
         <scene sceneID="BZV-Tq-Dne">

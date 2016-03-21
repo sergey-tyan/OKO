@@ -19,4 +19,5 @@ class LocationType{
         self.description = description
         self.id = id
     }
+    
 }
