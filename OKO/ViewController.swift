@@ -88,6 +88,8 @@ View Appearance
         if let buttonBeep = self.setupAudioPlayerWithFile("sound_alarm", type:"mp3") {
             self.buttonBeep = buttonBeep
         }
+        
+
 
         self.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
         self.navigationBar.shadowImage = UIImage()
@@ -627,7 +629,7 @@ Map Buttons IBActions
             progressBarDisplayer("Загрузка", true)
 
 
-            Alamofire.request(.GET, "http://scl.kz/data/all")
+            Alamofire.request(.GET, "http://oko.city/data/all")
                 .responseJSON { _, _, result in
     //                print("JSON \(result.value!)")
                     print("got result")
@@ -783,10 +785,17 @@ Map Buttons IBActions
     }
 
     @IBAction func openVk(sender: AnyObject) {
-        let vkURL = (NSURL(string: "vk://vk.com/oko.city")!)
-        if(!UIApplication.sharedApplication().openURL(vkURL)){
-            UIApplication.sharedApplication().openURL((NSURL(string: "https://vk.com/oko.city")!))
-        }
+//        ImageStorage.saveImage(63);
+//        print("\n");
+
+        
+        let button = sender as! UIButton
+        button.setImage(ImageStorage.getImage(67), forState: .Normal)
+        
+//        let vkURL = (NSURL(string: "vk://vk.com/oko.city")!)
+//        if(!UIApplication.sharedApplication().openURL(vkURL)){
+//            UIApplication.sharedApplication().openURL((NSURL(string: "https://vk.com/oko.city")!))
+//        }
 
     }
     @IBAction func openInstagram(sender: AnyObject) {
