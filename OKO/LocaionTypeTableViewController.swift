@@ -9,17 +9,25 @@
 import UIKit
 
 class LocaionTypeTableViewController: UITableViewController {
-    
+    let userDefaults = NSUserDefaults.standardUserDefaults()
     var delegate:ChooseLocationTypeProtocol?=nil
+    var typeArray = [LocationType]()
+    let cellIdentifier = "LocationTypeTableViewCell"
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        if let savedData = userDefaults.objectForKey("mapData") as? NSData{
+            let placesDictionary = NSKeyedUnarchiver.unarchiveObjectWithData(savedData) as? NSDictionary
+            if let types = placesDictionary?.objectForKey("types") as? NSArray {
+                for type in types{
+                    let description = type.objectForKey("description") as! String
+                    let typeID = type.objectForKey("id") as! Int
+                    let type = LocationType(description: description, id: typeID)
+                    typeArray.append(type)
+                }
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -30,18 +38,18 @@ class LocaionTypeTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
+        
         return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 14
+        
+        return typeArray.count
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 
-        var locationType:Int = 0
+/*        var locationType:Int = 0
         
         switch indexPath.row {
             case 0:locationType = 70
@@ -64,6 +72,10 @@ class LocaionTypeTableViewController: UITableViewController {
         }
         
         delegate?.typeChosen(locationType)
+        self.dismissViewControllerAnimated(true, completion: nil);*/
+        
+        let selectedType = typeArray[indexPath.row]
+        delegate?.typeChosen(selectedType.id)
         self.dismissViewControllerAnimated(true, completion: nil);
 
     }
@@ -72,7 +84,7 @@ class LocaionTypeTableViewController: UITableViewController {
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
+        /*
         var cell :UITableViewCell
         
         
@@ -95,19 +107,22 @@ class LocaionTypeTableViewController: UITableViewController {
         default: cell = tableView.dequeueReusableCellWithIdentifier("61", forIndexPath: indexPath)
             
         }
+        return cell */
         
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! LocationTypeTableViewCell
         
-        
-
-        
-
-        
-        
-        
-        
+        let currentType = typeArray[indexPath.row]
+        cell.typeImageView.image = ImageStorage.getImage(currentType.id)
+        cell.descriptionLabel.text = currentType.description
         
         return cell
     }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
+    {
+        return 80.0;//Choose your custom row height
+    }
+
     
 
     

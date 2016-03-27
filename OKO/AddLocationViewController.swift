@@ -34,7 +34,6 @@ class AddLocationViewController: UIViewController,ChooseLocationTypeProtocol, UI
     point.radius=50.0&
     point.typeId=69
 */
-    var newLocation:Location?;
     var curSpeed:Int=10;
     var typeIdChosen:Int=64;
     var direction:Double=0;
@@ -67,7 +66,7 @@ class AddLocationViewController: UIViewController,ChooseLocationTypeProtocol, UI
         print(addLocationMapView.centerCoordinate)
         
         progressBarDisplayer("Загрузка", true)
-        Alamofire.request(.POST, "http://scl.kz/location/manual?point.latitude=\(addLocationMapView.centerCoordinate.latitude)&point.longitude=\(addLocationMapView.centerCoordinate.longitude)&point.direction=\(direction)&point.speed=\(curSpeed)&point.radius=50.0&point.typeId=\(typeIdChosen)")
+        Alamofire.request(.POST, "http://oko.city/location/request?point.latitude=\(addLocationMapView.centerCoordinate.latitude)&point.longitude=\(addLocationMapView.centerCoordinate.longitude)&point.direction=\(direction)&point.speed=\(curSpeed)&point.radius=50.0&point.typeId=\(typeIdChosen)&point.directionType=1&extraInfo=")
             .responseJSON { _, _, result in
                 print("got result \(result)")
                 self.messageFrame.removeFromSuperview()
@@ -101,12 +100,8 @@ class AddLocationViewController: UIViewController,ChooseLocationTypeProtocol, UI
     
     
     func typeChosen(type: Int) {
-
-        newLocation = Location(typeInt: type, speed: 60)
-        typeImage.image=UIImage(named: newLocation!.imageName)
+        typeImage.image=ImageStorage.getImage(type)
         typeIdChosen = type
-        
-        
     }
 
 
