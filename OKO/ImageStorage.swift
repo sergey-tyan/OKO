@@ -33,7 +33,7 @@ class ImageStorage {
     }
     
     static func saveImage(typeId: Int){
-        let urlToCall = String("http://oko.city/data/typeicon/id/\(typeId)")
+        let urlToCall = String("http://oko.city/data/typeicon/id/\(typeId)?ptf=i&token=\(UIDevice.currentDevice().identifierForVendor!.UUIDString)")
         
         var localPath: NSURL?
         

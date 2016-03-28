@@ -93,6 +93,7 @@
 		980C906AE1C6E9B285FA454D /* Pods_OKO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFFB06D87B7AB4AAF080FD62 /* Pods_OKO.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		A40F9E291C9FB7E400B1AE15 /* LocationsDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40F9E281C9FB7E400B1AE15 /* LocationsDataService.swift */; };
 		A4236BB91C95A1F1002C855E /* ImageStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4236BB81C95A1F1002C855E /* ImageStorage.swift */; };
+		A437F4321CA7C377005823FE /* direction2.png in Resources */ = {isa = PBXBuildFile; fileRef = A437F4311CA7C377005823FE /* direction2.png */; };
 		A4B1385C1C9FF58400269FED /* LocationTypeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B1385B1C9FF58400269FED /* LocationTypeTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -212,6 +213,7 @@
 		5EFD13661B8B7439002E3F7B /* user@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user@2x.png"; sourceTree = "<group>"; };
 		A40F9E281C9FB7E400B1AE15 /* LocationsDataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationsDataService.swift; sourceTree = "<group>"; };
 		A4236BB81C95A1F1002C855E /* ImageStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageStorage.swift; sourceTree = "<group>"; };
+		A437F4311CA7C377005823FE /* direction2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = direction2.png; sourceTree = "<group>"; };
 		A466AAC8CA678BA52C23C6BD /* Pods-OKO.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OKO.release.xcconfig"; path = "Pods/Target Support Files/Pods-OKO/Pods-OKO.release.xcconfig"; sourceTree = "<group>"; };
 		A4B1385B1C9FF58400269FED /* LocationTypeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationTypeTableViewCell.swift; sourceTree = "<group>"; };
 		FFFB06D87B7AB4AAF080FD62 /* Pods_OKO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OKO.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -396,6 +398,7 @@
 		5EB9EAFD1B89AC8100F3F863 /* map parts */ = {
 			isa = PBXGroup;
 			children = (
+				A437F4311CA7C377005823FE /* direction2.png */,
 				5ECDF5BC1BA58D5D0026B18D /* cluster@2x.png */,
 				5EFD13661B8B7439002E3F7B /* user@2x.png */,
 				5EB9EAFE1B89AC9500F3F863 /* bottom-bar.png */,
@@ -582,6 +585,7 @@
 				1E59B7B61C15D64E001A7EE4 /* page2.png in Resources */,
 				5EB9EB2E1B89C32000F3F863 /* red-light-camera.png in Resources */,
 				1E0662E01BE7BB07001BD1F5 /* edit.png in Resources */,
+				A437F4321CA7C377005823FE /* direction2.png in Resources */,
 				5EB9EAF91B899BAD00F3F863 /* location.png in Resources */,
 				5EFD13671B8B7439002E3F7B /* user@2x.png in Resources */,
 				1EDB6A271BDF45CB00828CC7 /* back-arrow.png in Resources */,

@@ -71,9 +71,6 @@ class AddLocationViewController: UIViewController,ChooseLocationTypeProtocol, UI
                 print("got result \(result)")
                 self.messageFrame.removeFromSuperview()
         }
-        
-
-        
     }
 
     @IBAction func editSpeed(sender: AnyObject) {

@@ -17,7 +17,7 @@ class LocationsDataService {
        if let savedData = userDefaults.objectForKey("mapData") as? NSData{
             let placesDictionary = NSKeyedUnarchiver.unarchiveObjectWithData(savedData) as? NSDictionary
             if let types = placesDictionary?.objectForKey("types") as? NSArray {
-                    for type in types{
+                for type in types{
                     let typeID = type.objectForKey("id") as! Int
                     ImageStorage.saveImage(typeID)
                     print(typeID)

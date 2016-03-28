@@ -514,7 +514,7 @@
                                     <action selector="startDetecting:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="seW-sm-q6D"/>
                                 </connections>
                             </button>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5RC-dQ-NIS" userLabel="bottom info bar">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5RC-dQ-NIS" userLabel="bottom info bar">
                                 <rect key="frame" x="0.0" y="502" width="320" height="66"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bottom-bar.png" translatesAutoresizingMaskIntoConstraints="NO" id="Tg0-bu-kJb">

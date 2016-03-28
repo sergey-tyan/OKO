@@ -74,6 +74,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     
     let notificationText:String="Осторожно, 100 м до ближайшей опасности!"
     
+    var menuToggled:Bool = false
+    
 /*
 View Appearance
 ************************************************************************************************************
@@ -124,8 +126,8 @@ View Appearance
 
 
 
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "enterBackground", name: "appEntersBackground", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "becomeActive", name: "appBecomesActive", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.enterBackground), name: "appEntersBackground", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.becomeActive), name: "appBecomesActive", object: nil)
         locationManager.startUpdatingLocation()
         
 
@@ -354,15 +356,30 @@ View Appearance
                         lon1: nearestLoc.coordinate.longitude,
                         lat2: userLocation.coordinate.latitude,
                         lon2: userLocation.coordinate.longitude)
-                    
+                    //угол между юзером и точкой
                     let userToLocAngle = bearingBetweenTwoPoints(userLocation.coordinate.latitude,
                         lon1: userLocation.coordinate.longitude,
                         lat2: nearestLoc.coordinate.latitude,
                         lon2: nearestLoc.coordinate.longitude)
 
                     //направление точки минус угол
-                    let degree = abs(nearestLoc.direction - locToUserAngle)
+                    var degree = abs(nearestLoc.direction - locToUserAngle)
                     let degree2 = abs(course - userToLocAngle)
+                    
+                    
+                    //TODO Протестировать
+                    //если камера смотрит в обе стороны
+                    if(nearestLoc.directionType == 2){
+                        //если машина не попадает в обзор первого направления, то проверяем второе направление
+                        if(degree > sightDegree){
+                            var secondDirection = nearestLoc.direction + 180.0;
+                            if(secondDirection > 360.0){
+                                secondDirection -= 360.0;
+                            }
+                            
+                            degree = abs(secondDirection - locToUserAngle)
+                        }
+                    }
                     
                     if((nearestLoc.distance > triggerRadius - 20.0) && (nearestLoc.distance < triggerRadius) && (degree < sightDegree) && (degree2 < sightDegree)){
                         if let triggeredAnnotation = locationAnnotationDict[nearestLoc]{
@@ -418,7 +435,12 @@ View Appearance
                 
                 let locationAnnot = kpSet?.first as! Location
                 //a.title = "angle \(locationAnnot.direction)"
-                let directionImageView:UIImageView=UIImageView(image: UIImage(named:"direction"))
+                var directionImageName = "direction"
+                if(locationAnnot.directionType == 2){
+                    directionImageName = "direction2"
+                }
+                
+                let directionImageView:UIImageView=UIImageView(image: UIImage(named:directionImageName))
                 directionImageView.tag = 1
 
                 let headingDegrees:CGFloat = CGFloat((locationAnnot.direction)*M_PI/180.0);
@@ -446,6 +468,9 @@ View Appearance
     
     func mapView(mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         clusteringController.refresh(true)
+        
+        self.menuView.hidden = !menuToggled
+        print("self.menuView.hidden \(self.menuView.hidden)")
 
         
         let headingDegrees:CGFloat = CGFloat((360.0-mapView.camera.heading)*M_PI/180.0);
@@ -628,9 +653,9 @@ Map Buttons IBActions
         if(!progressBarShowing){
             progressBarShowing = true
             progressBarDisplayer("Загрузка", true)
+            print(UIDevice.currentDevice().identifierForVendor!.UUIDString)
 
-
-            Alamofire.request(.GET, "http://oko.city/data/all")
+            Alamofire.request(.GET, "http://oko.city/data/all?ptf=i&token=\(UIDevice.currentDevice().identifierForVendor!.UUIDString)")
                 .responseJSON { _, _, result in
     //                print("JSON \(result.value!)")
                     print("got result")
@@ -676,6 +701,7 @@ Map Buttons IBActions
                         location.objectForKey("longitude") as! Double)
                     newLocation.direction = location.objectForKey("direction") as! Double
                     newLocation.radius = location.objectForKey("radius") as! Double
+                    newLocation.directionType = location.objectForKey("directionType") as! Int
                     let IdInt = location.objectForKey("id") as! Int
                     newLocation.identifier = String(format:"\(IdInt)")
                     let loc1CLLocation = CLLocation(latitude: newLocation.coordinate.latitude, longitude: newLocation.coordinate.longitude)
@@ -754,10 +780,11 @@ Map Buttons IBActions
     
     @IBAction func toggleMenu(sender: AnyObject) {
         print("togg")
+        menuToggled = self.menuView.hidden
         if(self.menuView.hidden){
+            menuToggled = true
             self.menuView.frame.origin.x = ((-1) * self.menuView.frame.width)
             self.menuView.hidden = false
-            
         }
         UIView.animateWithDuration(0.3, delay: 0.0, options: .CurveEaseOut, animations: {
             if(self.menuOpened){
