@@ -4,6 +4,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -514,7 +515,7 @@
                                     <action selector="startDetecting:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="seW-sm-q6D"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5RC-dQ-NIS" userLabel="bottom info bar">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5RC-dQ-NIS" userLabel="bottom info bar">
                                 <rect key="frame" x="0.0" y="502" width="320" height="66"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bottom-bar.png" translatesAutoresizingMaskIntoConstraints="NO" id="Tg0-bu-kJb">
@@ -627,6 +628,84 @@
                                         <exclude reference="jie-7t-xXc"/>
                                         <exclude reference="qqk-1a-a39"/>
                                         <exclude reference="yN9-3H-LwM"/>
+                                    </mask>
+                                </variation>
+                            </view>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="euU-EU-o12" userLabel="confirmation view">
+                                <rect key="frame" x="-8" y="431" width="336" height="59"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_normal_yes.png" highlightedImage="ic_normal_yes_pressed.png" translatesAutoresizingMaskIntoConstraints="NO" id="nPL-jy-4s3">
+                                        <rect key="frame" x="29" y="5" width="49" height="49"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="nPL-jy-4s3" secondAttribute="height" multiplier="1:1" id="8eZ-Xy-KCM"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_normal_no.png" highlightedImage="ic_normal_no_pressed.png" translatesAutoresizingMaskIntoConstraints="NO" id="Vjz-Ku-WaS">
+                                        <rect key="frame" x="187" y="5" width="49" height="49"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="Vjz-Ku-WaS" secondAttribute="height" multiplier="1:1" id="kxF-rs-KoS"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Видел" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oKb-V9-ygD">
+                                        <rect key="frame" x="88" y="19" width="50" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Не видел" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="naa-Oc-08F">
+                                        <rect key="frame" x="246" y="19" width="75" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Hh-FK-5i0" userLabel="not seen">
+                                        <rect key="frame" x="168" y="0.0" width="168" height="59"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <action selector="dontConfirm:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Ldw-cx-tIC"/>
+                                            <action selector="notseenTouchDown:" destination="vXZ-lx-hvc" eventType="touchDown" id="JRq-d4-yOc"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YaY-Cy-8lh" userLabel="seen">
+                                        <rect key="frame" x="0.0" y="0.0" width="168" height="59"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <action selector="confirm:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="q6k-uC-do7"/>
+                                            <action selector="seenTouchCancel:" destination="vXZ-lx-hvc" eventType="touchCancel" id="cjU-aN-iTJ"/>
+                                            <action selector="seenTouchDown:" destination="vXZ-lx-hvc" eventType="touchDown" id="zsh-h8-r1S"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="YaY-Cy-8lh" firstAttribute="height" secondItem="euU-EU-o12" secondAttribute="height" id="4GK-FN-gDT"/>
+                                    <constraint firstItem="oKb-V9-ygD" firstAttribute="trailing" secondItem="YaY-Cy-8lh" secondAttribute="trailing" constant="-30" id="Jk3-0d-5RT"/>
+                                    <constraint firstItem="Vjz-Ku-WaS" firstAttribute="centerY" secondItem="euU-EU-o12" secondAttribute="centerY" id="K7i-yN-WwE"/>
+                                    <constraint firstItem="Vjz-Ku-WaS" firstAttribute="width" secondItem="Vjz-Ku-WaS" secondAttribute="height" multiplier="1:1" id="L56-Qf-MER"/>
+                                    <constraint firstItem="nPL-jy-4s3" firstAttribute="top" secondItem="euU-EU-o12" secondAttribute="top" constant="5" id="PXB-5U-M8J"/>
+                                    <constraint firstItem="oKb-V9-ygD" firstAttribute="centerY" secondItem="euU-EU-o12" secondAttribute="centerY" id="VSI-Rx-RPc"/>
+                                    <constraint firstItem="naa-Oc-08F" firstAttribute="centerY" secondItem="euU-EU-o12" secondAttribute="centerY" id="W0L-xX-QsN"/>
+                                    <constraint firstItem="9Hh-FK-5i0" firstAttribute="height" secondItem="euU-EU-o12" secondAttribute="height" id="Wya-Pp-joT"/>
+                                    <constraint firstItem="oKb-V9-ygD" firstAttribute="leading" secondItem="nPL-jy-4s3" secondAttribute="trailing" constant="10" id="XK8-qh-ow3"/>
+                                    <constraint firstAttribute="trailing" secondItem="YaY-Cy-8lh" secondAttribute="trailing" constant="282" id="XVv-UL-tEX"/>
+                                    <constraint firstAttribute="trailing" secondItem="9Hh-FK-5i0" secondAttribute="trailing" id="Xnc-IF-9Qp"/>
+                                    <constraint firstAttribute="width" constant="320" id="YYg-ek-yAO"/>
+                                    <constraint firstItem="naa-Oc-08F" firstAttribute="trailing" secondItem="9Hh-FK-5i0" secondAttribute="trailing" constant="-15" id="aNP-oJ-DkI"/>
+                                    <constraint firstItem="YaY-Cy-8lh" firstAttribute="leading" secondItem="euU-EU-o12" secondAttribute="leading" id="e1t-nB-ATV"/>
+                                    <constraint firstAttribute="width" secondItem="euU-EU-o12" secondAttribute="height" multiplier="32:3" constant="-290.66666666666663" id="eMW-16-HVv"/>
+                                    <constraint firstItem="naa-Oc-08F" firstAttribute="leading" secondItem="Vjz-Ku-WaS" secondAttribute="trailing" constant="10" id="fdY-X4-82j"/>
+                                    <constraint firstItem="9Hh-FK-5i0" firstAttribute="leading" secondItem="euU-EU-o12" secondAttribute="centerX" id="hdW-Dt-6dE"/>
+                                    <constraint firstItem="9Hh-FK-5i0" firstAttribute="centerY" secondItem="euU-EU-o12" secondAttribute="centerY" id="jMM-2B-F7J"/>
+                                    <constraint firstItem="YaY-Cy-8lh" firstAttribute="centerY" secondItem="euU-EU-o12" secondAttribute="centerY" id="kRu-gd-j3S"/>
+                                    <constraint firstItem="YaY-Cy-8lh" firstAttribute="trailing" secondItem="euU-EU-o12" secondAttribute="trailing" multiplier="0.5" id="pC5-tP-hok"/>
+                                    <constraint firstItem="nPL-jy-4s3" firstAttribute="centerY" secondItem="euU-EU-o12" secondAttribute="centerY" id="qK4-GE-tSD"/>
+                                    <constraint firstItem="Vjz-Ku-WaS" firstAttribute="top" secondItem="euU-EU-o12" secondAttribute="top" constant="5" id="t1z-8c-k9x"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="YYg-ek-yAO"/>
+                                        <exclude reference="XVv-UL-tEX"/>
+                                        <exclude reference="L56-Qf-MER"/>
                                     </mask>
                                 </variation>
                             </view>
@@ -1102,8 +1181,8 @@
                                                             </mask>
                                                         </variation>
                                                     </view>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="СЛЕДИТЕ ЗА НАМИ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CTC-B0-CYN">
-                                                        <rect key="frame" x="53" y="508" width="145" height="21"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="СЛЕДИТЕ ЗА НАМИ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CTC-B0-CYN">
+                                                        <rect key="frame" x="52" y="508" width="145" height="21"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="21" id="DU5-6E-Iiq"/>
                                                             <constraint firstAttribute="width" constant="145" id="owq-AG-xRX"/>
@@ -1112,8 +1191,8 @@
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2ss-zr-7MY" userLabel="social buttons">
-                                                        <rect key="frame" x="56" y="549" width="194" height="32"/>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2ss-zr-7MY" userLabel="social buttons">
+                                                        <rect key="frame" x="28" y="549" width="194" height="32"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nLG-jn-2PF" userLabel="facebook">
                                                                 <rect key="frame" x="0.0" y="0.0" width="32" height="32"/>
@@ -1292,6 +1371,7 @@
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="5RC-dQ-NIS" secondAttribute="bottom" id="CYF-2A-2Lk"/>
                             <constraint firstItem="8g0-FD-HR4" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" id="Cmx-CC-a7X"/>
                             <constraint firstAttribute="trailingMargin" secondItem="EEW-e1-ZCz" secondAttribute="trailing" constant="-10" id="D29-nv-OyB"/>
+                            <constraint firstItem="euU-EU-o12" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-24" id="KY1-4c-rkq"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="5RC-dQ-NIS" secondAttribute="bottom" id="L9G-Mr-guc"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Ttp-gl-l1L" secondAttribute="trailing" constant="-7" id="Ldm-to-awQ"/>
                             <constraint firstItem="dNa-S8-jrK" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-3" id="MJs-ey-ENs"/>
@@ -1311,6 +1391,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="8g0-FD-HR4" secondAttribute="trailing" constant="-16" id="hPG-MD-AF8"/>
                             <constraint firstItem="lu3-nw-cwQ" firstAttribute="top" secondItem="0rv-rW-OcK" secondAttribute="bottom" id="oOj-Av-e2B"/>
                             <constraint firstItem="0rv-rW-OcK" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="q1K-8y-2Vz"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="euU-EU-o12" secondAttribute="trailing" constant="-24" id="r9c-qI-5Lb"/>
                             <constraint firstItem="Ehi-yf-E1E" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="rgt-Wh-SoD"/>
                             <constraint firstItem="0rv-rW-OcK" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="tIv-mZ-ZNx"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Ehi-yf-E1E" secondAttribute="trailing" constant="-16" id="vwb-O1-V4z"/>
@@ -1318,6 +1399,7 @@
                             <constraint firstItem="dNa-S8-jrK" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-3" id="wcL-Bt-c1V"/>
                             <constraint firstAttribute="trailing" secondItem="lu3-nw-cwQ" secondAttribute="trailing" constant="72" id="xK1-UR-Ovu"/>
                             <constraint firstItem="5RC-dQ-NIS" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="xK1-WK-Fwy"/>
+                            <constraint firstItem="5RC-dQ-NIS" firstAttribute="top" secondItem="euU-EU-o12" secondAttribute="bottom" constant="12" id="ycx-wK-wOe"/>
                             <constraint firstItem="Ttp-gl-l1L" firstAttribute="top" secondItem="UZt-FV-2iE" secondAttribute="bottom" constant="14" id="ynQ-l0-lix"/>
                             <constraint firstAttribute="trailingMargin" secondItem="c6Z-WJ-8Lk" secondAttribute="trailing" constant="-7" id="zVk-0o-DJI"/>
                             <constraint firstItem="lu3-nw-cwQ" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="zvf-p3-LCM"/>
@@ -1339,6 +1421,7 @@
                         <outlet property="bottomInfoBar" destination="5RC-dQ-NIS" id="UY4-77-CCE"/>
                         <outlet property="centerOnUserButton" destination="c6Z-WJ-8Lk" id="gQa-tu-7hg"/>
                         <outlet property="compasView" destination="dNa-S8-jrK" id="ITe-Fp-hK8"/>
+                        <outlet property="confirmationView" destination="euU-EU-o12" id="FL1-Vf-c1o"/>
                         <outlet property="descriptionBottom" destination="RQ3-8d-3aT" id="mCB-Lz-oo4"/>
                         <outlet property="distanceBottom" destination="ueE-Rk-vDh" id="wbL-tl-Dg0"/>
                         <outlet property="mapView" destination="8g0-FD-HR4" id="wXJ-0x-uua"/>
@@ -1346,7 +1429,9 @@
                         <outlet property="menuScrollView" destination="E7l-Kb-RaU" id="jRZ-YO-X2Y"/>
                         <outlet property="menuView" destination="lu3-nw-cwQ" id="Kvv-vi-jN4"/>
                         <outlet property="navigationBar" destination="0rv-rW-OcK" id="78E-jN-7yi"/>
+                        <outlet property="notSeenImageView" destination="Vjz-Ku-WaS" id="mkg-e9-Fkf"/>
                         <outlet property="radarButton" destination="t8t-xF-Sy7" id="LSO-dM-TiR"/>
+                        <outlet property="seenImageView" destination="nPL-jy-4s3" id="o3q-1W-24W"/>
                         <outlet property="signImageBottom" destination="5bF-RB-QAV" id="NFD-vD-CZh"/>
                         <outlet property="signSpeedLimitBottom" destination="9Vt-zF-EWS" id="Yfb-AD-maX"/>
                         <outlet property="soundSwitch" destination="5dU-Kz-lxr" id="Y1q-64-r9v"/>
@@ -3464,6 +3549,10 @@
         <image name="edit.png" width="38" height="38"/>
         <image name="facebook-button.png" width="63" height="63"/>
         <image name="filter-check.png" width="38" height="38"/>
+        <image name="ic_normal_no.png" width="512" height="512"/>
+        <image name="ic_normal_no_pressed.png" width="512" height="512"/>
+        <image name="ic_normal_yes.png" width="512" height="512"/>
+        <image name="ic_normal_yes_pressed.png" width="512" height="512"/>
         <image name="ic_rotate_left.png" width="80" height="80"/>
         <image name="ic_rotate_right.png" width="80" height="80"/>
         <image name="instagram-button.png" width="63" height="63"/>

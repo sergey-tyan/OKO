@@ -60,20 +60,20 @@ class AnimationViewController: UIViewController {
         rotationAnimation.cumulative=true
         rotationAnimation.repeatCount=3
         self.radarImageView.layer .addAnimation(rotationAnimation, forKey: "rotationAnimation")
-        self.performSelector("smallAppear", withObject: self, afterDelay: 0.8)
-        self.performSelector("fadeOutSmall", withObject: self, afterDelay: 0.8)
+        self.performSelector(#selector(AnimationViewController.smallAppear), withObject: self, afterDelay: 0.8)
+        self.performSelector(#selector(AnimationViewController.fadeOutSmall), withObject: self, afterDelay: 0.8)
         
         var turns = 500.0
         if(!loading){
             turns = 5.0
-            self.performSelector("openMap", withObject: self, afterDelay: 3)
+            self.performSelector(#selector(AnimationViewController.openMap), withObject: self, afterDelay: 3)
         }
-        for (var i = 0.0; i < turns; i++){
-            self.performSelector("smallAppear", withObject: self, afterDelay: 0.8 + 3.25 * i)
-            self.performSelector("fadeOutSmall", withObject: self, afterDelay: 0.8 + 3.25 * i)
+        for (var i = 0.0; i < turns; i += 1){
+            self.performSelector(#selector(AnimationViewController.smallAppear), withObject: self, afterDelay: 0.8 + 3.25 * i)
+            self.performSelector(#selector(AnimationViewController.fadeOutSmall), withObject: self, afterDelay: 0.8 + 3.25 * i)
             
-            self.performSelector("bigAppear", withObject: self, afterDelay: 2.1 + 3.25 * i)
-            self.performSelector("fadeOutBig", withObject: self, afterDelay: 2.1 + 3.25 * i)
+            self.performSelector(#selector(AnimationViewController.bigAppear), withObject: self, afterDelay: 2.1 + 3.25 * i)
+            self.performSelector(#selector(AnimationViewController.fadeOutBig), withObject: self, afterDelay: 2.1 + 3.25 * i)
         }
 
     }
@@ -110,6 +110,9 @@ class AnimationViewController: UIViewController {
         }else{
             self.performSegueWithIdentifier("openTutorial", sender: nil)
         }
+        
+        //self.performSegueWithIdentifier("openTutorial", sender: nil)
+        
 
     }
 

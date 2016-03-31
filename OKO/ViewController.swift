@@ -25,10 +25,13 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     @IBOutlet weak var centerOnUserButton: UIButton!
     @IBOutlet weak var mapView: MKMapView!
     
+    @IBOutlet weak var confirmationView: UIView!
     @IBOutlet weak var signSpeedLimitBottom: UILabel!
     @IBOutlet var compasView: UIImageView!
     @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var menuView: UIView!
+    @IBOutlet weak var notSeenImageView: UIImageView!
+    @IBOutlet weak var seenImageView: UIImageView!
     
     @IBOutlet weak var speedColor: UIImageView!
     
@@ -52,7 +55,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     var curSpeedColor: Int = 0
     var userLocation:CLLocation=CLLocation()
     var lastUserLocationForMapLoading:CLLocation=CLLocation()
-    
+    var selectedLocationID:String?
     @IBOutlet weak var soundSwitch: UISwitch!
     var delegate:MyLocationDelegateProtocol?=nil
     var progressBarShowing:Bool=false
@@ -93,7 +96,7 @@ View Appearance
         //FOR CLEAN START
 //        userDefaults.removeObjectForKey("mapData");
 
-
+        selectedLocationID = nil
         self.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
         self.navigationBar.shadowImage = UIImage()
         self.navigationBar.translucent = true
@@ -470,8 +473,6 @@ View Appearance
         clusteringController.refresh(true)
         
         self.menuView.hidden = !menuToggled
-        print("self.menuView.hidden \(self.menuView.hidden)")
-
         
         let headingDegrees:CGFloat = CGFloat((360.0-mapView.camera.heading)*M_PI/180.0);
         compasView.transform=CGAffineTransformMakeRotation(headingDegrees)
@@ -493,6 +494,8 @@ View Appearance
     
     func mapView(mapView: MKMapView, didDeselectAnnotationView view: MKAnnotationView) {
         bottomInfoBar.hidden = true
+        confirmationView.hidden = true
+        selectedLocationID = nil
         deselectLocationIcon(view)
     }
     
@@ -531,12 +534,13 @@ View Appearance
                     let locationAnnot = kpSet?.first as! Location
                     print("image type \(locationAnnot.typeInt)")
                     bottomInfoBar.hidden = false
+                    confirmationView.hidden = false
                     let loc1CLLocation = CLLocation(latitude: locationAnnot.coordinate.latitude, longitude: locationAnnot.coordinate.longitude)
                     distanceBottom.text = NSString(format: "%.0f", userLocation.distanceFromLocation(loc1CLLocation)) as String
                     signImageBottom.image = ImageStorage.getImage(locationAnnot.typeInt)!
                     descriptionBottom.text = locationAnnot.signDescription
                     signSpeedLimitBottom.text = NSString(format: "%.0f km/h", locationAnnot.speed) as String
-                
+                    selectedLocationID = locationAnnot.identifier
                 }
             }
         }
@@ -607,6 +611,7 @@ Map Buttons IBActions
             print("switched OFF")
             deselectAllAnnotations()
             bottomInfoBar.hidden = true
+            confirmationView.hidden = true
             speedIndicator.hidden=true;
             radarButton.selected = false;
             mapView.setUserTrackingMode(MKUserTrackingMode.None, animated: true);
@@ -653,9 +658,8 @@ Map Buttons IBActions
         if(!progressBarShowing){
             progressBarShowing = true
             progressBarDisplayer("Загрузка", true)
-            print(UIDevice.currentDevice().identifierForVendor!.UUIDString)
-
-            Alamofire.request(.GET, "http://oko.city/data/all?ptf=i&token=\(UIDevice.currentDevice().identifierForVendor!.UUIDString)")
+            
+            Alamofire.request(.GET, "http://oko.city/data/all?ptf=i&token=\(self.getBase64UUID())")
                 .responseJSON { _, _, result in
     //                print("JSON \(result.value!)")
                     print("got result")
@@ -735,7 +739,60 @@ Map Buttons IBActions
     //Help functions
     //
 
+    func getBase64UUID()->String{
+        let uuidString = UIDevice.currentDevice().identifierForVendor!.UUIDString;
+        let data = uuidString.dataUsingEncoding(NSUTF8StringEncoding)
+        
+        return data!.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(rawValue: 0))
+        
+    }
     
+    
+    @IBAction func notseenTouchDown(sender: AnyObject) {
+        notSeenImageView.highlighted = true
+    }
+    
+    @IBAction func seenTouchDown(sender: AnyObject) {
+        seenImageView.highlighted = true
+    }
+    @IBAction func confirm(sender: AnyObject) {
+        print("confirm \(selectedLocationID)")
+        seenImageView.highlighted = false
+        
+        //POST /location/seen/{locationId}
+        
+        if(selectedLocationID != nil){
+            let postURL = "http://oko.city/location/seen/\(selectedLocationID!)?ptf=i&token=\(self.getBase64UUID())"
+            print(postURL)
+            Alamofire.request(.POST, postURL)
+                .response { request, response, data, error in
+                    print(response?.statusCode)
+                    self.showSimpleAlertWithTitle("Спасибо", message: "Голос засчитывается только 1 раз", viewController: self)
+                    
+            }
+        }
+        
+        
+    }
+    
+    @IBAction func dontConfirm(sender: AnyObject) {
+        print("dont confirm \(selectedLocationID)")
+        notSeenImageView.highlighted = false
+        
+        if(selectedLocationID != nil){
+            let postURL = "http://oko.city/location/unseen/\(selectedLocationID!)?ptf=i&token=\(self.getBase64UUID())"
+            print(postURL)
+            Alamofire.request(.POST, postURL as String!)
+                .response { request, response, data, error in
+                    print(response?.statusCode)
+                    self.showSimpleAlertWithTitle("Спасибо", message: "Голос засчитывается только 1 раз", viewController: self)
+                    
+            }
+                    
+            
+            
+        }
+    }
     func toggleInfoSpeedBar(){
         bottomInfoBar.hidden = !bottomInfoBar.hidden
         speedIndicator.hidden = !speedIndicator.hidden
