@@ -93,6 +93,18 @@ View Appearance
             self.buttonBeep = buttonBeep
         }
         
+        Alamofire.request(.GET, "http://oko.city/ios/version")
+            .responseJSON { request, response, result in
+            print("ALALALA")
+            let version = result.value as! Double
+            print(version)
+            if(version > 1.0){
+                self.showSimpleAlertWithTitle("Вышла новая версия", message: "Пожалуйста, обновите приложение", viewController: self)
+            }
+            
+        }
+        
+        
         //FOR CLEAN START
 //        userDefaults.removeObjectForKey("mapData");
 
