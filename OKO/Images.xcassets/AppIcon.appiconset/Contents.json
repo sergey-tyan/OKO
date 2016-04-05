@@ -1,15 +1,13 @@
 {
   "images" : [
     {
-      "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "@1x (iOS 5_6).png",
+      "size" : "29x29",
       "scale" : "2x"
     },
     {
-      "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "@3x (iOS 7_8)-1.png",
+      "size" : "29x29",
       "scale" : "3x"
     },
     {

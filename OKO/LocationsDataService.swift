@@ -19,7 +19,7 @@ class LocationsDataService {
             if let types = placesDictionary?.objectForKey("types") as? NSArray {
                 for type in types{
                     let typeID = type.objectForKey("id") as! Int
-                    ImageStorage.saveImage(typeID)
+                    ImageStorage.saveImage(typeID, annotView: nil)
                     print(typeID)
                 }
             }

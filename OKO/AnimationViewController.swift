@@ -26,14 +26,16 @@ class AnimationViewController: UIViewController {
         
         if (userDefaults.objectForKey("mapData") == nil){
             loading = true
-            self.alamofireManager!.request(.GET, "http://46.101.120.101/data/all").responseJSON { _, _, result in
+            self.alamofireManager!.request(.GET, "http://oko.city/data/all?ptf=i&token=\(self.getBase64UUID())").responseJSON { _, _, result in
                 print(result)
                 if(result.isSuccess){
                     if let locationDictionary = result.value! as? NSDictionary {
                         let placesData = NSKeyedArchiver.archivedDataWithRootObject(locationDictionary)
                         self.userDefaults.setObject(placesData, forKey: "mapData");
                         self.userDefaults.synchronize();
-                        self.openMap()
+                        LocationsDataService.saveTypeImages()
+                        self.openMapOrTutorial()
+                        
                     }
                 }else{
                     print("FEIL")
@@ -53,6 +55,14 @@ class AnimationViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    func getBase64UUID()->String{
+        let uuidString = UIDevice.currentDevice().identifierForVendor!.UUIDString;
+        let data = uuidString.dataUsingEncoding(NSUTF8StringEncoding)
+        
+        return data!.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(rawValue: 0))
+        
+    }
+    
     override func viewDidAppear(animated: Bool) {
         let rotationAnimation:CABasicAnimation=CABasicAnimation(keyPath: "transform.rotation.z")
         rotationAnimation.toValue=CGFloat(M_2_PI) * 3 * 2
@@ -66,7 +76,7 @@ class AnimationViewController: UIViewController {
         var turns = 500
         if(!loading){
             turns = 5
-            self.performSelector(#selector(AnimationViewController.openMap), withObject: self, afterDelay: 3)
+            self.performSelector(#selector(AnimationViewController.openMapOrTutorial), withObject: self, afterDelay: 3)
         }
         for i in 0..<turns {
             self.performSelector(#selector(AnimationViewController.smallAppear), withObject: self, afterDelay: 0.8 + 3.25 * Double(i))
@@ -101,7 +111,7 @@ class AnimationViewController: UIViewController {
         })
     }
     
-    func openMap(){
+    func openMapOrTutorial(){
 
         print("open Map or Tutorial")
         

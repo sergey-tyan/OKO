@@ -8,6 +8,7 @@
 
 import Foundation
 import Alamofire
+import kingpin
 
 class ImageStorage {
     //TODO add return image type
@@ -21,8 +22,20 @@ class ImageStorage {
             let data:NSData = NSData(contentsOfURL: documentsDirectory)!
             return UIImage(data:data)
         }else{
+            
             return nil
         }
+    }
+    
+    static func setImageViewImage(typeId: Int, annotView: MKAnnotationView){
+        let typeImage = getImage(typeId)
+        if(typeImage == nil){
+            saveImage(typeId, annotView: annotView)
+        }else{
+            annotView.image = typeImage
+        }
+        
+        
     }
     
     static func hasImage(typeId: Int) -> Bool{
@@ -32,23 +45,30 @@ class ImageStorage {
         return (checkValidation.fileExistsAtPath(documentsDirectory.path!))
     }
     
-    static func saveImage(typeId: Int){
-        let urlToCall = String("http://oko.city/data/typeicon/id/\(typeId)?ptf=i&token=\(UIDevice.currentDevice().identifierForVendor!.UUIDString)")
-        
-        var localPath: NSURL?
-        
-        Alamofire.download(.GET,
-            urlToCall,
-            destination: { (temporaryURL, response) in
-                let directoryURL = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0]
-                let pathComponent = response.suggestedFilename
-                
-                localPath = directoryURL.URLByAppendingPathComponent(pathComponent!)
-                return localPath!
-        })
-            .response { (request, response, _, error) in
-
-                print("Downloaded file \(typeId)")
+    static func saveImage(typeId: Int, annotView: MKAnnotationView?) {
+        if(!hasImage(typeId)){
+            let urlToCall = String("http://oko.city/data/typeicon/id/\(typeId)?ptf=i&token=\(UIDevice.currentDevice().identifierForVendor!.UUIDString)")
+            
+            var localPath: NSURL?
+            
+            Alamofire.download(.GET,
+                urlToCall,
+                destination: { (temporaryURL, response) in
+                    let directoryURL = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0]
+                    let pathComponent = response.suggestedFilename
+                    
+                    localPath = directoryURL.URLByAppendingPathComponent(pathComponent!)
+                    return localPath!
+            })
+                .response { (request, response, _, error) in
+                    
+                    if(annotView != nil){
+                        annotView!.image = getImage(typeId)
+                    }
+                    
+                    print("Downloaded file \(typeId)")
+                    
+            }
         }
     }
 }

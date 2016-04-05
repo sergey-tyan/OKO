@@ -43,7 +43,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     
     @IBOutlet weak var radarButton: UIButton!
     var working = false
-    let regionRadius: CLLocationDistance = 1000
+    let regionRadius: CLLocationDistance = 9000
     let userDefaults = NSUserDefaults.standardUserDefaults()
     let locationManager = CLLocationManager()
 
@@ -78,6 +78,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     let notificationText:String="Осторожно, 100 м до ближайшей опасности!"
     
     var menuToggled:Bool = false
+    var initialZooming:Bool=false
     
 /*
 View Appearance
@@ -95,9 +96,8 @@ View Appearance
         
         Alamofire.request(.GET, "http://oko.city/ios/version")
             .responseJSON { request, response, result in
-            print("ALALALA")
             let version = result.value as! Double
-            print(version)
+            print("version: \(version)")
             if(version > 1.0){
                 self.showSimpleAlertWithTitle("Вышла новая версия", message: "Пожалуйста, обновите приложение", viewController: self)
             }
@@ -105,8 +105,7 @@ View Appearance
         }
         
         
-        //FOR CLEAN START
-//        userDefaults.removeObjectForKey("mapData");
+        
 
         selectedLocationID = nil
         self.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
@@ -145,8 +144,14 @@ View Appearance
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.becomeActive), name: "appBecomesActive", object: nil)
         locationManager.startUpdatingLocation()
         
-
         
+        
+    }
+    
+    func centerMapOnLocation(location: CLLocation) {
+        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate,
+                                                                  regionRadius * 2.0, regionRadius * 2.0)
+        mapView.setRegion(coordinateRegion, animated: true)
     }
     
     override func viewDidLayoutSubviews() {
@@ -259,7 +264,9 @@ View Appearance
         
         
         //Проверяем зум карты и если слишком близко то отключаем кластеризацию
-        if(working && region.span.latitudeDelta < 0.09){
+//        print("region.span.latitudeDelta \(region.span.latitudeDelta)")
+        if(working || region.span.latitudeDelta < 0.007){
+            
             return false
         }
         
@@ -275,7 +282,12 @@ View Appearance
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if((inBackground && workInBackground) || (!inBackground)){
             userLocation = locations.last!;
+            if(!initialZooming){
+                centerOnUser(userLocation)
+                initialZooming = true
+            }
             if let savedData = userDefaults.objectForKey("mapData") as? NSData{
+                
                 loadLocationsAroundUser(savedData,currentCoordinate: userLocation)
             }else{
                 
@@ -461,7 +473,8 @@ View Appearance
                 let headingDegrees:CGFloat = CGFloat((locationAnnot.direction)*M_PI/180.0);
                 directionImageView.transform = CGAffineTransformMakeRotation(headingDegrees)
                 if let reusedAnnotationView = mapView.dequeueReusableAnnotationViewWithIdentifier("pin"){
-                    reusedAnnotationView.image=ImageStorage.getImage(locationAnnot.typeInt)
+                    ImageStorage.setImageViewImage(locationAnnot.typeInt, annotView: reusedAnnotationView)
+//                    reusedAnnotationView.image=ImageStorage.getImage(locationAnnot.typeInt)
                     reusedAnnotationView.frame=CGRectMake(0,0,20,20);
                     reusedAnnotationView.viewWithTag(1)?.removeFromSuperview()
                     reusedAnnotationView.addSubview(directionImageView)
@@ -469,7 +482,10 @@ View Appearance
                     return reusedAnnotationView
                 }else{
                     let newAnnotationView = MKAnnotationView(annotation: a, reuseIdentifier: "pin")
-                    newAnnotationView.image=ImageStorage.getImage(locationAnnot.typeInt)!
+                    
+                    ImageStorage.setImageViewImage(locationAnnot.typeInt, annotView: newAnnotationView)
+                    
+//                    newAnnotationView.image=ImageStorage.getImage(locationAnnot.typeInt)!
                     newAnnotationView.frame=CGRectMake(0,0,20,20);
                     newAnnotationView.addSubview(directionImageView)
                     directionImageView.center=newAnnotationView.center
@@ -479,6 +495,8 @@ View Appearance
         }
         return nil;
     }
+    
+    
     
     
     func mapView(mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
@@ -513,7 +531,17 @@ View Appearance
     
     func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
         if view.annotation is KPAnnotation {
+            
             let cluster = view.annotation as! KPAnnotation
+            print("cluster.annotations.count \(cluster.annotations.count)")
+            print(cluster.annotations)
+            
+            /*for genre in cluster.annotations {
+                var anot : Location
+                anot = genre as! Location
+                print("anot.coordinate \(anot.coordinate)")
+            }*/
+            
             if cluster.annotations.count > 1 {
                 let region = MKCoordinateRegionMakeWithDistance(cluster.coordinate,
                     cluster.radius * 2.5,
@@ -681,7 +709,7 @@ Map Buttons IBActions
                         self.userDefaults.synchronize();
     //                    self.loadDataFromMemory(placesData)
     //                    self.groupLocationsByType()
-                        
+                        print("saving type images")
                         LocationsDataService.saveTypeImages()
                         
                         self.messageFrame.removeFromSuperview()
@@ -889,8 +917,10 @@ Map Buttons IBActions
     }
 
     @IBAction func openVk(sender: AnyObject) {
-
-
+        //FOR CLEAN START
+//        userDefaults.removeObjectForKey("mapData");
+//        userDefaults.synchronize();
+//        print("deleted")
         
         let vkURL = (NSURL(string: "vk://vk.com/oko.city")!)
         if(!UIApplication.sharedApplication().openURL(vkURL)){
@@ -899,6 +929,7 @@ Map Buttons IBActions
 
     }
     @IBAction func openInstagram(sender: AnyObject) {
+        
         let instagramURL = (NSURL(string: "instagram://user?username=oko.city")!)
         if(!UIApplication.sharedApplication().openURL(instagramURL)){
             UIApplication.sharedApplication().openURL((NSURL(string: "https://www.instagram.com/oko.city")!))

@@ -42,16 +42,15 @@ class AddLocationViewController: UIViewController,ChooseLocationTypeProtocol, UI
     @IBOutlet weak var addLocationMapView: MKMapView!
 
     @IBAction func rotateRight(sender: AnyObject) {
-        let camera = addLocationMapView.camera
+        let camera = self.addLocationMapView.camera
         camera.heading += 15
-        addLocationMapView.setCamera(camera, animated: true)
-        
+        self.addLocationMapView.setCamera(camera, animated: true)
     }
+    
     @IBAction func rotateLeft(sender: AnyObject) {
-        let camera = addLocationMapView.camera
+        let camera = self.addLocationMapView.camera
         camera.heading -= 15
-        addLocationMapView.setCamera(camera, animated: true)
-        
+        self.addLocationMapView.setCamera(camera, animated: true)
     }
     @IBOutlet weak var typeImage: UIImageView!
     override func viewDidLoad() {
@@ -69,7 +68,9 @@ class AddLocationViewController: UIViewController,ChooseLocationTypeProtocol, UI
         Alamofire.request(.POST, "http://oko.city/location/request?point.latitude=\(addLocationMapView.centerCoordinate.latitude)&point.longitude=\(addLocationMapView.centerCoordinate.longitude)&point.direction=\(direction)&point.speed=\(curSpeed)&point.radius=50.0&point.typeId=\(typeIdChosen)&point.directionType=1&extraInfo=")
             .responseJSON { _, _, result in
                 print("got result \(result)")
+                
                 self.messageFrame.removeFromSuperview()
+                self.showSimpleAlertWithTitle("Спасибо!", message: "Мы рассмотрим ваш запрос",viewController: self)
         }
     }
 
@@ -144,6 +145,13 @@ class AddLocationViewController: UIViewController,ChooseLocationTypeProtocol, UI
     func mapView(mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         print("camera heading \(mapView.camera.heading)")
         direction = mapView.camera.heading
+    }
+    
+    func showSimpleAlertWithTitle(title: String!, message: String, viewController: UIViewController) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+        let action = UIAlertAction(title: "OK", style: .Cancel, handler: nil)
+        alert.addAction(action)
+        viewController.presentViewController(alert, animated: true, completion: nil)
     }
 
     
