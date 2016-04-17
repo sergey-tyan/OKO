@@ -136,7 +136,9 @@ View Appearance
             mapView.showsCompass=false
         }
     
-        
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(ViewController.respondToSwipeGesture(_:)))
+        swipeLeft.direction = UISwipeGestureRecognizerDirection.Left
+        self.menuView.addGestureRecognizer(swipeLeft)
 
 
 
@@ -148,6 +150,16 @@ View Appearance
         
     }
     
+    func respondToSwipeGesture(gesture: UIGestureRecognizer) {
+        
+        if let swipeGesture = gesture as? UISwipeGestureRecognizer {
+            
+            if(swipeGesture.direction == UISwipeGestureRecognizerDirection.Left){
+                self.toggleMenu(swipeGesture)
+            }
+        }
+    }
+    
     func centerMapOnLocation(location: CLLocation) {
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate,
                                                                   regionRadius * 2.0, regionRadius * 2.0)
@@ -155,7 +167,9 @@ View Appearance
     }
     
     override func viewDidLayoutSubviews() {
-        menuScrollView.contentSize=menuInsideView.frame.size
+        print("menuInsideView.frame.size")
+        print(menuInsideView.frame.size)
+        menuScrollView.contentSize=CGSize(width: menuInsideView.frame.size.width, height: menuInsideView.frame.size.height + 80)
         
     }
 
@@ -875,6 +889,11 @@ Map Buttons IBActions
         }
     }
     
+    @IBAction func openTutorial(sender: AnyObject) {
+        userDefaults.setObject(nil, forKey: "show_tutorial")
+        userDefaults.synchronize()
+        print("asd")
+    }
     @IBAction func toggleMenu(sender: AnyObject) {
         print("togg")
         menuToggled = self.menuView.hidden
